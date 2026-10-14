@@ -1,7 +1,7 @@
 #!/bin/bash
 # regression suite for V18; each test writes r_<name>.txt
 cd "$(dirname "$0")"
-python3 mk_test12.py && NOFIX27=1 NOFIX35=1 LV12=levels12test.json OUT12=gametest.html python3 patch12.py > /dev/null
+python3 mk_test12.py && NOFIX27=1 NOFIX35=1 NO36=1 LV12=levels12test.json OUT12=gametest.html python3 patch12.py > /dev/null
 t() { local name=$1; shift; echo "== $name $(date +%T)" >> r_all.log; timeout 1200 "$@" > r_$name.txt 2>&1; echo "   exit $? $(date +%T)" >> r_all.log; }
 rm -f r_all.log
 GAME=gametest.html t new12 python3 test_new12.py
@@ -37,4 +37,7 @@ t purr python3 test_purr.py
 t v27 python3 test_v27.py
 t paw python3 test_paw.py
 t v30 python3 test_v30.py
+t save35 python3 test_save35.py
+t v36 python3 test_v36.py
+t levels36 python3 test_levels.py 161,162,168,181,196,201,211,220,240,257,260
 echo "== done $(date +%T)" >> r_all.log

@@ -18,6 +18,7 @@ def ok(m, c, info=None):
 LVL = {'name': 'Testband', 'moves': 30, 'target': 1000, 'collect': [[0, 20]], 'belts': [[4, 1], [6, -1]], 'wildRate': 0,
        'board': ['........', '.dddddd.', '.dddddd.', '........', '..r.....', '........', '........', '........']}
 def start(pg, lvl=LVL):
+    pg.evaluate("() => { document.querySelectorAll('.overlay.show').forEach(o => o.classList.remove('show')); if (!onMap) showMap(); }"); pg.wait_for_timeout(600)
     pg.evaluate(f"(d) => {{ LEVELS[0] = d; }}", lvl)
     pg.evaluate('openLevel(1)'); pg.wait_for_timeout(500); pg.click('#introBtn'); pg.wait_for_timeout(1400)
     pg.add_script_tag(content=HN); pg.evaluate('T_waitIdle()')

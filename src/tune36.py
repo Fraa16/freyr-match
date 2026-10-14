@@ -7,7 +7,7 @@ D = os.path.dirname(os.path.abspath(__file__)) + '/'
 LV = {161 + i: d for i, d in enumerate(json.load(open(D + 'levels36.json')))}
 FIX = json.load(open(D + 'fix36.json')) if os.path.exists(D + 'fix36.json') else {}
 cur = lambda L: {**LV[L], **FIX.get(str(L), {})}
-PHASE = sys.argv[1] if len(sys.argv) > 1 else 'all'
+PHASE = (sys.argv[1] if len(sys.argv) > 1 else 'all') if __name__ == '__main__' else 'none'
 LEVELS = list(range(161, 261))
 
 def sim(levels, runs, ovr, tag):
@@ -98,6 +98,7 @@ if PHASE in ('all', 'moves', 'cont'):
             print(f'mv it{it} L{L} moves {m} win {w:.2f} want {want:.2f} -> {m + step}', flush=True)
             FIX[str(L)]['moves'] = max(10, m + step)
         json.dump(FIX, open(D + 'fix36.json', 'w'), ensure_ascii=False, indent=0)
-for f in os.listdir(D):
-    if f.startswith('_ovr_') or f.startswith('_sim_'): os.remove(D + f)
-print('done')
+if __name__ == '__main__':
+    for f in os.listdir(D):
+        if f.startswith('_ovr_') or f.startswith('_sim_'): os.remove(D + f)
+    print('done')
