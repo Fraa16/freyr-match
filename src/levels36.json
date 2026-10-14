@@ -1,0 +1,2382 @@
+[
+{
+"name": "Erste Fahrt",
+"board": [
+"........",
+"........",
+"........",
+"........",
+"........",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+]
+],
+"collect": [
+[
+0,
+24
+]
+],
+"moves": 22,
+"intro": "belt",
+"colors": 5
+},
+{
+"name": "Apfelernte",
+"board": [
+" ...... ",
+"........",
+"........",
+"........",
+"........",
+"........",
+"........",
+" ...... "
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+],
+[
+5,
+-1
+]
+],
+"collect": [
+[
+1,
+30
+]
+],
+"moves": 22
+},
+{
+"name": "Kistenband",
+"board": [
+"bb....bb",
+"bb....bb",
+"b......b",
+"........",
+"........",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+5,
+1
+]
+],
+"collect": [
+[
+2,
+26
+]
+],
+"moves": 22
+},
+{
+"name": "Rollende Äpfel",
+"board": [
+"  ....  ",
+" ...... ",
+"........",
+"........",
+"........",
+"........",
+" .mmmm. ",
+"  mmmm  "
+],
+"target": 1000,
+"belts": [
+[
+3,
+-1
+]
+],
+"collect": [
+[
+3,
+28
+]
+],
+"moves": 22
+},
+{
+"name": "Großes Laufband",
+"board": [
+"BB....BB",
+"........",
+"........",
+"........",
+"........",
+"........",
+"........",
+"MMMMMMMM"
+],
+"target": 1000,
+"belts": [
+[
+2,
+1
+],
+[
+5,
+-1
+]
+],
+"collect": [
+[
+4,
+34
+]
+],
+"moves": 24,
+"hard": 1
+},
+{
+"name": "Brötchenband",
+"board": [
+"........",
+"........",
+"........",
+"........",
+"........",
+" ...... ",
+"  kkkk  ",
+"  kkkk  "
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+]
+],
+"cover": 33,
+"collect": [
+[
+5,
+26
+]
+],
+"moves": 22
+},
+{
+"name": "Hefezopf",
+"board": [
+"bbb..bbb",
+"........",
+"........",
+"........",
+"........",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+],
+[
+5,
+-1
+]
+],
+"collect": [
+[
+0,
+50
+],
+[
+2,
+40
+]
+],
+"moves": 38,
+"long": 1
+},
+{
+"name": "Glöckchen-Express",
+"board": [
+" .g..g. ",
+"........",
+"........",
+"........",
+"........",
+"........",
+"........",
+" ...... "
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+]
+],
+"bells": 4,
+"moves": 24,
+"intro": "mix_beltbells"
+},
+{
+"name": "Puderzucker",
+"board": [
+"........",
+" ...... ",
+"  ....  ",
+"  n..n  ",
+"  ....  ",
+"  ....  ",
+" ...... ",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+0,
+1
+],
+[
+7,
+-1
+]
+],
+"collect": [
+[
+1,
+30
+]
+],
+"moves": 22
+},
+{
+"name": "Backofenhitze",
+"board": [
+"........",
+"........",
+"........",
+"C......C",
+"........",
+"........",
+".wwwwww.",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+],
+[
+5,
+-1
+]
+],
+"collect": [
+[
+3,
+36
+]
+],
+"moves": 25,
+"hard": 1
+},
+{
+"name": "Laternenweg",
+"board": [
+".w.  .w.",
+"...  ...",
+".w.  .w.",
+"........",
+"........",
+"...  ...",
+"...  ...",
+"...  ..."
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+],
+[
+4,
+-1
+]
+],
+"collect": [
+[
+4,
+32
+]
+],
+"moves": 22
+},
+{
+"name": "Nachtschicht",
+"board": [
+"........",
+".p....p.",
+"........",
+"........",
+"........",
+"........",
+"kkkkkkkk",
+"kkkkkkkk"
+],
+"target": 1000,
+"belts": [
+[
+4,
+-1
+]
+],
+"moves": 24,
+"cover": 40
+},
+{
+"name": "Lichterkette",
+"board": [
+" ...... ",
+"........",
+"..a..a..",
+"........",
+"........",
+"........",
+"........",
+" ...... "
+],
+"target": 1000,
+"belts": [
+[
+2,
+1
+],
+[
+5,
+1
+]
+],
+"clock": 14,
+"collect": [
+[
+5,
+30
+]
+],
+"moves": 23
+},
+{
+"name": "Doppelband",
+"board": [
+"........",
+"........",
+"........",
+"........",
+"........",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+],
+[
+4,
+-1
+]
+],
+"make": [
+[
+"cat",
+2
+],
+[
+"laser",
+2
+]
+],
+"moves": 20
+},
+{
+"name": "Stadtfest",
+"board": [
+"  u..u  ",
+"  ....  ",
+"b......b",
+"........",
+"........",
+"b......b",
+"  ....  ",
+"  ....  "
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+],
+[
+4,
+-1
+]
+],
+"collect": [
+[
+0,
+34
+]
+],
+"moves": 24,
+"hard": 1
+},
+{
+"name": "Fischkutter",
+"board": [
+"  ...   ",
+" .....  ",
+"....... ",
+"..mmmm..",
+"..mmmm..",
+"....... ",
+" .....  ",
+"  ...   "
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+],
+[
+4,
+1
+]
+],
+"collect": [
+[
+0,
+32
+]
+],
+"moves": 22
+},
+{
+"name": "Ladekran",
+"board": [
+"B......B",
+"B......B",
+"........",
+"........",
+"........",
+"........",
+"........",
+".kkkkkk."
+],
+"target": 1000,
+"belts": [
+[
+3,
+-1
+],
+[
+5,
+1
+]
+],
+"cover": 40,
+"collect": [
+[
+2,
+54
+]
+],
+"moves": 40,
+"long": 1
+},
+{
+"name": "Netzflicker",
+"board": [
+"........",
+".w.ww.w.",
+"........",
+"........",
+"........",
+"........",
+".w.ww.w.",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+],
+[
+4,
+-1
+]
+],
+"moves": 22
+},
+{
+"name": "Hafenkante",
+"board": [
+"........",
+"........",
+"........",
+"........",
+"...  ...",
+"...  ...",
+"n..  ..n",
+".n.  .n."
+],
+"target": 1000,
+"belts": [
+[
+2,
+-1
+]
+],
+"collect": [
+[
+3,
+30
+]
+],
+"moves": 22
+},
+{
+"name": "Sturmflut",
+"board": [
+"........",
+"...VV...",
+"...VV...",
+"........",
+"........",
+"........",
+"n......n",
+"..MMMM.."
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+],
+[
+5,
+-1
+]
+],
+"boss": 55,
+"moves": 28,
+"hard": 2
+},
+{
+"name": "Gute Nacht",
+"board": [
+"dddddddd",
+"dddddddd",
+"........",
+"........",
+"........",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"collect": [
+[
+1,
+22
+]
+],
+"moves": 22,
+"intro": "dark",
+"colors": 5
+},
+{
+"name": "Minzbeet",
+"board": [
+" dd..dd ",
+".dd..dd.",
+".dd..dd.",
+"........",
+"........",
+"........",
+"........",
+" ...... "
+],
+"target": 1000,
+"collect": [
+[
+4,
+26
+]
+],
+"moves": 22
+},
+{
+"name": "Schattenbeet",
+"board": [
+"..dddd..",
+"..dddd..",
+"..dddd..",
+"..dddd..",
+"b......b",
+"b......b",
+"........",
+"........"
+],
+"target": 1000,
+"moves": 22
+},
+{
+"name": "Mondkraut",
+"board": [
+"  ....  ",
+" ...... ",
+"dddddddd",
+"dddddddd",
+"........",
+"........",
+" .mmmm. ",
+"  ....  "
+],
+"target": 1000,
+"moves": 22
+},
+{
+"name": "Nachtfalter",
+"board": [
+"dddddddd",
+"dd....dd",
+"dd....dd",
+"dd....dd",
+"........",
+"..wwww..",
+"........",
+"........"
+],
+"target": 1000,
+"collect": [
+[
+2,
+28
+]
+],
+"moves": 24,
+"hard": 1
+},
+{
+"name": "Kissenschlacht",
+"board": [
+"dddddddd",
+"dddddddd",
+"........",
+"........",
+"........",
+" ...... ",
+"  kkkk  ",
+"  kkkk  "
+],
+"target": 1000,
+"cover": 33,
+"moves": 24
+},
+{
+"name": "Federbett",
+"board": [
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"........",
+"........",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"collect": [
+[
+5,
+44
+],
+[
+3,
+40
+]
+],
+"moves": 38,
+"long": 1
+},
+{
+"name": "Daunendecke",
+"board": [
+" ...... ",
+"........",
+"dd....dd",
+"dd.kk.dd",
+"dd.kk.dd",
+"dd....dd",
+"........",
+" ...... "
+],
+"target": 1000,
+"cover": 37,
+"moves": 23
+},
+{
+"name": "Schlummerland",
+"board": [
+"...gg...",
+" ...... ",
+"  dddd  ",
+"  dddd  ",
+"  dddd  ",
+"  dddd  ",
+" ...... ",
+"........"
+],
+"target": 1000,
+"bells": 3,
+"moves": 24
+},
+{
+"name": "Albtraum",
+"board": [
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"........",
+".n....n.",
+"........",
+"u......u"
+],
+"target": 1000,
+"moves": 26,
+"hard": 1
+},
+{
+"name": "Fernrohr",
+"board": [
+"  dddd  ",
+"  dddd  ",
+"..dddd..",
+"........",
+".a....a.",
+"........",
+"  ....  ",
+"  ....  "
+],
+"target": 1000,
+"clock": 14,
+"collect": [
+[
+0,
+26
+]
+],
+"moves": 22
+},
+{
+"name": "Sternbild",
+"board": [
+".d...d..",
+"...d...d",
+"..d...d.",
+"d...d...",
+"........",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"collect": [
+[
+3,
+30
+]
+],
+"moves": 22
+},
+{
+"name": "Mondfinsternis",
+"board": [
+"p......p",
+"........",
+"..dddd..",
+"..d  d..",
+"..d  d..",
+"..dddd..",
+"........",
+"........"
+],
+"target": 1000,
+"moves": 22
+},
+{
+"name": "Komet",
+"board": [
+"  dddd  ",
+" .dddd. ",
+"..dddd..",
+"........",
+"........",
+"........",
+" ...... ",
+"  .CC.  "
+],
+"target": 1000,
+"collect": [
+[
+1,
+30
+]
+],
+"moves": 24
+},
+{
+"name": "Schwarzes Loch",
+"board": [
+"........",
+".dddddd.",
+".dddddd.",
+".ddVVdd.",
+".ddVVdd.",
+".dddddd.",
+".dddddd.",
+"........"
+],
+"target": 1000,
+"boss": 40,
+"moves": 28,
+"hard": 1
+},
+{
+"name": "Nachtband",
+"board": [
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"........",
+"........",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+]
+],
+"collect": [
+[
+0,
+26
+]
+],
+"moves": 23,
+"intro": "mix_beltdark"
+},
+{
+"name": "Ebbe",
+"board": [
+" dddddd ",
+".dddddd.",
+"........",
+"........",
+"........",
+"........",
+".MMMMMM.",
+" MMMMMM "
+],
+"target": 1000,
+"belts": [
+[
+3,
+-1
+]
+],
+"moves": 38,
+"long": 1
+},
+{
+"name": "Flut",
+"board": [
+"...nn...",
+"........",
+"........",
+"........",
+"........",
+"dd....dd",
+"dd....dd",
+"dd....dd"
+],
+"target": 1000,
+"belts": [
+[
+2,
+1
+]
+],
+"moves": 24
+},
+{
+"name": "Muschelsuche",
+"board": [
+"  ...   ",
+" .p...  ",
+"....... ",
+"dddddddd",
+"dddddddd",
+"....... ",
+" .p...  ",
+"  ...   "
+],
+"target": 1000,
+"belts": [
+[
+2,
+1
+],
+[
+5,
+-1
+]
+],
+"moves": 24
+},
+{
+"name": "Leuchtfeuer",
+"board": [
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"........",
+"........",
+"...VV...",
+"...VV..."
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+],
+[
+5,
+-1
+]
+],
+"boss": 45,
+"turbo": 1,
+"moves": 28,
+"hard": 2
+},
+{
+"name": "Regenbogen",
+"board": [
+"........",
+"........",
+"........",
+"...r....",
+".....r..",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"wildRate": 0.04,
+"collect": [
+[
+2,
+26
+]
+],
+"moves": 22,
+"intro": "wild",
+"colors": 5
+},
+{
+"name": "Sonnenschein",
+"board": [
+" ...... ",
+"........",
+"..r..r..",
+"........",
+"........",
+"........",
+"........",
+" ...... "
+],
+"target": 1000,
+"wildRate": 0.035,
+"collect": [
+[
+0,
+30
+],
+[
+5,
+26
+]
+],
+"moves": 24
+},
+{
+"name": "Blütenstaub",
+"board": [
+" ..  .. ",
+".mmmmmm.",
+".mmmmmm.",
+"........",
+"...r....",
+" ...... ",
+"  ....  ",
+"   ..   "
+],
+"target": 1000,
+"wildRate": 0.03,
+"moves": 22
+},
+{
+"name": "Bienenflug",
+"board": [
+"........",
+"........",
+"www..www",
+"........",
+"........",
+"..r..r..",
+"........",
+"........"
+],
+"target": 1000,
+"wildRate": 0.03,
+"collect": [
+[
+4,
+30
+]
+],
+"moves": 22
+},
+{
+"name": "Erntefest",
+"board": [
+"BB....BB",
+"BB....BB",
+"........",
+"........",
+"..r..r..",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"wildRate": 0.03,
+"make": [
+[
+"nip",
+2
+]
+],
+"collect": [
+[
+1,
+30
+]
+],
+"moves": 24,
+"hard": 1
+},
+{
+"name": "Brückenzoll",
+"board": [
+"g.    .g",
+"..    ..",
+"........",
+"...r....",
+"........",
+"........",
+"..    ..",
+"..    .."
+],
+"target": 1000,
+"wildRate": 0.03,
+"bells": 3,
+"moves": 22
+},
+{
+"name": "Wolkenkratzer",
+"board": [
+"b...    ",
+"b....   ",
+"b.....  ",
+"....... ",
+"........",
+"....r...",
+"........",
+"........"
+],
+"target": 1000,
+"wildRate": 0.03,
+"collect": [
+[
+3,
+50
+],
+[
+0,
+44
+]
+],
+"moves": 40,
+"long": 1
+},
+{
+"name": "Seiltanz",
+"board": [
+"........",
+"........",
+"........",
+"...nn...",
+"...nn...",
+"........",
+".r....r.",
+"........"
+],
+"target": 1000,
+"wildRate": 0.03,
+"moves": 23
+},
+{
+"name": "Windböe",
+"board": [
+" ...... ",
+" ...... ",
+" .a..a. ",
+" ...... ",
+" ...r.. ",
+" ..a... ",
+" ...... ",
+" ...... "
+],
+"target": 1000,
+"wildRate": 0.04,
+"clock": 14,
+"clockRate": 0.015,
+"collect": [
+[
+5,
+30
+]
+],
+"moves": 22
+},
+{
+"name": "Gewitter",
+"board": [
+"........",
+".u....u.",
+"........",
+"...r....",
+"........",
+"..u..u..",
+"........",
+"kkkkkkkk"
+],
+"target": 1000,
+"wildRate": 0.03,
+"cover": 40,
+"moves": 26,
+"hard": 1
+},
+{
+"name": "Spiegelung",
+"board": [
+" ...... ",
+"..r..r..",
+"........",
+"........",
+"dddddddd",
+"dddddddd",
+"dddddddd",
+" dddddd "
+],
+"target": 1000,
+"wildRate": 0.035,
+"moves": 23,
+"intro": "mix_darkfish"
+},
+{
+"name": "Mondfische",
+"board": [
+"  ddd   ",
+" ddddd  ",
+"ddddddd ",
+"........",
+"...r....",
+"....... ",
+" .....  ",
+"  ...   "
+],
+"target": 1000,
+"wildRate": 0.04,
+"collect": [
+[
+0,
+32
+]
+],
+"moves": 23
+},
+{
+"name": "Nebelbank",
+"board": [
+"dd....dd",
+"dd....dd",
+"dd....dd",
+"dd.r..dd",
+"dd..r.dd",
+"dd....dd",
+"dd....dd",
+"dd....dd"
+],
+"target": 1000,
+"wildRate": 0.03,
+"collect": [
+[
+2,
+30
+]
+],
+"moves": 24
+},
+{
+"name": "Glühfische",
+"board": [
+"..dddd..",
+"..dddd..",
+"..dddd..",
+"...  ...",
+"...  ...",
+"p......p",
+"...r....",
+"........"
+],
+"target": 1000,
+"wildRate": 0.03,
+"moves": 23
+},
+{
+"name": "Seeungeheuer",
+"board": [
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"........",
+"...VV...",
+"...VV...",
+"........",
+".r....r."
+],
+"target": 1000,
+"wildRate": 0.03,
+"boss": 50,
+"moves": 28,
+"hard": 1
+},
+{
+"name": "Schatzkarte",
+"board": [
+"w......w",
+".w....w.",
+"..w..w..",
+"........",
+"........",
+"...r....",
+"........",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+]
+],
+"wildRate": 0.03,
+"goldrush": 8,
+"moves": 23
+},
+{
+"name": "Flaschenpost",
+"board": [
+" dddddd ",
+".dddddd.",
+"........",
+"........",
+"........",
+"........",
+".mmmmmm.",
+" mmmmmm "
+],
+"target": 1000,
+"belts": [
+[
+3,
+-1
+]
+],
+"wildRate": 0.03,
+"collect": [
+[
+1,
+40
+]
+],
+"moves": 40,
+"long": 1
+},
+{
+"name": "Kokosnuss",
+"board": [
+"C..gg..C",
+"........",
+"........",
+"........",
+"........",
+" ...... ",
+"  ....  ",
+"  ....  "
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+]
+],
+"bells": 3,
+"moves": 24
+},
+{
+"name": "Piratenband",
+"board": [
+".p....p.",
+"........",
+"........",
+"........",
+"........",
+"........",
+"u......u",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+],
+[
+4,
+-1
+]
+],
+"wildRate": 0.03,
+"moves": 24
+},
+{
+"name": "Goldkiste",
+"board": [
+"dddddddd",
+"dddddddd",
+"........",
+"C......C",
+"C......C",
+"........",
+"...VV...",
+"...VV..."
+],
+"target": 1000,
+"belts": [
+[
+5,
+1
+]
+],
+"wildRate": 0.03,
+"boss": 55,
+"turbo": 1,
+"moves": 29,
+"hard": 2
+},
+{
+"name": "Fliegenpilz",
+"board": [
+" ...... ",
+"..d..d..",
+"...dd...",
+"........",
+"........",
+"b......b",
+".b....b.",
+" ...... "
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+]
+],
+"collect": [
+[
+5,
+30
+]
+],
+"moves": 23
+},
+{
+"name": "Moosweg",
+"board": [
+"k......k",
+"k......k",
+"k......k",
+"k..r...k",
+"k......k",
+"k......k",
+"k......k",
+"k......k"
+],
+"target": 1000,
+"wildRate": 0.03,
+"cover": 40,
+"moves": 24
+},
+{
+"name": "Pilzkreis",
+"board": [
+"dddddddd",
+"........",
+"..u..u..",
+"...  ...",
+"...  ...",
+"..u..u..",
+"........",
+"........"
+],
+"target": 1000,
+"collect": [
+[
+2,
+30
+]
+],
+"moves": 24
+},
+{
+"name": "Wichtelpfad",
+"board": [
+"dddddddd",
+"dddddddd",
+"........",
+"........",
+"........",
+"........",
+"wwwwwwww",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+]
+],
+"moves": 24
+},
+{
+"name": "Waldgeist",
+"board": [
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"..r..r..",
+"n......n",
+".n....n.",
+"........",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+6,
+-1
+]
+],
+"wildRate": 0.03,
+"collect": [
+[
+0,
+30
+]
+],
+"moves": 26,
+"hard": 1
+},
+{
+"name": "Startbahn",
+"board": [
+" .g..g. ",
+" ...... ",
+" ...... ",
+" ...... ",
+" ...... ",
+" ...... ",
+" dddddd ",
+" dddddd "
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+]
+],
+"bells": 3,
+"moves": 24
+},
+{
+"name": "Luftschiff",
+"board": [
+"  ...   ",
+" .r...  ",
+"....... ",
+"kkkkkkkk",
+"kkkkkkkk",
+"....... ",
+" .r...  ",
+"  ...   "
+],
+"target": 1000,
+"belts": [
+[
+2,
+1
+],
+[
+5,
+-1
+]
+],
+"wildRate": 0.03,
+"cover": 29,
+"collect": [
+[
+3,
+44
+]
+],
+"moves": 42,
+"long": 1
+},
+{
+"name": "Ballast",
+"board": [
+"CC....CC",
+"C......C",
+"..dddd..",
+"..dddd..",
+"........",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"wildRate": 0.03,
+"moves": 25
+},
+{
+"name": "Wolkenpost",
+"board": [
+" ...... ",
+"........",
+".p....p.",
+"...a....",
+"....a...",
+".p....p.",
+"........",
+" ...... "
+],
+"target": 1000,
+"belts": [
+[
+4,
+-1
+]
+],
+"clock": 14,
+"moves": 24
+},
+{
+"name": "Sturmfahrt",
+"board": [
+"dddddddd",
+"dddddddd",
+"........",
+"...VV...",
+"...VV...",
+"........",
+".u....u.",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+6,
+1
+]
+],
+"wildRate": 0.03,
+"boss": 55,
+"turbo": 1,
+"moves": 29,
+"hard": 1
+},
+{
+"name": "Eulenruf",
+"board": [
+"d      d",
+"dd    dd",
+"dddddddd",
+"dddddddd",
+"........",
+"...r....",
+" ...... ",
+"  ....  "
+],
+"target": 1000,
+"wildRate": 0.03,
+"collect": [
+[
+4,
+30
+]
+],
+"moves": 24
+},
+{
+"name": "Baumhaus",
+"board": [
+"dddddddd",
+"dddddddd",
+"........",
+"wwwwwwww",
+"...  ...",
+"...  ...",
+"...  ...",
+"...  ..."
+],
+"target": 1000,
+"wildRate": 0.03,
+"moves": 24
+},
+{
+"name": "Nachtwanderung",
+"board": [
+"d...d...",
+"...d...d",
+"..d...d.",
+".d...d..",
+"d...d...",
+"...d...d",
+"..d...d.",
+".d...d.."
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+],
+[
+4,
+-1
+]
+],
+"moves": 24
+},
+{
+"name": "Uhu",
+"board": [
+"  ....  ",
+"  ....  ",
+"dd....dd",
+"dd.mm.dd",
+"dd.mm.dd",
+"dd....dd",
+"  ....  ",
+"  ....  "
+],
+"target": 1000,
+"wildRate": 0.03,
+"collect": [
+[
+1,
+30
+]
+],
+"moves": 24
+},
+{
+"name": "Mitternacht",
+"board": [
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"........",
+"..n..n..",
+".a....a.",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+5,
+1
+]
+],
+"wildRate": 0.03,
+"clock": 15,
+"moves": 27,
+"hard": 1
+},
+{
+"name": "Seepferdchen",
+"board": [
+"  ...   ",
+" .r...  ",
+"....... ",
+".MMMMMM.",
+".MMMMMM.",
+"....... ",
+" .....  ",
+"  ...   "
+],
+"target": 1000,
+"belts": [
+[
+2,
+-1
+]
+],
+"wildRate": 0.03,
+"moves": 24
+},
+{
+"name": "Seestern",
+"board": [
+"dddddddd",
+"dddddddd",
+"........",
+"........",
+"p......p",
+"........",
+"........",
+"kkkkkkkk"
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+],
+[
+5,
+-1
+]
+],
+"wildRate": 0.03,
+"cover": 40,
+"collect": [
+[
+0,
+44
+]
+],
+"moves": 42,
+"long": 1
+},
+{
+"name": "Perlentaucher",
+"board": [
+" dddddd ",
+".dddddd.",
+"........",
+"...CC...",
+"...CC...",
+"........",
+"........",
+" ...... "
+],
+"target": 1000,
+"wildRate": 0.03,
+"moves": 25
+},
+{
+"name": "Muränenhöhle",
+"board": [
+".u.  .u.",
+"...  ...",
+"...  ...",
+"dddddddd",
+"dddddddd",
+"...  ...",
+".u.  .u.",
+"...  ..."
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+]
+],
+"moves": 25
+},
+{
+"name": "Tiefsee",
+"board": [
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"dddddddd",
+".r....r.",
+"...VV...",
+"...VV...",
+"n......n"
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+]
+],
+"wildRate": 0.03,
+"boss": 60,
+"turbo": 1,
+"moves": 30,
+"hard": 2
+},
+{
+"name": "Festzelt",
+"board": [
+".g....g.",
+"........",
+"........",
+"...r....",
+"........",
+" ...... ",
+"  ....  ",
+"  ....  "
+],
+"target": 1000,
+"belts": [
+[
+2,
+1
+]
+],
+"wildRate": 0.035,
+"bells": 4,
+"moves": 25
+},
+{
+"name": "Erdbeerbowle",
+"board": [
+"dd....dd",
+"dd....dd",
+"........",
+"........",
+"........",
+"..MMMM..",
+"..MMMM..",
+"..MMMM.."
+],
+"target": 1000,
+"belts": [
+[
+3,
+-1
+]
+],
+"wildRate": 0.03,
+"moves": 25
+},
+{
+"name": "Tanzfläche",
+"board": [
+"........",
+"........",
+"........",
+"..kkkk..",
+"..kkkk..",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+2,
+1
+],
+[
+5,
+-1
+]
+],
+"wildRate": 0.035,
+"cover": 40,
+"make": [
+[
+"cat",
+3
+]
+],
+"moves": 24
+},
+{
+"name": "Kuchenbuffet",
+"board": [
+" ...... ",
+".BB..BB.",
+"........",
+"........",
+"...pp...",
+"........",
+"........",
+" ...... "
+],
+"target": 1000,
+"wildRate": 0.03,
+"collect": [
+[
+5,
+34
+]
+],
+"moves": 25
+},
+{
+"name": "Feuerwerk",
+"board": [
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"........",
+"u......u",
+"........",
+"..u..u..",
+"..wwww.."
+],
+"target": 1000,
+"belts": [
+[
+5,
+1
+]
+],
+"wildRate": 0.03,
+"goldrush": 6,
+"moves": 27,
+"hard": 1
+},
+{
+"name": "Schlosstor",
+"board": [
+"C.dddd.C",
+"..dddd..",
+"........",
+"........",
+"...  ...",
+"...  ...",
+"...  ...",
+"...  ..."
+],
+"target": 1000,
+"wildRate": 0.03,
+"collect": [
+[
+2,
+32
+]
+],
+"moves": 25
+},
+{
+"name": "Thronsaal",
+"board": [
+"kkkkkkkk",
+"........",
+"........",
+"dddddddd",
+"dddddddd",
+"........",
+"........",
+"kkkkkkkk"
+],
+"target": 1000,
+"belts": [
+[
+2,
+1
+],
+[
+5,
+-1
+]
+],
+"wildRate": 0.03,
+"cover": 40,
+"collect": [
+[
+4,
+40
+]
+],
+"moves": 44,
+"long": 1
+},
+{
+"name": "Turmzimmer",
+"board": [
+"dddddddd",
+" dddddd ",
+"  .g..  ",
+"  ....  ",
+"  ....  ",
+"  ....  ",
+" ...... ",
+"........"
+],
+"target": 1000,
+"wildRate": 0.03,
+"bells": 3,
+"moves": 25
+},
+{
+"name": "Wendeltreppe",
+"board": [
+"dddd    ",
+"dddd.   ",
+"......  ",
+"...w... ",
+"....w...",
+".....w..",
+"......w.",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+5,
+1
+]
+],
+"wildRate": 0.03,
+"moves": 25
+},
+{
+"name": "Königsball",
+"board": [
+"dddddddd",
+"dddddddd",
+"........",
+"...VV...",
+"...VV...",
+"........",
+"C......C",
+"C......C"
+],
+"target": 1000,
+"belts": [
+[
+6,
+-1
+]
+],
+"wildRate": 0.03,
+"boss": 60,
+"moves": 30,
+"hard": 1
+},
+{
+"name": "Zeltlager",
+"board": [
+"d      d",
+"dd    dd",
+"dddddddd",
+"........",
+"........",
+"...nn...",
+" ...... ",
+"  ....  "
+],
+"target": 1000,
+"wildRate": 0.03,
+"moves": 25
+},
+{
+"name": "Lagerfeuer",
+"board": [
+"dddddddd",
+"dddddddd",
+"........",
+"..a..a..",
+"........",
+".a....a.",
+"........",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+]
+],
+"wildRate": 0.03,
+"clock": 15,
+"clockRate": 0.015,
+"collect": [
+[
+3,
+32
+]
+],
+"moves": 25
+},
+{
+"name": "Sternschnuppen-Nacht",
+"board": [
+" ..d..d ",
+"..d..d..",
+".d..d..d",
+"d..d..d.",
+"..d..d..",
+".d..d..d",
+"d..d..d.",
+" .d..d. "
+],
+"target": 1000,
+"wildRate": 0.04,
+"goldrush": 8,
+"moves": 25
+},
+{
+"name": "Milchstraße",
+"board": [
+"dddddddd",
+"dddddddd",
+"........",
+"MMMMMMMM",
+"MMMMMMMM",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+6,
+1
+]
+],
+"wildRate": 0.03,
+"moves": 26
+},
+{
+"name": "Nordstern",
+"board": [
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"dddddddd",
+"........",
+"u......u",
+"..p..p..",
+"...kk..."
+],
+"target": 1000,
+"belts": [
+[
+5,
+-1
+]
+],
+"wildRate": 0.03,
+"cover": 40,
+"moves": 28,
+"hard": 1
+},
+{
+"name": "Ankunft",
+"board": [
+" dd  dd ",
+"dddddddd",
+"........",
+"........",
+"........",
+" .mmmm. ",
+"  mmmm  ",
+"   ..   "
+],
+"target": 1000,
+"belts": [
+[
+3,
+1
+]
+],
+"wildRate": 0.035,
+"moves": 25
+},
+{
+"name": "Sardinenbuffet",
+"board": [
+"p.p..p.p",
+"........",
+"........",
+"dddddddd",
+"........",
+"........",
+"........",
+"........"
+],
+"target": 1000,
+"belts": [
+[
+5,
+1
+],
+[
+6,
+-1
+]
+],
+"wildRate": 0.03,
+"collect": [
+[
+0,
+56
+],
+[
+5,
+40
+]
+],
+"moves": 44,
+"long": 1
+},
+{
+"name": "Hängematte",
+"board": [
+"d      d",
+"dd    dd",
+"...  ...",
+"........",
+"...r....",
+"........",
+" kkkkkk ",
+"  kkkk  "
+],
+"target": 1000,
+"wildRate": 0.03,
+"cover": 29,
+"moves": 26
+},
+{
+"name": "Sonnenbad",
+"board": [
+"........",
+"........",
+"........",
+"u......u",
+"........",
+"........",
+"MMMMMMMM",
+"MMMMMMMM"
+],
+"target": 1000,
+"belts": [
+[
+4,
+1
+]
+],
+"wildRate": 0.035,
+"collect": [
+[
+2,
+34
+]
+],
+"moves": 26
+},
+{
+"name": "Das zweite Finale",
+"board": [
+"dddddddd",
+"dddddddd",
+"........",
+"C..VV..C",
+"...VV...",
+"..r..r..",
+".u....u.",
+"..MMMM.."
+],
+"target": 1000,
+"belts": [
+[
+5,
+1
+]
+],
+"wildRate": 0.03,
+"boss": 70,
+"turbo": 1,
+"bells": 2,
+"moves": 34,
+"hard": 2,
+"intro": "mix_newfinale"
+}
+]
