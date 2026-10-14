@@ -1429,6 +1429,10 @@ main .top .hud{z-index:1}
 .savemsg{min-height:0;margin:0 0 10px!important;font-weight:800;font-size:.95rem}
 .savemsg:empty{display:none}
 .savemsg.bad{color:#D22A5C}
+/* the level card sits in the middle of the screen (margin-top:28px had overridden margin:auto, so the card stuck to the top);
+   the room for the "Level 8" tab above the card is now padding of the overlay */
+#introCard{margin:auto}
+#introOv{padding-top:calc(max(12px,env(safe-area-inset-top,0px)) + 30px)}
 /* ===== web app: the home screen hint at the bottom of the map ===== */
 .a2hs{position:absolute;z-index:5;left:84px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);max-width:420px;margin-left:auto;
   display:flex;align-items:center;gap:10px;padding:10px 8px 10px 14px;border-radius:18px;background:var(--panel);color:var(--ink);
