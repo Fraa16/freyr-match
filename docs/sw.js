@@ -1,5 +1,5 @@
 // Freyr Match: offline cache. The game page comes from the network first (so updates arrive), everything else from the cache.
-const VERSION = '87d384393c';
+const VERSION = '39257658fa';
 const CACHE = 'freyr-match-' + VERSION;
 const CORE = ["./", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png", "icons/favicon-64.png", "fonts/lilita-one-latin-400-normal.woff2", "fonts/nunito-latin-700-normal.woff2", "fonts/nunito-latin-800-normal.woff2", "fonts/nunito-latin-900-normal.woff2", "fonts/m-plus-rounded-1c-latin-700-normal.woff2", "fonts/m-plus-rounded-1c-latin-800-normal.woff2"];
 

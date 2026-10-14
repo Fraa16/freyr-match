@@ -1433,6 +1433,33 @@ main .top .hud{z-index:1}
    the room for the "Level 8" tab above the card is now padding of the overlay */
 #introCard{margin:auto}
 #introOv{padding-top:calc(max(12px,env(safe-area-inset-top,0px)) + 30px)}
+/* tall screens (the app on the home screen): the board already has the full width, so the extra height goes into a bigger panel and tool bar
+   instead of empty bands. Set by fitLayout (roomy1, roomy2 on very tall screens). */
+html.roomy1{--mz:94px}
+html.roomy1 main .top .hud{padding:8px 9px 9px}
+html.roomy1 main .top .hbox{min-width:56px;padding:3px 8px 4px}
+html.roomy1 main .top .hbox .label{font-size:.78rem}
+html.roomy1 main .top .hbox .val{font-size:1.72rem}
+html.roomy1 main .top .hbox #score{font-size:1.28rem}
+html.roomy1 main .top .chip svg,html.roomy1 main .top .chip img{width:26px;height:26px}
+html.roomy1 main .top .goalsbox .goals.gtight .chip svg,html.roomy1 main .top .goalsbox .goals.gtight .chip img{width:22px;height:22px}
+html.roomy1 main .top .chip b{font-size:1.12rem}
+html.roomy1 main .top .belly{margin-top:7px}
+html.roomy1 main .top .bar{height:19px}
+html.roomy1 main .top .purr .pico{width:30px;height:30px}
+html.roomy1 .hud .ltab .label{font-size:.74rem}
+html.roomy1 .hud .ltab .val{font-size:1.02rem}
+html.roomy1 main .actions{padding:12px 14px 10px}
+html.roomy1 main .actions .btn{width:52px;height:52px}
+html.roomy1 .tool .tbtn{width:60px;height:60px}
+html.roomy1 .tool .tbtn > svg{width:44px;height:44px}
+html.roomy1 .tool small{font-size:.82rem}
+html.roomy2{--mz:104px}
+html.roomy2 main .top .hbox .val{font-size:1.9rem}
+html.roomy2 main .top .chip svg,html.roomy2 main .top .chip img{width:29px;height:29px}
+html.roomy2 main .top .chip b{font-size:1.22rem}
+html.roomy2 .tool .tbtn{width:66px;height:66px}
+html.roomy2 .tool .tbtn > svg{width:48px;height:48px}
 /* ===== web app: the home screen hint at the bottom of the map ===== */
 .a2hs{position:absolute;z-index:5;left:84px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);max-width:420px;margin-left:auto;
   display:flex;align-items:center;gap:10px;padding:10px 8px 10px 14px;border-radius:18px;background:var(--panel);color:var(--ink);
@@ -7928,6 +7955,29 @@ function applyCode(o) {
     setTimeout(() => location.reload(), 600);
   };
 })();
+
+/* ===================== V35: tall screens use the extra height (bigger panel and tools, see game35.css) ===================== */
+const ROOMY = ['roomy1', 'roomy2'], ROOM_MIN = 150;
+const fitLayoutPlain35 = fitLayout;
+fitLayout = function () {
+  const html = document.documentElement, had = ROOMY.filter(c => html.classList.contains(c)).length;
+  html.classList.remove(...ROOMY);
+  let changed = fitLayoutPlain35.apply(this, arguments);
+  let n = 0;
+  const st = document.querySelector('main .stage');
+  if (st && fitLv === 0 && !SIDE.matches) {
+    for (; n < ROOMY.length; n++) {
+      const r = st.getBoundingClientRect();
+      if (!r.width || r.height - r.width < ROOM_MIN) break;
+      html.classList.add(ROOMY[n]);
+      const r2 = st.getBoundingClientRect();
+      if (r2.height + 1 < r2.width) { html.classList.remove(ROOMY[n]); break; }
+    }
+  }
+  if (n !== had) { BG = null; if (bubble.firstChild) fitBubble(); changed = true; }
+  return changed;
+};
+fitLayout();
 
 /* ===================== web app (GitHub Pages build only): offline, and a hint how to put it on the home screen ===================== */
 (() => {

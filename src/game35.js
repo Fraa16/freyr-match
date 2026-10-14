@@ -86,3 +86,26 @@ function applyCode(o) {
     setTimeout(() => location.reload(), 600);
   };
 })();
+
+/* ===================== V35: tall screens use the extra height (bigger panel and tools, see game35.css) ===================== */
+const ROOMY = ['roomy1', 'roomy2'], ROOM_MIN = 150;
+const fitLayoutPlain35 = fitLayout;
+fitLayout = function () {
+  const html = document.documentElement, had = ROOMY.filter(c => html.classList.contains(c)).length;
+  html.classList.remove(...ROOMY);
+  let changed = fitLayoutPlain35.apply(this, arguments);
+  let n = 0;
+  const st = document.querySelector('main .stage');
+  if (st && fitLv === 0 && !SIDE.matches) {
+    for (; n < ROOMY.length; n++) {
+      const r = st.getBoundingClientRect();
+      if (!r.width || r.height - r.width < ROOM_MIN) break;
+      html.classList.add(ROOMY[n]);
+      const r2 = st.getBoundingClientRect();
+      if (r2.height + 1 < r2.width) { html.classList.remove(ROOMY[n]); break; }
+    }
+  }
+  if (n !== had) { BG = null; if (bubble.firstChild) fitBubble(); changed = true; }
+  return changed;
+};
+fitLayout();
