@@ -44,3 +44,32 @@ html.roomy2 main .top .chip svg,html.roomy2 main .top .chip img{width:29px;heigh
 html.roomy2 main .top .chip b{font-size:1.22rem}
 html.roomy2 .tool .tbtn{width:66px;height:66px}
 html.roomy2 .tool .tbtn > svg{width:48px;height:48px}
+/* the purr bar text stays on one line; fitPurrTxt makes it smaller when the bar is short */
+.ptxt{white-space:nowrap;overflow:hidden}
+/* the win card: instead of swinging his head, Freyr winks, then licks his paw (game35.js adds the eyes, the paw and the tongue) */
+.face.cheer{animation:cheerpop .5s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes cheerpop{from{transform:scale(.6)}to{transform:none}}
+.face.cheer svg.catsvg{overflow:visible}
+.face.cheer .eyeL,.face.cheer .eyeR,.face.cheer .shut,.face.cheer .lpaw,.face.cheer .m-y,.face.cheer .m-c{transform-box:fill-box;transform-origin:50% 50%}
+.face.cheer .eyeR{animation:chR 4.4s ease-in-out .7s infinite}
+.face.cheer .eyeL{animation:chL 4.4s ease-in-out .7s infinite}
+.face.cheer .shutR{opacity:0;animation:chRs 4.4s ease-in-out .7s infinite}
+.face.cheer .shutL{opacity:0;animation:chLs 4.4s ease-in-out .7s infinite}
+.face.cheer .catsvg .m-y{display:inline;opacity:0;animation:chT 4.4s ease-in-out .7s infinite}
+.face.cheer .catsvg .m-c{animation:chM 4.4s ease-in-out .7s infinite}
+.face.cheer .lpaw{opacity:0;animation:chP 4.4s ease-in-out .7s infinite}
+/* 0-6 %: look; 7-17 %: wink; 30-74 %: paw up, eyes shut, three licks; then back */
+@keyframes chR{0%,6%{transform:scaleY(1);opacity:1}9%,15%{transform:scaleY(.1);opacity:0}18%,28%{transform:scaleY(1);opacity:1}32%,74%{transform:scaleY(.1);opacity:0}78%,100%{transform:scaleY(1);opacity:1}}
+@keyframes chL{0%,28%{transform:scaleY(1);opacity:1}32%,74%{transform:scaleY(.1);opacity:0}78%,100%{transform:scaleY(1);opacity:1}}
+@keyframes chRs{0%,7%{opacity:0}9%,15%{opacity:1}17%,30%{opacity:0}32%,74%{opacity:1}76%,100%{opacity:0}}
+@keyframes chLs{0%,30%{opacity:0}32%,74%{opacity:1}76%,100%{opacity:0}}
+@keyframes chT{0%,38%{opacity:0}40%,70%{opacity:1}72%,100%{opacity:0}}
+@keyframes chM{0%,38%{opacity:1}40%,70%{opacity:0}72%,100%{opacity:1}}
+@keyframes chP{0%,27%{opacity:0;transform:translate(10px,26px) rotate(18deg)}33%{opacity:1;transform:translate(0,0) rotate(0)}
+  41%{transform:translate(-1px,-5px) rotate(-6deg)}48%{transform:translate(0,0) rotate(0)}55%{transform:translate(-1px,-5px) rotate(-6deg)}
+  62%{transform:translate(0,0) rotate(0)}68%{opacity:1;transform:translate(-1px,-4px) rotate(-4deg)}76%,100%{opacity:0;transform:translate(10px,26px) rotate(18deg)}}
+@media (prefers-reduced-motion:reduce){
+  .face.cheer,.face.cheer .eyeR,.face.cheer .eyeL,.face.cheer .lpaw,.face.cheer .catsvg .m-y,.face.cheer .catsvg .m-c{animation:none}
+  .face.cheer .shutL,.face.cheer .shutR{animation:none;opacity:1}
+  .face.cheer .eyeR,.face.cheer .eyeL{opacity:0}
+}

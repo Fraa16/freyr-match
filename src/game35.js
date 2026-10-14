@@ -109,3 +109,51 @@ fitLayout = function () {
   return changed;
 };
 fitLayout();
+
+/* ===================== V35: the purr bar text always fits in one line ===================== */
+function fitPurrTxt() {
+  const t = $('purrTxt'), bw = $('barwrap'); if (!t || !bw || !bw.clientWidth) return;
+  t.style.fontSize = '';
+  // the text's own width (the box itself always spans the whole bar)
+  const avail = bw.clientWidth - 10, rg = document.createRange(), w = () => { rg.selectNodeContents(t); return rg.getBoundingClientRect().width; };
+  let fs = parseFloat(getComputedStyle(t).fontSize), n = 0;
+  while (w() > avail && fs > 9.5 && n++ < 24) { fs -= .5; t.style.fontSize = fs + 'px'; }
+}
+new MutationObserver(() => fitPurrTxt()).observe($('purrTxt'), { childList: true, characterData: true, subtree: true });
+new MutationObserver(() => fitPurrTxt()).observe($('barwrap'), { attributes: true, attributeFilter: ['class'] });
+addEventListener('resize', () => requestAnimationFrame(fitPurrTxt));
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPurrTxt);
+const fitLayoutPlain35b = fitLayout;
+fitLayout = function () { const r = fitLayoutPlain35b.apply(this, arguments); fitPurrTxt(); return r; };
+
+/* ===================== V35: on the win card Freyr winks, then licks his paw (instead of swinging his head) ===================== */
+function cheerFace(el) {
+  const svg = el && el.querySelector('svg.catsvg'); if (!svg) return;
+  const eyes = svg.querySelector('.eyes'), NS = 'http://www.w3.org/2000/svg';
+  if (eyes && !eyes.querySelector('.eyeL')) {
+    const gL = document.createElementNS(NS, 'g'), gR = document.createElementNS(NS, 'g');
+    gL.setAttribute('class', 'eyeL'); gR.setAttribute('class', 'eyeR');
+    [...eyes.children].forEach(e => { const x = parseFloat(e.getAttribute('cx')); (x < 50 ? gL : gR).appendChild(e); });
+    eyes.append(gL, gR);
+  }
+  const g = svg.querySelector('g'), tongue = svg.querySelector('.m-y');
+  if (g && tongue && !svg.querySelector('.shutL')) {
+    // happy closed eyes
+    g.insertAdjacentHTML('beforeend',
+      '<path class="shut shutL" d="M28.5 57.5 Q36 50.5 43.5 57.5" fill="none" stroke-width="3"/>' +
+      '<path class="shut shutR" d="M56.5 57.5 Q64 50.5 71.5 57.5" fill="none" stroke-width="3"/>');
+    // the paw that comes up to his mouth: over the face, under the tongue
+    tongue.insertAdjacentHTML('beforebegin',
+      '<g class="lpaw"><ellipse cx="58" cy="88" rx="11.5" ry="9.5" fill="#fff" stroke-width="3"/>' +
+      '<path d="M52.5 84 V88 M58 83 V87.5 M63.5 84 V88" stroke="#E2D3E3" stroke-width="1.8"/>' +
+      '<ellipse cx="58" cy="91.5" rx="4.2" ry="3" fill="#FFB3C9" stroke="none"/></g>');
+  }
+  el.classList.remove('dance', 'cheer'); void el.offsetWidth; el.classList.add('cheer');
+}
+const showEndPlain35 = showEnd;
+showEnd = function (won) {
+  const r = showEndPlain35.apply(this, arguments);
+  const f = $('endFace');
+  if (won) cheerFace(f); else f.classList.remove('cheer');
+  return r;
+};

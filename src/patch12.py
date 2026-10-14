@@ -507,6 +507,9 @@ for a, b in [
     ("'Laserpunkt! Tausch ihn, dann jagt ' + catName + ' 3 Leckerlis quer übers Feld.'", "'Laserpunkt! Tausch ihn, dann jag ich 3 Leckerlis quer übers Feld.'"),
     ("'Festmahl-Napf! Tausch ihn mit einem Leckerli, dann frisst ' + catName + ' alle von der Sorte.'", "'Festmahl-Napf! Tausch ihn mit einem Leckerli, dann fress ich alle von der Sorte.'"),
     ("pounce: () => 'Tipp auf ein Feld: ' + catName + ' springt drauf und räumt Reihe und Spalte ab'", "pounce: () => 'Tipp auf ein Feld: Ich springe drauf und räume Reihe und Spalte ab'"),
+    # the purr bar: shorter text, it has to fit in one line
+    ("setText($('purrTxt'), 'Voll! Bleibt fürs nächste Level');", "setText($('purrTxt'), 'Fürs nächste Level');"),
+    ("if (ready) setText($('purrTxt'), aiming ? 'Tipp auf ein Feld' : 'Voll! Tipp auf ' + catName);", "if (ready) setText($('purrTxt'), aiming ? 'Tipp auf ein Feld' : 'Tipp auf ' + catName + '!');"),
 ]:
     rep(a, b)
 # V35: the game is called Freyr Match now
