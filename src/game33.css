@@ -1,0 +1,20 @@
+/* ===== V33: nothing on top of anything at the top of the screen; the board without its white rim ===== */
+/* the level number inside the panel: at the end of the purr row, or a small fourth box */
+.hud .ltab.inrow{position:static;flex:none;align-self:center;box-shadow:none;border:2px solid #FFCBE4;padding:2px 8px 2px;margin:0}
+.hud .ltab.inbox{position:static;box-shadow:none;background:#fff;border:2.5px solid #FFCBE4;border-radius:14px;padding:2px 7px 3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.hud .ltab.inbox .label{font-size:.7rem}
+.hud .ltab.inbox .val{font-size:1.3rem}
+main .top .hud-row.has-lv{grid-template-columns:auto minmax(0,1fr) auto auto}
+/* the bubble keeps clear of the panel above and the board below */
+main .top .bubble{top:calc(100% + 19px)}
+main .top{gap:12px}
+/* the board sits low in its space: the room above it is where the bubble pops up */
+@media not all and (orientation:landscape) and (max-height:520px){
+  @supports (width:1cqh){main .boardwrap{margin-bottom:max(0px,min(var(--free) - 112px,var(--free) / 2))}}
+}
+/* Freyr's glow when the meter is full stays behind the panel */
+main .top .hud{z-index:1}
+/* the board's edge: a thin soft line instead of the white rim */
+.tray .tedge{stroke:rgba(255,255,255,.38)}
+/* the lines between the cells: softer than the edge */
+.tray .tgrid{stroke:rgba(255,255,255,.16)}

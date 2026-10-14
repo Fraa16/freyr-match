@@ -1,0 +1,15 @@
+/* ===== V35: the progress code ===== */
+.savelink{display:block;margin:-4px auto 14px;padding:6px 10px;border:0;background:none;cursor:pointer;font:inherit;font-weight:800;font-size:.92rem;
+  color:var(--ink);opacity:.72;text-decoration:underline;text-underline-offset:3px}
+.savelink:hover{opacity:1}
+#saveOv{z-index:30}
+.savecard{max-width:380px}
+.savecard p{margin:0 0 14px}
+.savecode{display:block;box-sizing:border-box;width:100%;margin:0 0 10px;padding:10px 12px;border:2.5px solid var(--line);border-radius:14px;resize:none;
+  background:#fff;color:var(--ink);font:600 16px/1.3 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all;overflow:auto}
+.savecode::placeholder{color:var(--ink);opacity:.45;font-family:inherit}
+.savecode:focus{outline:3px solid var(--pink, #FF5FA8);outline-offset:1px}
+.savebtn{width:100%}
+.savemsg{min-height:0;margin:0 0 10px!important;font-weight:800;font-size:.95rem}
+.savemsg:empty{display:none}
+.savemsg.bad{color:#D22A5C}

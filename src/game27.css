@@ -1,0 +1,6 @@
+
+/* ===== V27: the level card says when the Schnurr-Power is full ===== */
+.ipurr{display:flex;align-items:center;gap:8px;margin:10px 0 0;padding:7px 12px;border-radius:14px;background:linear-gradient(#FFF7DA,#FFE9A8);color:#7A4A00;font-weight:800;font-size:.86rem;line-height:1.25;text-align:left;box-shadow:inset 0 0 0 2px #FFD23F}
+.ipurr[hidden]{display:none}
+.ipurr .ipi{width:26px;height:26px;flex:none}
+.ipurr .ipi svg{width:100%;height:100%;display:block}

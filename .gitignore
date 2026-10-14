@@ -1,0 +1,12 @@
+__pycache__/
+# build output and test leftovers in src/ (the web app in docs/ is committed)
+/src/game.html
+/src/gametest.html
+/src/asim_*.html
+/src/r_*.txt
+/src/r_all.log
+/src/*.png
+/src/*.jsonl
+/src/*.log
+/src/shots*/
+/src/rec*/

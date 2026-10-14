@@ -1,0 +1,80 @@
+
+/* ===== V25: the intro ===== */
+/* the chest button only shows once the chest is there (an empty white pill sat in the corner before) */
+.mchest[hidden]{display:none}
+/* while Freyr wakes up: no top bar, no chest, just him */
+.mapbar,.mchest{transition:opacity .6s}
+#mapScreen.intro .mapbar,#mapScreen.intro .mchest,#mapScreen.intro .mtoast{opacity:0;pointer-events:none}
+.wbanner{transition:opacity .6s}
+#mapScreen.iquiet .wbanner{opacity:0}
+#iScene{position:absolute;inset:0;pointer-events:none}
+#iScene .ibed{position:absolute;overflow:visible;pointer-events:none;will-change:transform}
+#iBedBack{z-index:2}
+#iBedFront{z-index:3}
+.icat{position:absolute;z-index:3;width:58px;height:74px;margin:-74px 0 0 -29px;pointer-events:none;will-change:transform}
+.icat[hidden]{display:none}
+.icat .fwrap{transform-origin:50% 100%}
+#iZzz{position:absolute;right:auto;z-index:4;margin:0;font-size:15px;letter-spacing:1px;color:#fff;text-shadow:0 0 0 #1B78E0,1px 1px 0 #1B78E0,-1px -1px 0 #1B78E0,1px -1px 0 #1B78E0,-1px 1px 0 #1B78E0;transform:translate(-50%,-100%);transition:opacity .4s}
+#iZzz.gone{opacity:0}
+/* Freyr curled up: breathing, waking, yawning, stretching */
+#iScene .seyes,#iScene .m-yawn{display:none}
+#iScene.shut .seyes{display:inline}
+#iScene.shut .eyes{display:none}
+#iScene.yawn .m-yawn{display:inline}
+#iScene.yawn .m-c{display:none}
+#iScene .cbody,#iScene .chead,#iScene .cpaws,#iScene .ctail{transform-box:fill-box;transition:transform .38s cubic-bezier(.3,.7,.4,1),opacity .16s}
+#iScene .chead{transform-origin:50% 92%}
+#iScene .cbody{transform-origin:40% 100%}
+#iScene .cpaws{transform-origin:50% 50%}
+#iScene .ctail{transform-origin:10% 20%}
+#iScene.asleep .cbody{animation:ibreath 3.2s ease-in-out infinite}
+#iScene.asleep .chead{animation:ibreathh 3.2s ease-in-out infinite}
+@keyframes ibreath{50%{transform:scale(1.03,1.07)}}
+@keyframes ibreathh{50%{transform:translateY(1px) rotate(-1.5deg)}}
+#iScene.twitch .chead{animation:itwitch .52s ease-in-out}
+@keyframes itwitch{20%{transform:rotate(-5deg)}45%{transform:rotate(4deg)}70%{transform:rotate(-2.5deg)}100%{transform:none}}
+#iScene.lift .chead{transform:translateY(-3px)}
+#iScene.yawn .chead{transform:translateY(-5px) rotate(-9deg) scale(1.04)}
+#iScene.stretch .chead{transform:translateY(4px) rotate(7deg)}
+#iScene.stretch .cbody{transform:translateY(-7px) scale(1.08,1.2)}
+#iScene.stretch .cpaws{transform:translate(-2px,3px) scale(1.25,1)}
+#iScene.stretch .ctail{transform:rotate(-8deg)}
+#iScene.up .cbody,#iScene.up .chead,#iScene.up .cpaws,#iScene.up .ctail{opacity:0}
+/* standing up, meowing, hopping out */
+.icat.rise .fwrap{animation:irise .58s cubic-bezier(.3,.7,.4,1) both}
+@keyframes irise{0%{transform:translateY(42%) scale(1.12,.6);opacity:.4}25%{opacity:1}60%{transform:translateY(-5%) scale(.95,1.07)}82%{transform:translateY(0) scale(1.03,.97)}100%{transform:none}}
+.icat.meow .fwrap{animation:imeow .9s ease-out}
+@keyframes imeow{0%{transform:none}14%{transform:scale(1.07,.92)}40%{transform:translateY(-6%) scale(.96,1.06)}70%{transform:translateY(0) scale(1.02,.98)}100%{transform:none}}
+.icat.jump .fwrap{animation:ijump .52s ease-out}
+@keyframes ijump{0%{transform:scale(1.12,.86)}22%{transform:scale(.92,1.1)}100%{transform:none}}
+.icat.land .fwrap{animation:iland .22s ease-out}
+@keyframes iland{0%{transform:scale(1.14,.86)}100%{transform:none}}
+/* a soft morning light that lifts when he wakes */
+.ishade{position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(ellipse 80% 62% at 50% 56%,rgba(45,25,100,0) 38%,rgba(45,25,100,.36));transition:opacity 1.4s}
+.ishade.off{opacity:0}
+/* "tap to wake him" */
+.ihint{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 36px);z-index:5;margin:0;padding:11px 22px 12px;border:0;border-radius:99px;background:#fff;cursor:pointer;
+  font:400 1.12rem/1.1 'Lilita One','Nunito',system-ui,sans-serif;letter-spacing:.02em;color:var(--blue);white-space:nowrap;
+  box-shadow:0 0 0 2.5px #fff,0 0 0 5.5px var(--frame),0 5px 0 5px rgba(30,30,110,.18);transform:translateX(-50%);opacity:0;transition:opacity .4s}
+.ihint[hidden]{display:none}
+.ihint.show{opacity:1;animation:ihint 1.7s ease-in-out infinite}
+.ihint:focus-visible{outline:3px dashed var(--pinkDeep);outline-offset:6px}
+@keyframes ihint{50%{transform:translateX(-50%) scale(1.06)}}
+/* his speech bubble */
+.ibubble{position:absolute;left:50%;top:40%;z-index:5;margin:0;padding:9px 18px 10px;border-radius:20px;background:#fff;text-align:center;white-space:nowrap;pointer-events:none;
+  box-shadow:0 0 0 2.5px #fff,0 0 0 5.5px var(--frame),0 6px 0 5px rgba(30,30,110,.18);transform:translate(-50%,-100%) scale(0);transform-origin:50% 100%;opacity:0}
+.ibubble::after{content:'';position:absolute;left:50%;bottom:-9px;width:16px;height:16px;margin-left:-8px;background:#fff;border-right:3px solid var(--frame);border-bottom:3px solid var(--frame);transform:rotate(45deg);
+  box-shadow:3px 3px 0 0 #fff}
+.ibubble b{display:block;font:400 2rem/1 'Lilita One','Nunito',system-ui,sans-serif;letter-spacing:.03em;color:var(--pink)}
+.ibubble span{display:block;margin-top:4px;font-weight:800;font-size:.98rem;color:var(--ink)}
+.ibubble.show{animation:ibub .5s cubic-bezier(.3,1.5,.5,1) forwards}
+.ibubble.hide{animation:ibubout .24s ease-in forwards}
+@keyframes ibub{0%{transform:translate(-50%,-100%) scale(0);opacity:0}60%{opacity:1}100%{transform:translate(-50%,-100%) scale(1);opacity:1}}
+@keyframes ibubout{0%{transform:translate(-50%,-100%) scale(1);opacity:1}100%{transform:translate(-50%,-100%) scale(.6);opacity:0}}
+/* watch it again, from Freyr's card */
+#setIntro{display:block;margin:14px auto 0;font-size:1rem;padding:9px 20px}
+#setIntro[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){
+  #iScene.asleep .cbody,#iScene.asleep .chead,#iScene.twitch .chead,.icat.rise .fwrap,.icat.meow .fwrap,.icat.jump .fwrap,.icat.land .fwrap,.ihint.show{animation:none}
+  .ibubble.show{animation:none;transform:translate(-50%,-100%);opacity:1}
+}

@@ -1,0 +1,39 @@
+
+/* ===== V26: tap Freyr to jump; a full meter you can't miss ===== */
+main .top{position:relative}
+/* the paw that taps on him while the meter is full */
+.mtap{position:absolute;z-index:3;pointer-events:none;filter:drop-shadow(0 3px 3px rgba(20,8,52,.45));animation:ctap 1s ease-in-out infinite}
+.mtap[hidden]{display:none}
+.mtap svg{width:100%;height:100%;display:block;transform:rotate(-30deg)}
+/* Freyr with a full meter: golden rays turning behind him, a golden glow round him, a ring that keeps pinging outwards, a hop now and then */
+.mascot.charged::before{content:'';position:absolute;inset:-24px;border-radius:50%;z-index:-1;pointer-events:none;opacity:1;
+  background:repeating-conic-gradient(from 0deg,rgba(255,206,50,.95) 0deg 9deg,rgba(255,206,50,0) 9deg 30deg);
+  -webkit-mask:radial-gradient(circle,transparent 31%,#000 41%,#000 56%,transparent 70%);mask:radial-gradient(circle,transparent 31%,#000 41%,#000 56%,transparent 70%);
+  animation:spin 8s linear infinite}
+.mascot.charged::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;border:4px solid #FFD23F;box-shadow:0 0 10px rgba(255,190,30,.9);
+  animation:mping 1.5s ease-out infinite}
+@keyframes mping{0%{transform:scale(.8);opacity:1}100%{transform:scale(1.45);opacity:0}}
+.mascot.charged svg{filter:drop-shadow(0 0 2.5px #fff) drop-shadow(0 0 8px rgba(255,190,30,.95))}
+.mascot.charged .catwrap{animation:mhop 2.6s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes mhop{0%,62%,100%{transform:none}70%{transform:translateY(-11%) scale(.95,1.06)}78%{transform:translateY(0) scale(1.07,.93)}85%{transform:none}}
+/* the moment it fills up, and the reminder after two moves */
+.mascot.powered{animation:mpower .8s cubic-bezier(.3,.7,.4,1)}
+@keyframes mpower{0%{transform:scale(1)}22%{transform:translateY(-18px) scale(1.14) rotate(-7deg)}48%{transform:translateY(0) scale(.92,1.07)}68%{transform:scale(1.06,.95)}100%{transform:none}}
+.mascot.nudge{animation:mnudge 1s ease-in-out}
+@keyframes mnudge{14%{transform:translateY(-15px) rotate(-8deg) scale(1.08)}32%{transform:translateY(0) rotate(7deg)}50%{transform:rotate(-6deg)}68%{transform:rotate(4deg)}84%{transform:rotate(-2deg)}100%{transform:none}}
+/* tapped: he crouches and wiggles, ready to pounce */
+.mascot.aiming .catwrap{animation:maim .42s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes maim{0%,100%{transform:scale(1.05,.93) rotate(-3deg)}50%{transform:scale(1.05,.93) rotate(3deg)}}
+.mascot.aiming::before{animation-duration:2.4s}
+/* the bar: the whole width now, gold and pulsing when full */
+.purr .bar.full i{background:linear-gradient(90deg,#FFB21A,#FFE27A,#FF8CCB,#FFE27A,#FFB21A);background-size:200% 100%;animation:purrflow 1.2s linear infinite}
+.purr .bar.full{box-shadow:0 0 0 2px #fff,0 0 14px 3px rgba(255,186,30,.95),inset 0 2px 3px rgba(30,60,140,.22);border-color:#FFB21A;animation:pbar 1.2s ease-in-out infinite}
+@keyframes pbar{50%{transform:scale(1.02,1.14)}}
+.purr .bar.full .ptxt{font-size:.82rem;text-shadow:1.3px 0 #B5520A,-1.3px 0 #B5520A,0 1.3px #B5520A,0 -1.3px #B5520A,1px 1px #B5520A,-1px -1px #B5520A}
+/* the stars that fly from the bar to Freyr */
+.pstar{position:fixed;left:0;top:0;z-index:60;width:24px;height:24px;margin:-12px 0 0 -12px;pointer-events:none;filter:drop-shadow(0 0 4px rgba(255,200,40,.9))}
+.pstar svg{width:100%;height:100%;display:block;overflow:visible}
+@media (prefers-reduced-motion:reduce){
+  .mascot.charged::before,.mascot.charged .catwrap,.mascot.aiming .catwrap,.mtap,.purr .bar.full,.mascot.powered,.mascot.nudge{animation:none}
+  .mascot.charged::after{animation:none;transform:scale(1.08)}
+}

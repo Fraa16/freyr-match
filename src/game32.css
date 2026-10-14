@@ -1,0 +1,62 @@
+/* ===== V32: the game screen, restructured ===== */
+/* Freyr sits next to the score panel, his bubble only pops up while he talks, the board gets the room with some air at the sides */
+:root{--mz:80px}
+@media (max-height:780px){:root{--mz:72px}}
+@media (max-height:690px){:root{--mz:62px}}
+@media (max-height:600px){:root{--mz:54px}}
+@media not all and (orientation:landscape) and (max-height:520px){
+  main{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));--g:clamp(10px,1.6vh,16px)}
+  main .stage{margin-left:-3px;margin-right:-3px}
+  /* the board sits a little below the middle: the room above it is where Freyr's bubble pops up */
+  @supports (width:1cqh){main .boardwrap{--free:calc(100cqh - min(100cqw,100cqh));align-self:end;margin-bottom:calc(var(--free) - clamp(var(--free) / 2,120px,var(--free) * .66))}}
+}
+.boardwrap{padding:3px}
+.tray{left:3px;top:3px;width:calc(100% - 6px);height:calc(100% - 6px)}
+.tile{padding:0}
+/* the top row: Freyr, then the score panel */
+main .top{height:auto;margin-bottom:0;gap:10px;align-items:center;z-index:6}
+main .top .mascot{width:var(--mz);height:var(--mz)}
+main .top .hud{flex:1 1 auto;min-width:0;padding:6px 7px 7px}
+main .top .hud-row{grid-template-columns:auto minmax(0,1fr) auto;gap:5px}
+main .top .hbox{padding:2px 7px 3px;min-width:50px}
+main .top .hbox .label{font-size:.7rem}
+main .top .hbox .val{font-size:1.45rem;line-height:1.02}
+main .top .hbox #score{font-size:1.12rem}
+/* the goals: icon and number side by side */
+main .top .goalsbox .goals{gap:7px;margin-top:2px;align-items:center}
+main .top .chip{flex-direction:row;gap:2px;align-items:center}
+main .top .chip svg,main .top .chip img{width:22px;height:22px}
+main .top .chip b{font-size:.98rem}
+main .top .goalsbox .goals.gtight .chip svg,main .top .goalsbox .goals.gtight .chip img{width:18px;height:18px}
+main .top .belly{margin-top:5px}
+main .top .bar{height:16px}
+main .top .purr .pico{width:26px;height:26px}
+/* the level number: a little tab on the panel instead of a fourth box */
+.hud .ltab{position:absolute;right:14px;bottom:-13px;z-index:2;display:flex;align-items:baseline;gap:4px;padding:3px 10px 3px;border-radius:99px;background:#fff;
+  box-shadow:0 0 0 2px var(--frame),0 2px 0 2px rgba(30,30,110,.18);white-space:nowrap}
+.hud .ltab .label{font:400 .66rem/1 'Lilita One','Nunito',sans-serif;color:var(--blue);letter-spacing:.05em;text-transform:uppercase}
+.hud .ltab .val{font:400 .9rem/1 'Lilita One','Nunito',sans-serif;color:#E85400}
+/* the bubble pops up under Freyr while he talks, then goes again */
+main .top .bubble{position:absolute;left:calc(var(--mz) * .3);top:calc(100% + 15px);z-index:8;display:block;flex:none;width:max-content;max-width:calc(100% - var(--mz) * .3 - 4px);
+  min-height:0;margin:0;padding:8px 13px 9px;font-size:.95rem;line-height:1.24;pointer-events:none;
+  opacity:0;visibility:hidden;transform:translateY(-8px) scale(.9);transform-origin:24px -12px;
+  transition:opacity .16s,transform .24s cubic-bezier(.3,1.5,.5,1),visibility 0s .24s}
+main .top .bubble.show{opacity:1;visibility:visible;transform:none;transition:opacity .16s,transform .24s cubic-bezier(.3,1.5,.5,1),visibility 0s}
+main .top .bubble::before{left:20px;top:-14px;transform:rotate(135deg)}
+@media (prefers-reduced-motion:reduce){main .top .bubble,main .top .bubble.show{transition:none;transform:none}}
+/* the tools stay in front of the bar's stitching when they pulse */
+main .actions .tools{position:relative;z-index:1}
+/* phones held sideways: Freyr and the panel in the left column, as before */
+@media (orientation:landscape) and (max-height:520px){:root{--mz:48px}}
+/* when the board would come out narrower than the screen (see fitLayout): more compact, step by step */
+html.fit1 main{--g:9px}
+html.fit1 main .top .hud{padding-top:6px;padding-bottom:7px}
+html.fit1 main .actions{padding-top:6px;padding-bottom:5px}
+html.fit1 .tool{gap:4px}
+html.fit2 .tool small{display:none}
+html.fit3{--mz:62px}
+html.fit3 main .top .hbox .val{font-size:1.35rem}
+html.fit3 main .top .bar{height:15px}
+html.fit4{--mz:52px}
+html.fit4 main{--g:6px}
+html.fit4 main .top .hbox .label{font-size:.66rem}

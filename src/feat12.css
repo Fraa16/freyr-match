@@ -1,0 +1,128 @@
+
+/* ===== round 3: alarm clocks on treats, gifts, cucumbers, the turbo robot ===== */
+.tile .clk{position:absolute;right:-6%;bottom:-6%;width:54%;height:54%;pointer-events:none;z-index:2}
+.tile .clk svg{width:100%;height:100%;filter:drop-shadow(0 1.5px 1px rgba(20,8,50,.45))}
+.tile .clk b{position:absolute;left:0;right:0;top:31%;text-align:center;font:900 clamp(9px,2.6vw,13px)/1 Nunito,sans-serif;color:#2A1640}
+.tile .clk.low svg{animation:clkShake .5s ease-in-out infinite}
+.tile .clk.low b{color:#D6002E}
+@keyframes clkShake{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
+.tile.gift,.tile.cuke{z-index:2;padding:.6%}
+.tile.cuke svg{animation:cukeBob 2.2s ease-in-out infinite}
+@keyframes cukeBob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-3%) rotate(4deg)}}
+.tile.hop{z-index:4;animation:cukeHop .38s cubic-bezier(.3,.7,.4,1)}
+@keyframes cukeHop{0%{translate:var(--hx) var(--hy)}45%{translate:calc(var(--hx) * .5) calc(var(--hy) * .5 - 40%)}100%{translate:0 0}}
+.tile.ring{animation:clkRing .12s linear 8}
+@keyframes clkRing{0%,100%{transform:translateX(0)}50%{transform:translateX(5%)}}
+@media (prefers-reduced-motion:reduce){.tile .clk.low svg,.tile.cuke svg,.tile.hop,.tile.ring{animation:none}}
+.tile.flee{animation:cukeFlee .48s ease-in forwards;z-index:4}
+@keyframes cukeFlee{0%{transform:translateY(0) rotate(0)}30%{transform:translateY(-35%) rotate(-25deg) scale(1.1)}100%{transform:translateY(-140%) rotate(40deg) scale(.4);opacity:0}}
+.vac .vbolt{position:absolute;right:-6%;top:-10%;width:40%;height:40%;z-index:3;animation:boltPulse .7s ease-in-out infinite;pointer-events:none}
+.vac .vbolt svg{width:100%;height:100%;display:block;filter:drop-shadow(0 0 4px #FFD54A)}
+.vac.turbo .vacsvg{filter:drop-shadow(0 0 7px rgba(255,79,123,.85))}
+@keyframes boltPulse{50%{transform:scale(1.18) rotate(8deg)}}
+.lico.turbo .ico:last-child{width:28px;height:28px;margin-left:-14px;margin-top:-16px}
+@media (prefers-reduced-motion:reduce){.tile.flee{animation-duration:.01s}.vac .vbolt{animation:none}}
+/* level 61: the jersey reveal */
+#kitCard{text-align:center}
+.kitart{width:150px;height:150px;margin:6px auto 4px;animation:kitBob 2.4s ease-in-out infinite}
+.kitart .catwrap{width:100%;height:100%}
+@keyframes kitBob{50%{transform:translateY(-6px) rotate(-3deg)}}
+@media (prefers-reduced-motion:reduce){.kitart{animation:none}}
+/* many goals */
+.goalsbox .goals.gtight{gap:2px}
+.goalsbox .goals.gtight .chip svg,.goalsbox .goals.gtight .chip img{width:18px;height:18px}
+.goalsbox .goals.gtight .chip b{font-size:.74rem}
+.goalsbox.grows .label{display:none}
+.goalsbox .goals.grows{flex-wrap:wrap;gap:1px 3px;margin:0 auto}
+.goalsbox .goals.grows .chip svg,.goalsbox .goals.grows .chip img{width:18px;height:18px}
+.goalsbox .goals.grows .chip b{font-size:.72rem}
+/* extras going off */
+.xflash{position:absolute;z-index:6;pointer-events:none;transform:translate(-50%,-50%);animation:xflash .52s ease-out forwards}
+.xflash svg,.xflash img{position:relative;width:100%;height:100%;display:block}
+.xflash::before{content:'';position:absolute;inset:-45%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95) 0 22%,var(--xc) 46%,transparent 70%);animation:xglow .52s ease-out forwards}
+.xflash.cat{--xc:rgba(255,143,192,.8)}.xflash.nip{--xc:rgba(94,216,60,.8)}.xflash.laser{--xc:rgba(255,46,99,.8)}.xflash.bowl{--xc:rgba(255,201,77,.9)}
+@keyframes xflash{0%{transform:translate(-50%,-50%) scale(1)}30%{transform:translate(-50%,-50%) scale(1.6) rotate(-10deg)}100%{transform:translate(-50%,-50%) scale(2.2) rotate(6deg);opacity:0}}
+@keyframes xglow{0%{transform:scale(.3);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.streak{box-shadow:0 0 24px 9px rgba(240,124,160,.85),0 0 5px 2px #fff}
+.streak.h{height:10%;margin-top:-5%}
+.streak.v{width:10%;margin-left:-5%}
+.xdash{position:absolute;z-index:7;pointer-events:none;margin:0;transform-origin:50% 50%;translate:-50% -50%}
+.xdash .xt{position:absolute;top:28%;height:44%;right:45%;width:300%;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,209,225,.75) 45%,#fff);box-shadow:0 0 12px 4px rgba(255,143,192,.55)}
+.xdash .xh{position:absolute;inset:-14%}
+.xdash .xh svg,.xdash .xh img{width:100%;height:100%;display:block;filter:drop-shadow(0 3px 0 rgba(122,51,80,.3))}
+.xdash .xh img{border-radius:50%;object-fit:cover;border:3px solid #fff}
+.lbeam,.bray{position:absolute;z-index:6;pointer-events:none;height:0;transform-origin:0 0}
+.lbeam i,.bray i{position:absolute;left:0;right:0;border-radius:99px;transform-origin:0 50%;animation:beamIn .4s ease-out forwards}
+.lbeam i{top:-3px;height:6px;background:linear-gradient(90deg,#fff,#FF7096 30%,#FF2E63);box-shadow:0 0 10px 3px rgba(255,46,99,.75)}
+.bray i{top:-2.5px;height:5px;background:linear-gradient(90deg,#fff,var(--rc));box-shadow:0 0 10px 3px var(--rc)}
+.bray.c0{--rc:#FF6FB5}.bray.c1{--rc:#FFB547}.bray.c2{--rc:#FFE14D}.bray.c3{--rc:#7CDB5A}.bray.c4{--rc:#43B6FF}.bray.c5{--rc:#B57CFF}
+@keyframes beamIn{0%{transform:scaleX(0);opacity:1}35%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.lhit{position:absolute;z-index:6;pointer-events:none;transform:translate(-50%,-50%);border-radius:50%;border:4px solid #FF2E63;box-shadow:0 0 14px 4px rgba(255,46,99,.7),inset 0 0 10px rgba(255,46,99,.6);animation:lhit .44s ease-out forwards}
+@keyframes lhit{0%{transform:translate(-50%,-50%) scale(.2);opacity:1}100%{transform:translate(-50%,-50%) scale(1.6);opacity:0}}
+.nflash{position:absolute;z-index:5;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,255,255,.95) 0 16%,rgba(142,232,112,.85) 38%,rgba(94,216,60,.45) 60%,transparent 71%);animation:nflash .6s ease-out forwards}
+@keyframes nflash{0%{transform:translate(-50%,-50%) scale(.2);opacity:1}55%{opacity:.95}100%{transform:translate(-50%,-50%) scale(1.25);opacity:0}}
+.ring.white{border-color:#fff;box-shadow:0 0 20px 7px rgba(255,255,255,.9),inset 0 0 12px rgba(255,255,255,.7)}
+.bflash{position:absolute;inset:0;z-index:5;pointer-events:none;border-radius:inherit;background:radial-gradient(circle at var(--bx) var(--by),rgba(255,255,255,.95),rgba(255,225,140,.5) 28%,rgba(255,150,200,.22) 55%,transparent 78%);animation:bflash .55s ease-out forwards}
+@keyframes bflash{0%{opacity:0}22%{opacity:1}100%{opacity:0}}
+.shake2{animation:shake2 .44s cubic-bezier(.36,.07,.19,.97)}
+@keyframes shake2{10%,90%{transform:translate(-2px,1px)}20%,80%{transform:translate(5px,-2px) rotate(.6deg)}30%,50%,70%{transform:translate(-7px,3px) rotate(-1deg)}40%,60%{transform:translate(7px,-3px) rotate(1deg)}}
+/* stronger colors: deeper ink, saturated frames and buttons */
+:root,:root:not([data-theme="light"]),:root[data-theme="dark"]{--ink:#2D1B5E;--muted:#6B52A6;--blue:#1B78E0;--pink:#FF2E88;--pinkDeep:#C2105F;--frame:#4BB2FF;--frameDark:#1F7FE0;--line:#4BB2FF}
+/* ===== phones: everything fits the screen, big enough to tap, easy to read ===== */
+html{touch-action:manipulation;overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overscroll-behavior:none}
+main,#mapScreen,.overlay{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea{-webkit-user-select:text;user-select:text}
+button{-webkit-tap-highlight-color:transparent}
+:root{padding-top:0;padding-bottom:0}
+/* the game screen is exactly one screen high; the board takes whatever room is left and stays square */
+main{box-sizing:border-box;height:100vh;height:100dvh;min-height:0;overflow:hidden;
+  padding:calc(env(safe-area-inset-top,0px) + 14px) max(12px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 8px) max(12px,env(safe-area-inset-left,0px));
+  gap:clamp(8px,1.8vh,18px)}
+main .top,main .hud,main .actions{flex:none}
+.stage{flex:1 1 auto;min-height:0;display:grid;place-items:center;container-type:size}
+.boardwrap{width:100%;box-sizing:border-box;max-width:100%}
+@supports (width:1cqh){.boardwrap{width:min(100cqw,100cqh)}}
+.actions{margin:4px 6px 4px}
+/* shorter screens: a smaller Freyr and bubble, a tighter score panel */
+@media (max-height:780px){.mascot{width:72px;height:72px}.top{gap:12px}.bubble{min-height:46px;padding:8px 12px;font-size:.92rem;line-height:1.28}}
+@media (max-height:690px){.mascot{width:58px;height:58px}.top{gap:10px}.bubble{min-height:40px;padding:7px 11px;font-size:.86rem;line-height:1.22}
+  main .hud{padding:7px 8px 8px}.belly{margin-top:6px}main{padding-top:calc(env(safe-area-inset-top,0px) + 8px)}}
+@media (max-height:600px){.mascot{width:48px;height:48px}.bubble{min-height:34px;padding:5px 10px;font-size:.8rem}main .actions{padding:6px 8px 5px}
+  .tool{gap:4px}.tool small{display:none}}
+/* phones held sideways: board on the right, everything else on the left */
+@media (orientation:landscape) and (max-height:520px){
+  main{max-width:none;display:grid;grid-template-columns:minmax(250px,1fr) auto;grid-template-rows:auto auto 1fr auto;
+    grid-template-areas:"top stage" "hud stage" ". stage" "actions stage";column-gap:16px;row-gap:8px;align-items:start}
+  main .top{grid-area:top}main .hud{grid-area:hud}main .actions{grid-area:actions;align-self:end}
+  .stage{grid-area:stage;height:100%;aspect-ratio:1/1;width:auto}
+  .mascot{width:48px;height:48px}.tool small{display:block}}
+#mapInner{max-width:480px;margin:0 auto}
+/* level card, end card, settings: the main buttons stay in reach while the rest scrolls */
+.overlay{padding:max(12px,env(safe-area-inset-top,0px)) 12px max(12px,env(safe-area-inset-bottom,0px));overscroll-behavior:contain}
+.cta{position:sticky;bottom:-26px;z-index:3;margin:6px -20px -26px;padding:12px 20px 18px;border-radius:0 0 24px 24px;
+  background:linear-gradient(rgba(255,255,255,0),#fff 18px);display:flex;flex-direction:column;align-items:center;gap:12px}
+.cta > .btn{margin:0}
+.cta > [hidden]{display:none}
+@media (max-height:700px){.card{padding:20px 16px 20px}.cta{margin:6px -16px -20px;padding:10px 16px 14px;bottom:-20px}
+  .bigtitle{font-size:1.8rem}.card h2{font-size:1.4rem}.card .face{width:64px;height:64px}}
+@media (max-width:400px){.xbtn{top:-12px;right:4px}}
+/* tap targets: at least 44 px */
+.btn{min-height:44px}
+.mapbar .btn.icon,.mface{width:44px;height:44px}
+main .btn.icon,#pauseBtn{width:44px;height:44px;min-width:44px}
+.purrgo{position:relative}
+.purrgo::before{content:'';position:absolute;inset:-11px -8px}
+/* readable text and contrast */
+:root,:root:not([data-theme="light"]),:root[data-theme="dark"]{--blue:#1565C8}
+.btn.soft{color:#1565C8}
+.hbox .val{color:#E85400}
+.hbox #score{color:#E0145F}
+.tool small{font-size:.74rem;color:#1565C8}
+.legend b{font-size:.75rem}
+.outfit b,.outfit small{font-size:.75rem}
+.goalsbox .goals.gtight .chip b,.goalsbox .goals.grows .chip b{font-size:.72rem}
+.tbadge{background:linear-gradient(#FF5AA6,#E0127A)}
+.stt b{color:#17752A}
+.sg b{font-size:.72rem}
+.tile .clk b{font-size:clamp(10px,3.1vw,14px)}

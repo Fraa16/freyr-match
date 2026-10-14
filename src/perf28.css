@@ -1,0 +1,44 @@
+
+/* ===== V28: tiles glide on transforms (no layout while they fall), treats are finished pictures ===== */
+html.tx .tile{top:0;left:0;will-change:transform;transition:translate .26s cubic-bezier(.35,0,.4,1.2)}
+html.tx .vac{top:0!important;left:0!important;transition:translate .38s cubic-bezier(.4,.1,.3,1)}
+@keyframes cukeHop{0%{transform:translate(var(--hx),var(--hy))}45%{transform:translate(calc(var(--hx) * .5),calc(var(--hy) * .5 - 40%))}100%{transform:none}}
+.tile img.bm{position:absolute;left:-14%;top:-14%;width:128%;height:128%;max-width:none;border:0;border-radius:0;box-shadow:none;filter:none;object-fit:fill;pointer-events:none}
+.tile.gold img.bm{filter:none}
+@media (prefers-reduced-motion:reduce){html.tx .tile{transition-duration:.05s}}
+/* nothing runs behind the map: the game screen under it rests */
+body.onmap main *,body.onmap main *::before,body.onmap main *::after{animation-play-state:paused!important}
+/* the full purr meter shimmers with a moving layer instead of repainting its background in every frame */
+.purr .bar.full i{position:relative;overflow:hidden;animation:none;background:#FFB21A}
+.purr .bar.full i::after{content:'';position:absolute;top:0;bottom:0;left:0;width:400%;will-change:transform;
+  background:linear-gradient(90deg,#FFB21A,#FFE27A,#FF8CCB,#FFE27A,#FFB21A,#FFE27A,#FF8CCB,#FFE27A,#FFB21A);animation:purrflow28 1.2s linear infinite}
+@keyframes purrflow28{to{transform:translateX(-50%)}}
+/* eyes blink and the tail on the map wags now and then (set off from script), instead of animating in every frame */
+.mascot .eyes,.fsprite .eyes{animation:none}
+.mascot .eyes.bl,.fsprite .eyes.bl{animation:blink28 .24s ease-in-out}
+@keyframes blink28{50%{transform:scaleY(.1)}}
+.ftail{animation:none}
+.fsprite.walk .ftail{animation:ftail .36s ease-in-out infinite alternate}
+.ftail.wag{animation:fwag 1.7s ease-in-out 2}
+@keyframes fwag{0%,100%{transform:rotate(0)}25%{transform:rotate(-7deg)}75%{transform:rotate(7deg)}}
+@media (prefers-reduced-motion:reduce){.purr .bar.full i::after,.ftail.wag,.mascot .eyes.bl,.fsprite .eyes.bl{animation:none}}
+.mapsvg.pzlayer{position:absolute;left:0;top:0;width:100%;height:auto;pointer-events:none;will-change:transform}
+/* the cat's arrows move as whole little pictures */
+.dir2{display:block;pointer-events:none}
+.dir2.v{transform:rotate(90deg)}
+.dir2 .da{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;filter:none}
+.tile .dir2 .da{position:absolute;filter:none;transition:none}
+.tile .dir2 .al{animation:nudgeL28 .8s ease-in-out infinite}
+.tile .dir2 .ar{animation:nudgeR28 .8s ease-in-out infinite}
+@keyframes nudgeL28{50%{transform:translateX(-5%)}}
+@keyframes nudgeR28{50%{transform:translateX(5%)}}
+/* the robot: brushes turn while it drives, the light blinks as a little glow on top */
+.vac .vbrush > g{animation:none}
+.vac.moving .vbrush > g{animation:spin .45s linear infinite}
+.vac .vled{animation:none}
+.vac .vled2{position:absolute;left:50%;top:12.9%;width:10%;height:10%;margin:-5% 0 0 -5%;border-radius:50%;pointer-events:none;z-index:2;
+  background:radial-gradient(circle,#fff 0 22%,#FF7A96 38%,rgba(255,45,85,0) 72%);animation:vblink2 1s steps(1) infinite}
+@keyframes vblink2{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.tile .dir2 .da,.vac .vled2,.vac.moving .vbrush > g{animation:none}}
+/* the map's top bar is nearly opaque anyway: no live blur of the map scrolling under it */
+.mapbar::before{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.94)}

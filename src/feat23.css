@@ -1,0 +1,118 @@
+
+/* ===== V23: fixes from the full audit ===== */
+/* Freyr and his bubble sit in a row of fixed height: the board never jumps when he talks */
+:root{--toph:90px}
+main .top{height:var(--toph)}
+@media (max-height:780px){:root{--toph:72px}.bubble{line-height:1.25}}
+@media (max-height:690px){:root{--toph:62px}.bubble{padding:6px 11px;line-height:1.18}}
+@media (max-height:600px){:root{--toph:54px}.bubble{padding:4px 10px;line-height:1.16}}
+@media (orientation:landscape) and (max-height:520px){:root{--toph:54px}}
+/* the score box has room for five digits from the start, so the goals next to it keep their size */
+.hbox.scorebox{min-width:74px}
+#score{font-variant-numeric:tabular-nums}
+@media (max-width:370px){.hbox.scorebox{min-width:62px}}
+/* callouts are sized by the board, not the screen: they fit next to the HUD in landscape too */
+.callout{font-size:clamp(1.3rem,9cqw,2.5rem)}
+@supports not (width:1cqw){.callout{font-size:clamp(1.3rem,8.5vw,2.5rem)}}
+/* the end card: "Zur Karte" is the X in its corner */
+#endMap.xbtn{top:10px;right:10px}
+#endMap[hidden]{display:none}
+/* the level card title and its X stay apart on narrow phones */
+@media (max-width:400px){#introTitle{padding:3px 22px 6px;font-size:1.6rem}}
+@media (max-width:400px),(max-height:460px){#introCard .xbtn{top:-14px;right:-6px}}
+/* short phones: smaller pictures on the cards, so the text above the buttons stays visible */
+@media (max-height:600px) and (orientation:portrait){
+  .card .face{width:56px;height:56px;margin-bottom:6px}
+  .card .face.sleep{margin-bottom:22px}
+  .rating .rheart{width:38px;height:38px}.rating .rheart.mid{width:48px;height:48px;margin-bottom:6px}
+  .bigscore{font-size:1.7rem}
+  .miss .chip svg,.miss .chip img{width:38px;height:38px}
+  .jarline .jar{width:40px;height:40px}
+  .card p{margin:6px 0 12px}
+  .chestart,.kitart{width:120px;height:120px}
+}
+/* phones held sideways: wider cards, buttons side by side, smaller pictures */
+@media (max-height:460px){
+  .overlay .card{max-width:min(600px,100%)}
+  .cta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:10px 16px;padding-top:10px;padding-bottom:12px}
+  .cta > #rescueBtn{margin:0}
+  .card .face{width:50px;height:50px;margin-bottom:2px}
+  .card .face.sleep{margin-bottom:18px}
+  .chestart,.kitart{width:88px;height:88px}
+  .rating .rheart{width:32px;height:32px}.rating .rheart.mid{width:40px;height:40px;margin-bottom:5px}
+  .bigscore{font-size:1.5rem}
+  .bigtitle{font-size:1.5rem}
+  .card h2{font-size:1.25rem}
+  .card p{margin:4px 0 8px}
+  .miss{margin-bottom:6px}
+  .miss .chip svg,.miss .chip img{width:32px;height:32px}
+  .lclock{font-size:1.5rem;margin-bottom:8px}
+  .lrow svg{width:24px;height:24px}
+  .loot{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-bottom:8px}
+  #chestCard p{margin:4px 0 8px}
+}
+/* the level card's title pill sits above the card's stitching */
+#introTitle{z-index:4}
+/* the heart on the lives pill sits above the pill's stitching too */
+.mheart{z-index:1}
+/* the map's top bar: every frame sits inside its own box, so nothing overlaps; the heart sits inside the lives pill */
+.mgrow{display:none}
+#mMusic{margin-left:auto}
+.mapbar{gap:10px;padding-top:calc(env(safe-area-inset-top,0px) + 10px);padding-bottom:12px}
+.mapbar::before{background:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.6) 62%,rgba(255,255,255,0))}
+.mpill{box-sizing:border-box;height:44px;border:4px solid var(--frame);border-radius:16px;padding:0 11px 0 7px;gap:5px;
+  box-shadow:inset 0 0 0 2px #fff,0 4px 0 rgba(30,30,110,.2)}
+.mpill::after{inset:-3px;border-radius:15px;border:1.4px dashed rgba(255,255,255,.95)}
+#mLives{padding-left:3px}
+.mheart{width:32px;height:32px;margin:0}
+#mTreats .kib{width:22px;height:22px}
+.mapbar .btn.icon{width:44px;height:44px;min-height:0;box-shadow:inset 0 -4px 0 rgba(0,0,0,.15),inset 0 0 0 3px #fff,0 0 0 2px #1B66BD,0 4px 0 rgba(20,40,110,.25)}
+.mapbar .btn.icon:active{box-shadow:inset 0 -2px 0 rgba(0,0,0,.15),inset 0 0 0 3px #fff,0 0 0 2px #1B66BD,0 1px 0 rgba(20,40,110,.25)}
+.mface{width:44px;height:44px;box-sizing:border-box;border:3px solid #fff;box-shadow:0 0 0 2px var(--frame),0 4px 0 1px rgba(30,30,110,.2)}
+#mTreats.big b{font-size:.98rem}
+@media (max-width:385px){
+  .mapbar{gap:10px;padding-left:10px;padding-right:10px}
+  .mapbar .btn.icon,.mface{width:40px;height:40px}
+  .mapbar .btn.icon svg{width:20px;height:20px}
+  .mpill{height:40px;padding:0 9px 0 5px;gap:4px}
+  #mLives{padding-left:3px}
+  .mheart{width:28px;height:28px}
+  .mheart b{font-size:.92rem}
+  .mtime{font-size:.86rem}
+  #mTreats b{font-size:1rem}
+  #mTreats.big b{font-size:.88rem}
+  #mTreats .kib{width:20px;height:20px}
+}
+@media (max-width:340px){
+  .mapbar{gap:9px;padding-left:8px;padding-right:8px}
+  .mapbar .btn.icon,.mface{width:36px;height:36px}
+  .mapbar .btn.icon svg{width:18px;height:18px}
+  .mpill{height:38px;padding:0 7px 0 4px}
+  .mheart{width:26px;height:26px}
+  .mheart b{font-size:.84rem}
+  .mtime{font-size:.8rem}
+  #mTreats b{font-size:.92rem}
+  #mTreats.big b{font-size:.8rem}
+  #mTreats .kib{width:18px;height:18px}
+}
+/* a calm frosted band behind the top bar: the map scrolls underneath instead of peeking between the buttons */
+.mapbar::before{inset:0;border-radius:0 0 20px 20px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:0 3px 0 rgba(75,178,255,.4),0 8px 16px rgba(30,30,110,.14)}
+/* in the game: slimmer frames and enough room between the panels, so no frame covers another */
+main{--g:clamp(8px,1.8vh,18px);gap:var(--g)}
+main .hud,main .bubble,main .actions{box-shadow:0 0 0 2.5px #fff,0 0 0 6px var(--frame),0 0 0 7.5px var(--frameDark),0 6px 0 3px rgba(30,30,110,.2)}
+main .hud::after,main .bubble::after,main .actions::after{inset:-4.3px;border-radius:26px;border-width:1.6px}
+main .bubble::before{left:-15px;border-left-width:4.5px;border-bottom-width:4.5px}
+main .top{margin-bottom:max(0px,calc(20px - var(--g)))}
+@media (max-height:780px){
+  main .hud,main .bubble,main .actions{box-shadow:0 0 0 2px #fff,0 0 0 5px var(--frame),0 0 0 6.5px var(--frameDark),0 5px 0 2px rgba(30,30,110,.2)}
+  main .hud::after,main .bubble::after,main .actions::after{inset:-3.5px;border-radius:25px;border-width:1.5px}
+  main .bubble::before{left:-14px;border-left-width:4px;border-bottom-width:4px}
+  main .top{margin-bottom:max(0px,calc(16.5px - var(--g)))}
+}
+@media (max-height:600px){
+  main .hud,main .bubble,main .actions{box-shadow:0 0 0 2px #fff,0 0 0 4.5px var(--frame),0 0 0 5.5px var(--frameDark),0 4px 0 1.5px rgba(30,30,110,.2)}
+  main .hud::after,main .bubble::after,main .actions::after{inset:-3.2px;border-radius:24px;border-width:1.4px}
+  main .top{margin-bottom:max(0px,calc(13px - var(--g)))}
+}
+@media (orientation:landscape) and (max-height:520px){main{row-gap:14px}main .top{margin-bottom:0}}

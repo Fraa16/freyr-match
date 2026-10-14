@@ -1,0 +1,28 @@
+import os, json
+from playwright.sync_api import sync_playwright
+D = os.path.dirname(os.path.abspath(__file__))
+H = open(D + '/harness.js').read()
+with sync_playwright() as p:
+    b = p.chromium.launch(args=['--autoplay-policy=no-user-gesture-required'])
+    pg = b.new_page(viewport={'width': 390, 'height': 844}, device_scale_factor=2); errs = []; __import__('veteran').veteran(pg)
+    pg.on('pageerror', lambda e: errs.append(str(e)))
+    pg.goto('file://' + D + '/game.html')
+    pg.evaluate('() => { localStorage.clear(); localStorage.setItem("wm-level", 12); localStorage.setItem("wm-hearts", JSON.stringify({1:3,2:2,3:3,4:3,5:2,6:3,7:1,8:3,9:2,10:3,11:2})); }')
+    pg.reload(); pg.wait_for_timeout(900)
+    pg.click('.mnode.cur'); pg.wait_for_timeout(700)
+    print('intro shown', pg.evaluate('document.getElementById("introOv").classList.contains("show")'), 'lives', pg.evaluate('lives'))
+    pg.click('#introBtn'); pg.wait_for_timeout(700)
+    print('after Los: lives', pg.evaluate('lives'), 'onMap', pg.evaluate('onMap'), 'lifeTs set', pg.evaluate('lifeTs > 0'))
+    pg.add_script_tag(content=H); pg.evaluate('T_waitIdle()')
+    pg.evaluate('''() => { T_setup(1, [[5,1],[5,2],[6,3]]); T_goalNext(); moves = 9; goals.forEach(g => { g.left = 0; }); milk = milk.map(r => r.map(() => 0)); updateHud(); trySwap(6,3,5,3); }''')
+    pg.wait_for_function('document.getElementById("endOv").classList.contains("show")', timeout=60000)
+    pg.wait_for_timeout(1500)
+    print('won: lives', pg.evaluate('lives'), 'maxLevel', pg.evaluate('maxLevel'), 'stored', pg.evaluate('localStorage.getItem("wm-level")'), 'mapProg', pg.evaluate('JSON.stringify(mapProg)'))
+    pg.click('#endBtn')
+    for i, ms in enumerate([300, 700, 500, 400, 400, 400, 400, 400, 500, 600, 900]):
+        pg.wait_for_timeout(ms)
+        pg.screenshot(path=D + f'/nwalk_{i:02d}.png')
+    pg.wait_for_timeout(1500)
+    print('after walk: intro open', pg.evaluate('document.getElementById("introOv").classList.contains("show")'), 'level', pg.evaluate('level'), 'animating', pg.evaluate('mapAnimating'))
+    print('errors:', errs)
+    b.close()

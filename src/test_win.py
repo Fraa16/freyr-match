@@ -1,0 +1,25 @@
+import os
+from playwright.sync_api import sync_playwright
+D = os.path.dirname(os.path.abspath(__file__))
+H = open(D + '/harness.js').read()
+with sync_playwright() as p:
+    b = p.chromium.launch(args=['--autoplay-policy=no-user-gesture-required'])
+    pg = b.new_page(viewport={'width': 390, 'height': 844}, device_scale_factor=2); __import__('veteran').veteran(pg)
+    errs = []
+    pg.on('pageerror', lambda e: errs.append(str(e)))
+    pg.goto('file://' + D + '/game.html'); pg.evaluate('localStorage.clear()'); pg.reload(); pg.wait_for_timeout(800)
+    pg.evaluate("""async () => { mapSkip = true; for (let i = 0; i < 120 && mapAnimating; i++) await new Promise(r => setTimeout(r, 50)); if (!document.getElementById('introOv').classList.contains('show')) openLevel(maxLevel); }"""); pg.wait_for_timeout(500); pg.click('#introBtn'); pg.wait_for_timeout(1500)
+    print('music running:', pg.evaluate('!!musicTimer'), 'ctx', pg.evaluate('actx && actx.state'), 'steps scheduled', pg.evaluate('mStep'))
+    pg.add_script_tag(content=H); pg.evaluate('T_waitIdle()')
+    pg.evaluate('''() => { T_setup(1, [[5,1],[5,2],[6,3]]); T_goalNext(); moves = 9; updateHud(); window.__d = false; trySwap(6,3,5,3).then(() => window.__d = true); }''')
+    pg.wait_for_timeout(1050); pg.screenshot(path=D + '/w_banner.png')
+    pg.wait_for_function('window.__d === true', timeout=60000)
+    pg.wait_for_timeout(2600); pg.screenshot(path=D + '/w_card.png')
+    print('hearts on:', pg.evaluate('document.querySelectorAll(".rheart.on").length'), 'winMoves', pg.evaluate('winMoves'), 'bigScore', pg.evaluate('document.getElementById("bigScore").textContent'), 'total', pg.evaluate('document.getElementById("heartTotal").textContent'))
+    print('ducked:', pg.evaluate('duckTo'))
+    pg.click('#endBtn'); pg.wait_for_timeout(600); pg.evaluate("""async () => { mapSkip = true; for (let i = 0; i < 120 && mapAnimating; i++) await new Promise(r => setTimeout(r, 50)); if (!document.getElementById('introOv').classList.contains('show')) openLevel(maxLevel); }"""); pg.wait_for_timeout(500); pg.click('#introBtn'); pg.wait_for_timeout(500)
+    print('after next level: duck', pg.evaluate('duckTo'), 'level', pg.evaluate('level'))
+    pg.click('#pauseBtn'); pg.wait_for_timeout(300); pg.click('#music'); pg.wait_for_timeout(200)
+    print('music toggled off:', pg.evaluate('musicOn'), pg.evaluate('!!musicTimer'))
+    print('errors:', errs)
+    b.close()
