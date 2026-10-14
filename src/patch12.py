@@ -285,7 +285,7 @@ rep("  return `<div class=\"fwrap\"><i class=\"fshadow\"></i><div class=\"fsprit
 rep("  document.querySelectorAll('.fhead').forEach(e => { e.innerHTML = CAT_ICON(); });", "  document.querySelectorAll('.fsprite').forEach(e => { e.innerHTML = freyrInner(); });")
 
 # ---------------- the new code goes in after the lessons, before the boot ----------------
-rep("\naddEventListener('resize', sizeFx);\n", "\n" + R('art12.js') + R('feat12.js') + R('feat23.js') + R('intro25.js') + R('feat26.js') + R('vfx28.js') + R('game27.js') + R('perf28.js') + R('game30.js') + R('game31.js') + R('game32.js') + R('game33.js') + R('game35.js') + R('game36.js') + "\naddEventListener('resize', sizeFx);\n")
+rep("\naddEventListener('resize', sizeFx);\n", "\n" + R('art12.js') + R('feat12.js') + R('feat23.js') + R('intro25.js') + R('feat26.js') + R('vfx28.js') + R('game27.js') + R('perf28.js') + R('game30.js') + R('game31.js') + R('game32.js') + R('game33.js') + R('game35.js') + R('game36.js') + R('game37.js') + "\naddEventListener('resize', sizeFx);\n")
 
 # ---- map walk without the 3D camera tilt: the map stays flat, Freyr walks; scroll only if the path is out of view
 rep("""// the walk, filmed in 3D: the camera tips the map back, Freyr turns around and walks up the path
@@ -525,7 +525,7 @@ rep("const goalIcon = g =>", "let goalIcon = g =>")
 rep("if (milk[r][c] > 0) { milk[r][c]--; lick(r, c, d); licks.push(d); }", "if (milk[r][c] > 0) { milk[r][c]--; lick(r, c, d); licks.push(d); }\n      if (dark.length) lightAt(r, c, d);")
 rep("cell = mk(rnd(), cfg.gold && Math.random() < cfg.goldRate);", "cell = mk(rnd(), cfg.gold && Math.random() < cfg.goldRate); if (cfg.wildRate && !cell.gold && Math.random() < cfg.wildRate && countOnBoard(x => x.type === 'wild') < 2) cell.type = 'wild';")
 rep("if (sp.type === 'bowl') sp.eat = o.type;", "if (sp.type === 'bowl') sp.eat = o.type === 'wild' ? bestColor() : o.type;")
-# V37: the chomp: crunches from Freyr's own recordings (6 recordings, 38 cleaned slices, mk_chomp37.py), one per 0.45 s slot
+# V37: the chomp: chewing bursts from Freyr's own recordings (6 recordings, 22 bursts of 0.75 s, mk_chomp37.py), one per 0.85 s slot; played by game37.js
 if os.path.exists(D + 'chomp37.json'):
     import re as _re
     _c = json.load(open(D + 'chomp37.json'))

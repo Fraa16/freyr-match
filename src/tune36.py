@@ -19,7 +19,7 @@ def sim(levels, runs, ovr, tag):
         if not part: continue
         out = D + f'_sim_{tag}_{i}.jsonl'
         if os.path.exists(out): os.remove(out)
-        env = dict(os.environ, OVR=D + f'_ovr_{tag}.json')
+        env = dict(os.environ, OVR=D + f'_ovr_{tag}.json', SRC=os.environ.get('SRC', 'game36t.html'))
         procs.append((subprocess.Popen(['python3', D + 'sim36.py', ','.join(map(str, part)), str(runs), os.path.basename(out)], cwd=D, env=env,
                                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL), out))
     res = {}
@@ -79,14 +79,16 @@ if PHASE in ('all', 'length'):
         todo = nxt
         if not todo: break
 
-if PHASE in ('all', 'moves'):
+if PHASE in ('all', 'moves', 'cont'):
     # first guess from the measured length, then three rounds of corrections
     lens = {}
     res = sim(LEVELS, 6, {L: {**FIX.get(str(L), {}), 'moves': 70} for L in LEVELS}, 'len2')
     for L in LEVELS: lens[L] = used_of(res[L])[0]
-    for L in LEVELS:
-        d = cur(L); FIX.setdefault(str(L), {})['moves'] = max(10, round(lens[L] * (1.05 + 1.1 * plan_win(L, d) ** 2)))
-    for it, runs in enumerate([20, 24, 30, 40]):
+    if PHASE != 'cont':
+        for L in LEVELS:
+            d = cur(L); FIX.setdefault(str(L), {})['moves'] = max(10, round(lens[L] * (.9 + .75 * plan_win(L, d) ** 2)))
+    for it, runs in enumerate([20, 24, 30, 40] if PHASE != 'cont' else [24, 30, 40]):
+        it += 4 - (3 if PHASE == 'cont' else 4)
         res = sim(LEVELS, runs, {L: FIX.get(str(L), {}) for L in LEVELS}, 'mv')
         for L in LEVELS:
             d = cur(L); w = used_of(res[L])[1]; want = plan_win(L, d); m = d['moves']
