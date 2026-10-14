@@ -157,3 +157,49 @@ showEnd = function (won) {
   if (won) cheerFace(f); else f.classList.remove('cheer');
   return r;
 };
+
+/* ===================== V35: now and then a long level (more moves, bigger goals), with a tag on the level card ===================== */
+const levelConfigPlain35 = levelConfig;
+levelConfig = function (L) {
+  const c = levelConfigPlain35.apply(this, arguments);
+  if (L <= LEVELS.length && LEVELS[L - 1].long) c.long = true;
+  return c;
+};
+const LONG_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5h12M6 21.5h12M7.5 2.5c0 5 4.5 6.5 4.5 9.5S7.5 16.5 7.5 21.5M16.5 2.5c0 5-4.5 6.5-4.5 9.5s4.5 4.5 4.5 9.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M9.5 19.5c.8-2 2.5-3 2.5-3s1.7 1 2.5 3z" fill="#FFE27A"/></svg>';
+const drawIntroExtrasPlain35 = drawIntroExtras;
+drawIntroExtras = function () {
+  const r = drawIntroExtrasPlain35.apply(this, arguments);
+  if (cfg && cfg.long && !cfg.hard) {
+    const d = $('introDiff'); d.hidden = false;
+    d.innerHTML = '<span class="dtag dl">' + LONG_SVG + 'Langes Level</span><small>Mehr Züge, größere Ziele</small>';
+  }
+  return r;
+};
+
+/* ===================== V35: goals always fit in their box: one row, smaller, then a neat grid of two rows (label hidden) ===================== */
+fitGoals = function () {
+  const box = $('goals'), hb = box && box.closest('.goalsbox');
+  if (!hb) return;
+  const row = hb.closest('.hud-row');
+  box.classList.remove('gtight', 'gtight2', 'grows', 'gmini'); hb.classList.remove('grows'); box.style.maxWidth = ''; box.style.removeProperty('--gc');
+  if (row) row.classList.remove('noscore');
+  if (typeof goals === 'undefined' || !goals || goals.length < 2 || !box.clientWidth) return;
+  // a goal sticking out of the box (or the box scrolling) counts as not fitting
+  const over = () => {
+    const h = hb.getBoundingClientRect(), cs = getComputedStyle(hb), l = h.left + parseFloat(cs.paddingLeft) - 2, r = h.right - parseFloat(cs.paddingRight) + 2;
+    for (const c of box.children) { const k = c.getBoundingClientRect(); if (k.width && (k.left < l || k.right > r)) return true; }
+    return box.scrollWidth > box.clientWidth + 1;
+  };
+  if (!over()) return;
+  box.classList.add('gtight'); if (!over()) return;
+  box.classList.add('gtight2'); if (!over() && goals.length < 4) return;
+  // four or more goals that need the small step: two rows read better than one squeezed row
+  box.classList.remove('gtight', 'gtight2'); box.classList.add('grows'); hb.classList.add('grows');
+  box.style.setProperty('--gc', Math.ceil(goals.length / 2));
+  // the finale has seven goals: then the points make room (they still show on the win card)
+  if (over() && row) row.classList.add('noscore');
+  if (over()) box.classList.add('gmini');
+};
+addEventListener('resize', () => requestAnimationFrame(() => { if (!onMap) fitGoals(); }));
+const fitLayoutPlain35c = fitLayout;
+fitLayout = function () { const r = fitLayoutPlain35c.apply(this, arguments); if (!onMap && typeof goals !== 'undefined' && goals.length) fitGoals(); return r; };

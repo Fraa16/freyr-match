@@ -222,7 +222,7 @@ if os.path.exists(D + 'fix35.json') and not os.environ.get('NOFIX35'):
 def lvdef(d):
     parts = ["name: " + json.dumps(d['name'], ensure_ascii=False), "moves: %d" % d['moves'], "target: %d" % d.get('target', 1000)]
     if d.get('intro'): parts.append("intro: '%s'" % d['intro'])
-    for k in ['hard', 'colors', 'bells', 'cover', 'boss', 'goldrush', 'clock', 'clockMax', 'turbo']:
+    for k in ['hard', 'colors', 'bells', 'cover', 'boss', 'goldrush', 'clock', 'clockMax', 'turbo', 'long']:
         if d.get(k): parts.append("%s: %d" % (k, d[k]))
     if d.get('clockRate'): parts.append("clockRate: %s" % d['clockRate'])
     if d.get('collect'): parts.append('collect: ' + json.dumps(d['collect']))

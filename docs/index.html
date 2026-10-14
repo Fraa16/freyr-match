@@ -1489,6 +1489,24 @@ html.roomy2 .tool .tbtn > svg{width:48px;height:48px}
   .face.cheer .shutL,.face.cheer .shutR{animation:none;opacity:1}
   .face.cheer .eyeR,.face.cheer .eyeL{opacity:0}
 }
+/* the long level tag on the level card */
+.dtag.dl{background:linear-gradient(#7FD6FF,#1C8FE0);box-shadow:0 0 0 2px #fff,0 0 0 3.5px #0E5CA8;text-shadow:0 1.5px 0 #0E5CA8}
+/* goals: one more, smaller step, then two rows in a grid (the old two-row mode squeezed them into one column) */
+html[class] main .top .goalsbox .goals.gtight.gtight2{gap:3px}
+html[class] main .top .goalsbox .goals.gtight.gtight2 .chip{gap:1px}
+html[class] main .top .goalsbox .goals.gtight.gtight2 .chip svg,html[class] main .top .goalsbox .goals.gtight.gtight2 .chip img{width:18px;height:18px}
+html[class] main .top .goalsbox .goals.gtight.gtight2 .chip b{font-size:.9rem}
+html[class] main .top .goalsbox.grows{justify-content:center}
+html[class] main .top .goalsbox .goals.grows{display:grid;grid-template-columns:repeat(var(--gc,2),auto);gap:2px 10px;justify-content:center;align-content:center;align-items:center;margin:0 auto;flex-wrap:nowrap}
+html[class] main .top .goalsbox .goals.grows .chip{gap:2px;justify-content:flex-start}
+html[class] main .top .goalsbox .goals.grows .chip svg,html[class] main .top .goalsbox .goals.grows .chip img{width:20px;height:20px}
+html[class] main .top .goalsbox .goals.grows .chip b{font-size:.95rem}
+html.roomy1 main .top .goalsbox .goals.grows .chip svg,html.roomy1 main .top .goalsbox .goals.grows .chip img{width:23px;height:23px}
+html.roomy1 main .top .goalsbox .goals.grows .chip b{font-size:1.05rem}
+html[class] main .top .hud-row.noscore .scorebox{display:none}
+html[class] main .top .goalsbox .goals.grows.gmini{gap:2px 6px}
+html[class] main .top .goalsbox .goals.grows.gmini .chip svg,html[class] main .top .goalsbox .goals.grows.gmini .chip img{width:19px;height:19px}
+html[class] main .top .goalsbox .goals.grows.gmini .chip b{font-size:.9rem}
 /* ===== web app: the home screen hint at the bottom of the map ===== */
 .a2hs{position:absolute;z-index:5;left:84px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);max-width:420px;margin-left:auto;
   display:flex;align-items:center;gap:10px;padding:10px 8px 10px 14px;border-radius:18px;background:var(--panel);color:var(--ink);
@@ -1999,7 +2017,7 @@ const LEVELS = [
   // Zuckerstrand
   { name: "Sternkreuz", moves: 18, target: 1400, intro: 'paw', collect: [[0, 22]],
     board: ['  ....  ', '  .ww.  ', '........', '.w.bb.w.', '.w.bb.w.', '........', '  .ww.  ', '  ....  '] },
-  { name: "Mondschein", moves: 18, target: 1000, collect: [[1, 16]],
+  { name: "Mondschein", moves: 29, target: 1000, long: 1, collect: [[1, 29]],
     board: ['   .... ', '  ......', ' ...  ..', ' ..     ', ' ..     ', ' ...  ..', '  ......', '   .... '] },
   { name: "Wolkenloch", moves: 18, target: 1400, intro: 'box2', collect: [[4, 29]],
     board: ['........', '........', '..BbbB..', '..b  b..', '..b  b..', '..BbbB..', '........', '........'] },
@@ -2021,7 +2039,7 @@ const LEVELS = [
   // Regenbogenhimmel
   { name: "Deckenburg", moves: 23, target: 1300, intro: 'boosts', cover: 56,
     board: ['...  ...', '.k.  .k.', '........', '...kk...', '...kk...', '........', '.k.  .k.', '...  ...'] },
-  { name: "Himmelsleiter", moves: 25, target: 1000, bells: 3,
+  { name: "Himmelsleiter", moves: 40, target: 1000, bells: 5, long: 1,
     board: ['g.......', 'bb......', '...g....', '..bbb...', '........', '.....bbb', '........', '........'] },
   { name: "Blumenbeet", moves: 17, target: 1000, intro: 'gold',
     board: ['..w..w..', '.wwwwww.', '..w..w..', '........', '........', '..w..w..', '.wwwwww.', '..w..w..'] },
@@ -2047,7 +2065,7 @@ const LEVELS = [
     board: [' ...... ', '.mmmmmm.', '........', ' ...... ', '  ....  ', '  ....  ', '   ..   ', '   ..   '] },
   { name: "Picknick", moves: 28, target: 1500, intro: 'picnic', colors: 6, cover: 62,
     board: ['n......n', '........', '..k..k..', '........', '........', '..k..k..', '........', 'n......n'] },
-  { name: "Kometenschweif", moves: 22, target: 1000, collect: [[3, 52]],
+  { name: "Kometenschweif", moves: 36, target: 1000, long: 1, collect: [[3, 92]],
     board: ['........', '.n......', '..n.....', '........', '........', '.....n..', '......n.', '........'] },
   { name: "Saugroboter", moves: 26, target: 1000, intro: 'boss', hard: 2, boss: 55,
     board: ['........', '........', '........', '...VV...', '...VV...', '........', '........', '........'] },
@@ -2067,7 +2085,7 @@ const LEVELS = [
     board: ['.b.bb.b.', '.bbbbbb.', '........', '..n..n..', '........', '........', '.n....n.', '........'] },
   { name: "Kartonturm", moves: 20, target: 1000, intro: 'box3', collect: [[1, 36]],
     board: ['.. .. ..', '........', '..b..b..', '...CC...', '........', '..b..b..', '........', '........'] },
-  { name: "Sternbild", moves: 25, target: 1000, bells: 2, collect: [[0, 36]],
+  { name: "Sternbild", moves: 40, target: 1000, bells: 3, long: 1, collect: [[0, 66]],
     board: ['g......g', '..w.....', '.....w..', '...w....', '......w.', '.w......', '....w...', '........'] },
   { name: "Teeparty", moves: 23, target: 1000, collect: [[1, 52]],
     board: ['........', '.mm..mm.', '.mm..mm.', '........', '...nn...', '........', '.mm..mm.', '.mm..mm.'] },
@@ -2089,7 +2107,7 @@ const LEVELS = [
     board: ['  ....  ', ' ...... ', '..mBBm..', '.mmBBmm.', '.mmmmmm.', '..mmmm..', ' ...... ', '  ....  '] },
   { name: "Geschenkekiste", moves: 20, target: 1000, intro: 'gift', collect: [[1, 50]],
     board: ['........', '.p....p.', '........', '...pp...', '........', '.p....p.', '........', '........'] },
-  { name: "Flaschenpost", moves: 20, target: 1000, bells: 2,
+  { name: "Flaschenpost", moves: 31, target: 1000, bells: 4, long: 1,
     board: ['g......g', '........', '...nn...', '..n..n..', '..n..n..', '...nn...', '........', '........'] },
   { name: "Wolkenkissen", moves: 25, target: 1000, cover: 50, collect: [[0, 60]],
     board: ['kk....kk', 'k......k', '..MMMM..', '..MMMM..', '..MMMM..', '..MMMM..', 'k......k', 'kk....kk'] },
@@ -2107,7 +2125,7 @@ const LEVELS = [
   { name: "Schwarzmeersturm", moves: 24, target: 1000, hard: 1, collect: [[0, 29]],
     board: ['w..uu..w', '.w....w.', '..BBBB..', '........', '........', '..BBBB..', '.w....w.', 'w......w'] },
   // Drachenhimmel
-  { name: "Papierdrache", moves: 21, target: 1000, collect: [[0, 29]],
+  { name: "Papierdrache", moves: 36, target: 1000, long: 1, collect: [[0, 49]],
     board: ['   ..   ', '  .p..  ', ' ...... ', '.p....p.', ' ...... ', '  ..p.  ', '   ..   ', '   ..   '] },
   { name: "Windböe", moves: 25, target: 1000, bells: 3,
     board: ['.g....g.', '........', '..n..n..', '...  ...', '...  ...', '..n..n..', '........', '........'] },
@@ -2129,7 +2147,7 @@ const LEVELS = [
   { name: "Polarnacht", moves: 18, target: 1000, hard: 1,
     board: ['mmmmmmmm', 'm.u..u.m', 'm......m', 'm..nn..m', 'm..nn..m', 'm......m', 'm.u..u.m', 'mmmmmmmm'] },
   // Leuchtturmküste
-  { name: "Leuchtfeuer", moves: 20, target: 1000, bells: 3,
+  { name: "Leuchtfeuer", moves: 34, target: 1000, bells: 6, long: 1,
     board: ['   gg   ', '  ....  ', '   ..   ', '  ....  ', '  ....  ', '  ....  ', ' ...... ', '........'] },
   { name: "Wecker im Karton", moves: 22, target: 1000, intro: 'mix_clockbox', clock: 14, clockRate: 0.02, collect: [[1, 44]],
     board: [' ...... ', '.C....C.', '..a..a..', '........', '........', '..a..a..', '.C....C.', ' ...... '] },
@@ -2151,7 +2169,7 @@ const LEVELS = [
   { name: "Tulpenfinale", moves: 22, target: 1000, hard: 1, cover: 50, clock: 18, clockRate: 0.02, collect: [[0, 26]],
     board: ['..a..a..', '........', '.k....k.', '.. .. ..', '.. .. ..', '.k....k.', '........', '..a..a..'] },
   // Federwolken
-  { name: "Wolkenfeder", moves: 15, target: 1000, make: [["laser", 3], ["cat", 2]],
+  { name: "Wolkenfeder", moves: 26, target: 1000, long: 1, make: [["laser", 5], ["cat", 3]],
     board: ['  ....  ', ' ...... ', '........', '........', '........', '........', ' ...... ', '  ....  '] },
   { name: "Himmelsglocken", moves: 27, target: 1000, bells: 5,
     board: ['g..gg..g', '........', ' ...... ', ' .p..p. ', ' ...... ', ' ...... ', '........', '........'] },
@@ -2173,7 +2191,7 @@ const LEVELS = [
   { name: "Sternschnuppenfinale", moves: 24, target: 1000, hard: 1, collect: [[5, 20]], make: [["cat", 2]],
     board: ['n..  ..n', '........', '........', '.. .. ..', '.. .. ..', '........', '........', 'n..  ..n'] },
   // Palmeninsel
-  { name: "Kokosnuss", moves: 23, target: 1000, collect: [[4, 52]],
+  { name: "Kokosnuss", moves: 39, target: 1000, long: 1, collect: [[4, 88]],
     board: ['  ....  ', ' ...... ', '..p..p..', '........', '........', '..p..p..', ' ...... ', '  ....  '] },
   { name: "Zauberstunde", moves: 21, target: 1000, intro: 'feather', collect: [[1, 45]],
     board: [' ...... ', '........', 'bbb..bbb', '........', '........', 'bbb..bbb', '........', ' ...... '] },
@@ -2195,7 +2213,7 @@ const LEVELS = [
   { name: "Waldfinale", moves: 27, target: 1000, hard: 1, clock: 17, clockRate: 0.02,
     board: ['MwM..MwM', 'w......w', 'M.a..a.M', '........', '........', 'M.a..a.M', 'w......w', 'MwM..MwM'] },
   // Luftballonfest
-  { name: "Ballontraube", moves: 18, target: 1000, collect: [[5, 24]], make: [["nip", 1]],
+  { name: "Ballontraube", moves: 33, target: 1000, long: 1, collect: [[5, 38]], make: [["nip", 2]],
     board: [' ..  .. ', '........', '........', ' ...... ', '  ....  ', '   ..   ', '   ..   ', '   ..   '] },
   { name: "Zuckerwatte", moves: 25, target: 1000, cover: 50, collect: [[1, 57]],
     board: [' k.. .k ', '.p....p.', '........', '........', '........', '........', '.p....p.', ' k.. .k '] },
@@ -2219,7 +2237,7 @@ const LEVELS = [
   // Piratenbucht
   { name: "Schatzkarte", moves: 23, target: 1000, goldrush: 8,
     board: ['..    ..', '...  ...', ' ...... ', '  ....  ', '  ....  ', ' ...... ', '...  ...', '..    ..'] },
-  { name: "Planke", moves: 21, target: 1000, bells: 4,
+  { name: "Planke", moves: 36, target: 1000, bells: 7, long: 1,
     board: ['  ....  ', '  .gg.  ', '  ....  ', '  ....  ', '  ....  ', '  ....  ', '  ....  ', '  ....  '] },
   { name: "Flaschenschiff", moves: 24, target: 1000, collect: [[4, 47]],
     board: ['   ..   ', '  .MM.  ', '  .MM.  ', ' ...... ', '.p.MM.p.', '..MMMM..', '.p....p.', ' ...... '] },
@@ -2239,7 +2257,7 @@ const LEVELS = [
   { name: "Kürbisfinale", moves: 25, target: 1000, hard: 1, cover: 44, clock: 14, clockRate: 0.02, collect: [[0, 36]],
     board: [' k.aa.k ', ' ...... ', '.u....u.', '........', '........', '.u....u.', ' ...... ', '  k..k  '] },
   // Sonnenwolken
-  { name: "Sonnenstrahl", moves: 24, target: 1000, bells: 4,
+  { name: "Sonnenstrahl", moves: 41, target: 1000, bells: 7, long: 1,
     board: ['  ....  ', ' ...... ', '........', '...gg...', '........', '........', ' ...... ', '  ....  '] },
   { name: "Regenbogenrutsche", moves: 24, target: 1000, collect: [[1, 55]],
     board: ['mmmmmmm.', '.mmmmmmm', 'n.......', '.......n', 'n.......', '.......n', 'mmmmmmm.', '.mmmmmmm'] },
@@ -2261,7 +2279,7 @@ const LEVELS = [
   { name: "Mitternachtsfinale", moves: 27, target: 1000, hard: 1, bells: 3, clock: 18, clockRate: 0.02,
     board: ['.g....g.', '........', 'n.a..a.n', '........', '.. .. ..', 'n......n', '........', ' ...... '] },
   // Lagune
-  { name: "Seerose", moves: 22, target: 1000, collect: [[5, 28]],
+  { name: "Seerose", moves: 37, target: 1000, long: 1, collect: [[5, 48]],
     board: ['  .  .  ', ' ...... ', '........', '...  ...', '...  ...', '........', ' ...... ', '  .  .  '] },
   { name: "Bestellung XXL", moves: 17, target: 1000, intro: 'mix_bigorder', make: [["nip", 2], ["laser", 2], ["cat", 2]],
     board: [' ...... ', '........', '........', '........', '........', '........', '........', ' ...... '] },
@@ -2283,7 +2301,7 @@ const LEVELS = [
   { name: "Zauberfinale", moves: 29, target: 1000, hard: 1, make: [["laser", 2]],
     board: ['MM.CC.MM', 'M......M', '........', 'C......C', 'C......C', '........', 'M......M', 'MM.CC.MM'] },
   // Himmelstor
-  { name: "Wolkentreppe", moves: 18, target: 1000, bells: 3,
+  { name: "Wolkentreppe", moves: 30, target: 1000, bells: 6, long: 1,
     board: ['..g.    ', '....    ', '......  ', '......  ', '........', '........', '........', '........'] },
   { name: "Engelsflügel", moves: 27, target: 1000, cover: 40, collect: [[1, 44]],
     board: ['..    ..', '...  ...', '........', 'kk....kk', 'kk....kk', '........', '...  ...', '..    ..'] },
@@ -2305,7 +2323,7 @@ const LEVELS = [
   { name: "Palastfinale", moves: 26, target: 1000, hard: 1, bells: 3, clock: 18,
     board: ['g.C..C.g', '.u....u.', '..p..p..', 'mmmmmmmm', 'mmmmmmmm', '..w..w..', '.a....a.', '........'] },
   // Goldstrand
-  { name: "Goldküste", moves: 23, target: 1000, goldrush: 15,
+  { name: "Goldküste", moves: 41, target: 1000, goldrush: 26, long: 1,
     board: ['........', '........', '........', '........', '........', '........', 'mmmmmmmm', 'mmmmmmmm'] },
   { name: "Sandburg-Royal", moves: 27, target: 1000, bells: 3,
     board: ['.g.  .g.', '........', 'C.C..C.C', 'BBBBBBBB', '........', '........', '........', '........'] },
@@ -8055,6 +8073,52 @@ showEnd = function (won) {
   if (won) cheerFace(f); else f.classList.remove('cheer');
   return r;
 };
+
+/* ===================== V35: now and then a long level (more moves, bigger goals), with a tag on the level card ===================== */
+const levelConfigPlain35 = levelConfig;
+levelConfig = function (L) {
+  const c = levelConfigPlain35.apply(this, arguments);
+  if (L <= LEVELS.length && LEVELS[L - 1].long) c.long = true;
+  return c;
+};
+const LONG_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5h12M6 21.5h12M7.5 2.5c0 5 4.5 6.5 4.5 9.5S7.5 16.5 7.5 21.5M16.5 2.5c0 5-4.5 6.5-4.5 9.5s4.5 4.5 4.5 9.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M9.5 19.5c.8-2 2.5-3 2.5-3s1.7 1 2.5 3z" fill="#FFE27A"/></svg>';
+const drawIntroExtrasPlain35 = drawIntroExtras;
+drawIntroExtras = function () {
+  const r = drawIntroExtrasPlain35.apply(this, arguments);
+  if (cfg && cfg.long && !cfg.hard) {
+    const d = $('introDiff'); d.hidden = false;
+    d.innerHTML = '<span class="dtag dl">' + LONG_SVG + 'Langes Level</span><small>Mehr Züge, größere Ziele</small>';
+  }
+  return r;
+};
+
+/* ===================== V35: goals always fit in their box: one row, smaller, then a neat grid of two rows (label hidden) ===================== */
+fitGoals = function () {
+  const box = $('goals'), hb = box && box.closest('.goalsbox');
+  if (!hb) return;
+  const row = hb.closest('.hud-row');
+  box.classList.remove('gtight', 'gtight2', 'grows', 'gmini'); hb.classList.remove('grows'); box.style.maxWidth = ''; box.style.removeProperty('--gc');
+  if (row) row.classList.remove('noscore');
+  if (typeof goals === 'undefined' || !goals || goals.length < 2 || !box.clientWidth) return;
+  // a goal sticking out of the box (or the box scrolling) counts as not fitting
+  const over = () => {
+    const h = hb.getBoundingClientRect(), cs = getComputedStyle(hb), l = h.left + parseFloat(cs.paddingLeft) - 2, r = h.right - parseFloat(cs.paddingRight) + 2;
+    for (const c of box.children) { const k = c.getBoundingClientRect(); if (k.width && (k.left < l || k.right > r)) return true; }
+    return box.scrollWidth > box.clientWidth + 1;
+  };
+  if (!over()) return;
+  box.classList.add('gtight'); if (!over()) return;
+  box.classList.add('gtight2'); if (!over() && goals.length < 4) return;
+  // four or more goals that need the small step: two rows read better than one squeezed row
+  box.classList.remove('gtight', 'gtight2'); box.classList.add('grows'); hb.classList.add('grows');
+  box.style.setProperty('--gc', Math.ceil(goals.length / 2));
+  // the finale has seven goals: then the points make room (they still show on the win card)
+  if (over() && row) row.classList.add('noscore');
+  if (over()) box.classList.add('gmini');
+};
+addEventListener('resize', () => requestAnimationFrame(() => { if (!onMap) fitGoals(); }));
+const fitLayoutPlain35c = fitLayout;
+fitLayout = function () { const r = fitLayoutPlain35c.apply(this, arguments); if (!onMap && typeof goals !== 'undefined' && goals.length) fitGoals(); return r; };
 
 /* ===================== web app (GitHub Pages build only): offline, and a hint how to put it on the home screen ===================== */
 (() => {

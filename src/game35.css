@@ -73,3 +73,21 @@ html.roomy2 .tool .tbtn > svg{width:48px;height:48px}
   .face.cheer .shutL,.face.cheer .shutR{animation:none;opacity:1}
   .face.cheer .eyeR,.face.cheer .eyeL{opacity:0}
 }
+/* the long level tag on the level card */
+.dtag.dl{background:linear-gradient(#7FD6FF,#1C8FE0);box-shadow:0 0 0 2px #fff,0 0 0 3.5px #0E5CA8;text-shadow:0 1.5px 0 #0E5CA8}
+/* goals: one more, smaller step, then two rows in a grid (the old two-row mode squeezed them into one column) */
+html[class] main .top .goalsbox .goals.gtight.gtight2{gap:3px}
+html[class] main .top .goalsbox .goals.gtight.gtight2 .chip{gap:1px}
+html[class] main .top .goalsbox .goals.gtight.gtight2 .chip svg,html[class] main .top .goalsbox .goals.gtight.gtight2 .chip img{width:18px;height:18px}
+html[class] main .top .goalsbox .goals.gtight.gtight2 .chip b{font-size:.9rem}
+html[class] main .top .goalsbox.grows{justify-content:center}
+html[class] main .top .goalsbox .goals.grows{display:grid;grid-template-columns:repeat(var(--gc,2),auto);gap:2px 10px;justify-content:center;align-content:center;align-items:center;margin:0 auto;flex-wrap:nowrap}
+html[class] main .top .goalsbox .goals.grows .chip{gap:2px;justify-content:flex-start}
+html[class] main .top .goalsbox .goals.grows .chip svg,html[class] main .top .goalsbox .goals.grows .chip img{width:20px;height:20px}
+html[class] main .top .goalsbox .goals.grows .chip b{font-size:.95rem}
+html.roomy1 main .top .goalsbox .goals.grows .chip svg,html.roomy1 main .top .goalsbox .goals.grows .chip img{width:23px;height:23px}
+html.roomy1 main .top .goalsbox .goals.grows .chip b{font-size:1.05rem}
+html[class] main .top .hud-row.noscore .scorebox{display:none}
+html[class] main .top .goalsbox .goals.grows.gmini{gap:2px 6px}
+html[class] main .top .goalsbox .goals.grows.gmini .chip svg,html[class] main .top .goalsbox .goals.grows.gmini .chip img{width:19px;height:19px}
+html[class] main .top .goalsbox .goals.grows.gmini .chip b{font-size:.9rem}
