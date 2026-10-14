@@ -481,6 +481,34 @@ rep("const HEART2 = .15, HEART3 = .35;", "const HEART2 = " + os.environ.get('HEA
 rep("  if (L0 === 1) decos.push({ k: 'bed', x: geo.pts[0].x, y: geo.pts[0].y, s: 1, r: 50 });\n", "  decos = bedDecos(geo, decos);\n")
 # earlier worlds come back on the map when asked (the sign at the bottom)
 rep("const lastW = Math.max(3, Math.floor((maxLevel - 1) / 5) + 1), firstW = Math.max(0, lastW - 4);", "const lastW = Math.max(3, Math.floor((maxLevel - 1) / 5) + 1), firstW = Math.max(0, lastW - 4 - mapBack);")
+# V35: in his speech bubble Freyr talks about himself as "ich" (before: "Freyr kann nicht mehr aufhören zu fressen")
+for a, b in [
+    ("say('Nassfutter auf der Kuscheldecke?! ' + catName + ' ist empört.');", "say('Nassfutter auf meiner Kuscheldecke?! Ich bin empört.');"),
+    ("catName + ' rümpft die Nase.'", "'Ich rümpf die Nase.'"),
+    ("say((saidGold = true, catName) + ' hat ein goldenes Leckerli gefunden. '", "say((saidGold = true, 'Ich hab ein goldenes Leckerli gefunden! ')"),
+    ("say('Puh! Kein Nassfutter mehr. ' + catName + ' atmet auf.');", "say('Puh! Kein Nassfutter mehr. Ich atme auf.');"),
+    ("say('Alle Gurken sind weg. ' + catName + ' traut sich wieder raus.');", "say('Alle Gurken sind weg. Ich trau mich wieder raus.');"),
+    ("say(catName + ' liebt seine Kuscheldecke. Mehr davon!');", "say('Ich liebe meine Kuscheldecke. Mehr davon!');"),
+    ("say(catName + ' kann nicht mehr aufhören zu fressen.');", "say('Ich kann nicht mehr aufhören zu fressen!');"),
+    ("say('Die Gurke fasst ' + catName + ' nicht an! Mach ein Match direkt daneben, dann ist sie weg.');", "say('Die Gurke fass ich nicht an! Mach ein Match direkt daneben, dann ist sie weg.');"),
+    ("say(catName + ' springt ein letztes Mal!');", "say('Ich springe ein letztes Mal!');"),
+    ("say('Noch 5 Züge. ' + catName + ' zählt auf dich!');", "say('Noch 5 Züge. Ich zähl auf dich!');"),
+    ("say(n ? catName + ' ist satt und kriegt die Zoomies!' : catName + ' ist satt und glücklich!');", "say(n ? 'Ich bin satt und krieg die Zoomies!' : 'Ich bin satt und glücklich!');"),
+    ("const hungry = [' hat Hunger!', ' schaut dich mit großen Augen an.', ' hätte gern einen Cremesnack. Oder zwei.', ' wartet geduldig. Fast.', ' hat schon wieder Hunger.'];",
+     "const hungry = ['Ich hab Hunger!', 'Ich schau dich mit großen Augen an.', 'Ich hätte gern einen Cremesnack. Oder zwei.', 'Ich warte geduldig. Fast.', 'Ich hab schon wieder Hunger.'];"),
+    ("say(catName + hungry[level === 1 ? 0 : Math.floor(Math.random() * hungry.length)]);", "say(hungry[level === 1 ? 0 : Math.floor(Math.random() * hungry.length)]);"),
+    ("say('Weiter geht\\u2019s! ' + catName + ' glaubt an dich.');", "say('Weiter geht\\u2019s! Ich glaub an dich.');"),
+    ("catName + ' hat Hunger. Fütter mich!'", "'Ich hab Hunger. Fütter mich!'"),
+    ("say(catName + ' ist bereit zum Sprung. Tipp ihn an!');", "say('Ich bin bereit zum Sprung. Tipp mich an!');"),
+    ("say('Geschafft! Der Staubsauger ist aus. ' + catName + ' ist sehr stolz auf dich.');", "say('Geschafft! Der Staubsauger ist aus. Ich bin sehr stolz auf dich.');"),
+    ("catName + ' macht einen Buckel.'", "'Ich mach einen Buckel.'"),
+    ("catName + ' springt erschrocken zur Seite.'", "'Ich spring erschrocken zur Seite.'"),
+    ("say(catName + ' trägt jetzt Bordo-Mavi. Bereit für das nächste Spiel!');", "say('Ich trag jetzt Bordo-Mavi. Bereit für das nächste Spiel!');"),
+    ("'Laserpunkt! Tausch ihn, dann jagt ' + catName + ' 3 Leckerlis quer übers Feld.'", "'Laserpunkt! Tausch ihn, dann jag ich 3 Leckerlis quer übers Feld.'"),
+    ("'Festmahl-Napf! Tausch ihn mit einem Leckerli, dann frisst ' + catName + ' alle von der Sorte.'", "'Festmahl-Napf! Tausch ihn mit einem Leckerli, dann fress ich alle von der Sorte.'"),
+    ("pounce: () => 'Tipp auf ein Feld: ' + catName + ' springt drauf und räumt Reihe und Spalte ab'", "pounce: () => 'Tipp auf ein Feld: Ich springe drauf und räume Reihe und Spalte ab'"),
+]:
+    rep(a, b)
 # V35: the game is called Freyr Match now
 rep('<title>Whisker Match</title>', '<title>Freyr Match</title>')
 open(D + os.environ.get('OUT12', 'game.html'), 'w').write(s)

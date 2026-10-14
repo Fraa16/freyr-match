@@ -1796,10 +1796,10 @@ const ACC = {
 
 // the four extras: which shape makes them and what they do
 const EXTRA = {
-  laser: { name: 'Laserpunkt', how: '2×2 Quadrat', go: 'Laserjagd!', tip: () => 'Laserpunkt! Tausch ihn, dann jagt ' + catName + ' 3 Leckerlis quer übers Feld.' },
+  laser: { name: 'Laserpunkt', how: '2×2 Quadrat', go: 'Laserjagd!', tip: () => 'Laserpunkt! Tausch ihn, dann jag ich 3 Leckerlis quer übers Feld.' },
   cat: { name: 'Flitzekatze', how: '4 in einer Reihe', go: 'Flitzen!', tip: () => 'Flitzekatze! Tausch sie, dann flitzt sie in Pfeilrichtung quer übers Feld.' },
   nip: { name: 'Katzenminze', how: 'L- oder T-Form', go: 'Minze-Rausch!', tip: () => 'Katzenminze! Tausch sie, dann fliegt alles rundherum weg.' },
-  bowl: { name: 'Festmahl-Napf', how: '5 in einer Reihe', go: 'Festmahl!', tip: () => 'Festmahl-Napf! Tausch ihn mit einem Leckerli, dann frisst ' + catName + ' alle von der Sorte.' }
+  bowl: { name: 'Festmahl-Napf', how: '5 in einer Reihe', go: 'Festmahl!', tip: () => 'Festmahl-Napf! Tausch ihn mit einem Leckerli, dann fress ich alle von der Sorte.' }
 };
 const BOX_SVG = hp => `<svg viewBox="0 0 100 100"><g ${OL('#7E4A1C')}><path d="M10 34 L3 20 L45 20 L50 34Z" fill="#F7DFB6"/><path d="M90 34 L97 20 L55 20 L50 34Z" fill="#F7DFB6"/><rect x="10" y="34" width="80" height="58" rx="8" fill="url(#gCard)"/></g>` +
   (hp > 2 ? `<rect x="21" y="35.4" width="8" height="55.2" fill="url(#gGold)"/><rect x="71" y="35.4" width="8" height="55.2" fill="url(#gGold)"/>` : '') +
@@ -3019,8 +3019,8 @@ async function spreadWet() {
   const [x, y] = cellXY(r * N + c); burst(x, y, 12, 1.1, WETCOL);
   splorch(); catYuck(); buzz([40, 30, 40]);
   if (!toldSpread) { toldSpread = true; say('Igitt, das Nassfutter breitet sich aus! Räum in jedem Zug etwas davon weg.'); }
-  else if (cover[r] && cover[r][c]) say('Nassfutter auf der Kuscheldecke?! ' + catName + ' ist empört.');
-  else if (Math.random() < .4) say(['Bäh!', 'Igitt!', 'Nicht schon wieder Nassfutter.', catName + ' rümpft die Nase.'][Math.floor(Math.random() * 4)]);
+  else if (cover[r] && cover[r][c]) say('Nassfutter auf meiner Kuscheldecke?! Ich bin empört.');
+  else if (Math.random() < .4) say(['Bäh!', 'Igitt!', 'Nicht schon wieder Nassfutter.', 'Ich rümpf die Nase.'][Math.floor(Math.random() * 4)]);
   await sleep(480);
 }
 function lick(r, c, d) {
@@ -3409,12 +3409,12 @@ async function resolve(blast, swapPos, label, preFired, quiet, bd) {
       else if (wetBroken) text = 'Weg damit!';
       if (text) callout(text, sub);
       if (best && !seen[best]) { seen[best] = true; say(EXTRA[best].tip()); }
-      else if (golds && !saidGold) say((saidGold = true, catName) + ' hat ein goldenes Leckerli gefunden. ' + (isUnlocked('purr') ? 'Schnurr-Power +5!' : '+300!'));
-      else if (wetBroken && !countOnBoard(x => x.type === 'wet')) say('Puh! Kein Nassfutter mehr. ' + catName + ' atmet auf.');
+      else if (golds && !saidGold) say((saidGold = true, 'Ich hab ein goldenes Leckerli gefunden! ') + (isUnlocked('purr') ? 'Schnurr-Power +5!' : '+300!'));
+      else if (wetBroken && !countOnBoard(x => x.type === 'wet')) say('Puh! Kein Nassfutter mehr. Ich atme auf.');
       else if (giftsOpened && !toldGift) { toldGift = true; say('Ein Geschenk! Da war ' + EXTRA_A[giftKinds[0]] + ' drin.'); }
-      else if (cukesGone && !countOnBoard(x => x.type === 'cuke')) say('Alle Gurken sind weg. ' + catName + ' traut sich wieder raus.');
-      else if (tucked && !saidCover) { saidCover = true; say(catName + ' liebt seine Kuscheldecke. Mehr davon!'); }
-      else if (combo === 4) say(catName + ' kann nicht mehr aufhören zu fressen.');
+      else if (cukesGone && !countOnBoard(x => x.type === 'cuke')) say('Alle Gurken sind weg. Ich trau mich wieder raus.');
+      else if (tucked && !saidCover) { saidCover = true; say('Ich liebe meine Kuscheldecke. Mehr davon!'); }
+      else if (combo === 4) say('Ich kann nicht mehr aufhören zu fressen!');
     }
     updateHud();
     await sleep(280 + maxD);
@@ -3433,7 +3433,7 @@ function refuse(cell) {
   else if (cell.type === 'wet' && !toldWet) { toldWet = true; catYuck(); say('Nassfutter? Nein danke! Mach ein Match direkt daneben, dann ist es weg.'); }
   else if (cell.locked && !toldLock) { toldLock = true; say('Das hängt in der Wolle fest. Bring es in ein Match, dann ist es frei.'); }
   else if (cell.type === 'gift') say('Geschenke kann man nicht verschieben. Ein Match direkt daneben packt sie aus!');
-  else if (cell.type === 'cuke') { catYuck(); say('Die Gurke fasst ' + catName + ' nicht an! Mach ein Match direkt daneben, dann ist sie weg.'); }
+  else if (cell.type === 'cuke') { catYuck(); say('Die Gurke fass ich nicht an! Mach ein Match direkt daneben, dann ist sie weg.'); }
 }
 async function trySwap(r1, c1, r2, c2, free) {
   if (busy || r2 < 0 || r2 >= N || c2 < 0 || c2 >= N) return;
@@ -3551,11 +3551,11 @@ async function afterTurn() {
     // out of moves with a full purr meter: Freyr takes one last leap on his own
     if (purr >= PURR_MAX) {
       const t = bestPounce();
-      if (t) { say(catName + ' springt ein letztes Mal!'); await sleep(600); await pounceAt(t.r, t.c); updateHud(); if (goalsDone()) return winSequence(); }
+      if (t) { say('Ich springe ein letztes Mal!'); await sleep(600); await pounceAt(t.r, t.c); updateHud(); if (goalsDone()) return winSequence(); }
     }
     return showEnd(false);
   }
-  if (moves === 5) say('Noch 5 Züge. ' + catName + ' zählt auf dich!');
+  if (moves === 5) say('Noch 5 Züge. Ich zähl auf dich!');
   purrNotice();
   if (!hasMove()) { say('Keine Züge mehr möglich. Ich mische neu.'); await sleep(500); reshuffle(); }
 }
@@ -3680,7 +3680,7 @@ async function winSequence() {
   celebrate();
   const n = Math.min(moves, 12);
   lastBonus = 0;
-  say(n ? catName + ' ist satt und kriegt die Zoomies!' : catName + ' ist satt und glücklich!');
+  say(n ? 'Ich bin satt und krieg die Zoomies!' : 'Ich bin satt und glücklich!');
   await sleep(2100);
   if (n) lastBonus += await zoomiesFinale(n);
   if (moves > 0) await extraRain();
@@ -3808,8 +3808,8 @@ function startLevel() {
   goals = cfg.goals.map(g => ({ ...g, left: g.n || 0 }));
   lastRem = [];
   newGrid(); renderBoard(); render(true); if (!hasMove()) reshuffle(); updateHud(); $('score').textContent = 0; drawTools();
-  const hungry = [' hat Hunger!', ' schaut dich mit großen Augen an.', ' hätte gern einen Cremesnack. Oder zwei.', ' wartet geduldig. Fast.', ' hat schon wieder Hunger.'];
-  say(catName + hungry[level === 1 ? 0 : Math.floor(Math.random() * hungry.length)]);
+  const hungry = ['Ich hab Hunger!', 'Ich schau dich mit großen Augen an.', 'Ich hätte gern einen Cremesnack. Oder zwei.', 'Ich warte geduldig. Fast.', 'Ich hab schon wieder Hunger.'];
+  say(hungry[level === 1 ? 0 : Math.floor(Math.random() * hungry.length)]);
   showIntro();
 }
 function showIntro() {
@@ -3940,7 +3940,7 @@ $('rescueBtn').onclick = () => {
   moves += 5; if (clockRang) resetClocks(); updateHud();
   $('endOv').classList.remove('show');
   callout('+5 Züge!', 'aus der Leckerli-Dose'); sparkle(); duck(false);
-  say('Weiter geht\u2019s! ' + catName + ' glaubt an dich.');
+  say('Weiter geht\u2019s! Ich glaub an dich.');
   busy = false; resetIdle();
 };
 $('music').onclick = $('mMusic').onclick = () => {
@@ -3976,7 +3976,7 @@ $('outfits').addEventListener('click', e => {
 function closeSettings() {
   refreshCats(); $('setOv').classList.remove('show');
   if (onMap) { drawTreatsPill(); if (!mapAnimating) { const st = $('map').scrollTop; renderMap(); $('map').scrollTop = st; } }
-  say(wear ? 'Steht mir, oder?' : catName + ' hat Hunger. Fütter mich!');
+  say(wear ? 'Steht mir, oder?' : 'Ich hab Hunger. Fütter mich!');
 }
 $('setDone').onclick = closeSettings;
 $('setOv').addEventListener('click', e => { if (e.target === $('setOv')) closeSettings(); });
@@ -4775,7 +4775,7 @@ function purrNotice() {
     purrTold = true; try { localStorage.setItem('wm-purr-told', '1'); } catch (e) {}
     callout('Schnurr-Power!', 'Tipp ' + catName + ' an');
     say('Schnurr-Power voll! Tipp mich an, dann auf ein Feld. Ich springe drauf und räume Reihe und Spalte ab.');
-  } else say(catName + ' ist bereit zum Sprung. Tipp ihn an!');
+  } else say('Ich bin bereit zum Sprung. Tipp mich an!');
 }
 function tryPounce() {
   if (onMap || document.querySelector('.overlay.show')) return;
@@ -4793,7 +4793,7 @@ function tryPounce() {
 
 /* ---------- aiming: the pounce and the tools wait for a tap on the board ---------- */
 const AIM_TEXT = {
-  pounce: () => 'Tipp auf ein Feld: ' + catName + ' springt drauf und räumt Reihe und Spalte ab' + (isUnlocked('superpounce') ? ', dazu alles rundherum.' : '.'),
+  pounce: () => 'Tipp auf ein Feld: Ich springe drauf und räume Reihe und Spalte ab' + (isUnlocked('superpounce') ? ', dazu alles rundherum.' : '.'),
   feather: () => 'Tipp auf ein Leckerli: Es wird zur Flitzekatze.',
   paw: () => 'Tipp auf ein Feld. Kartons und Nassfutter verlieren eine Schicht.',
   claw: () => 'Tipp auf eine Reihe, dann ist sie leer gekratzt.',
@@ -5103,7 +5103,7 @@ function bossBoom() {
   el.classList.add('dead'); powerDown(); buzz([60, 40, 60, 40, 120]); shake();
   const [x, y] = cellXY(boss.r * N + boss.c), cw = boardEl.getBoundingClientRect().width / N;
   [0, 180, 360].forEach((t, i) => setTimeout(() => burst(x + cw * .5, y + cw * .5, 22 - i * 4, 1.8 - i * .3, ['#C9D2E3', '#ffffff', '#FFE14D', '#FF4F7B', '#7B8598'], i ? 'star' : undefined), t));
-  callout('Akku leer!', 'Der Roboter ist erledigt'); say('Geschafft! Der Staubsauger ist aus. ' + catName + ' ist sehr stolz auf dich.');
+  callout('Akku leer!', 'Der Roboter ist erledigt'); say('Geschafft! Der Staubsauger ist aus. Ich bin sehr stolz auf dich.');
   setTimeout(() => el.remove(), 1100);
   boss.el = null;
 }
@@ -5660,7 +5660,7 @@ async function cukeStep() {
   if (!hops) return;
   hopSound();
   if (!toldCuke) { toldCuke = true; say('Hilfe, die Gurken hüpfen! Mach ein Match direkt daneben, dann sind sie weg.'); }
-  else if (Math.random() < .25) say(['Iiih, Gurken!', catName + ' macht einen Buckel.', 'Die Gurke grinst so komisch.', catName + ' springt erschrocken zur Seite.'][Math.floor(Math.random() * 4)]);
+  else if (Math.random() < .25) say(['Iiih, Gurken!', 'Ich mach einen Buckel.', 'Die Gurke grinst so komisch.', 'Ich spring erschrocken zur Seite.'][Math.floor(Math.random() * 4)]);
   await sleep(430);
   // a hop can line up three treats
   await resolve(null, null);
@@ -5806,7 +5806,7 @@ function showKit() {
     const ov = $('kitOv'), card = $('kitCard');
     $('kitArt').innerHTML = CAT_ICON('trikot');
     $('kitText').textContent = catName + ' hat sein Bordo-Mavi-Trikot! Für Trabzon, mit der 61 auf dem Rücken. Du findest es auch bei den Outfits.';
-    const done = on => { ov.classList.remove('show'); if (on) { wear = 'trikot'; saveJar(); refreshCats(); sparkle(); say(catName + ' trägt jetzt Bordo-Mavi. Bereit für das nächste Spiel!'); } res(); };
+    const done = on => { ov.classList.remove('show'); if (on) { wear = 'trikot'; saveJar(); refreshCats(); sparkle(); say('Ich trag jetzt Bordo-Mavi. Bereit für das nächste Spiel!'); } res(); };
     $('kitWear').onclick = () => done(true); $('kitLater').onclick = () => done(false);
     card.classList.remove('pop-in'); void card.offsetWidth; card.classList.add('pop-in');
     ov.classList.add('show'); kitConfetti(90); fanfare(); buzz([40, 60, 40]);
