@@ -8347,22 +8347,37 @@ fitGoals = function () {
   const row = hb.closest('.hud-row');
   box.classList.remove('gtight', 'gtight2', 'grows', 'gmini'); hb.classList.remove('grows'); box.style.maxWidth = ''; box.style.removeProperty('--gc');
   if (row) row.classList.remove('noscore');
-  if (typeof goals === 'undefined' || !goals || goals.length < 2 || !box.clientWidth) return;
+  if (typeof goals === 'undefined' || !goals || !goals.length || !box.clientWidth) return;
   // a goal sticking out of the box (or the box scrolling) counts as not fitting
   const over = () => {
     const h = hb.getBoundingClientRect(), cs = getComputedStyle(hb), l = h.left + parseFloat(cs.paddingLeft) - 2, r = h.right - parseFloat(cs.paddingRight) + 2;
     for (const c of box.children) { const k = c.getBoundingClientRect(); if (k.width && (k.left < l || k.right > r)) return true; }
+    // the boxes of the panel must not run into each other either (the goals box can be squeezed below its own width)
+    if (row) {
+      const rs = [...row.children].filter(e => getComputedStyle(e).display !== 'none' && e.getBoundingClientRect().width).map(e => e.getBoundingClientRect());
+      for (let i = 1; i < rs.length; i++) if (rs[i].left < rs[i - 1].right - 1) return true;
+      const rr = row.getBoundingClientRect(); if (rs.length && rs[rs.length - 1].right > rr.right + 1) return true;
+    }
     return box.scrollWidth > box.clientWidth + 1;
   };
-  if (!over()) return;
-  box.classList.add('gtight'); if (!over()) return;
-  box.classList.add('gtight2'); if (!over() && goals.length < 4) return;
-  // four or more goals that need the small step: two rows read better than one squeezed row
-  box.classList.remove('gtight', 'gtight2'); box.classList.add('grows'); hb.classList.add('grows');
-  box.style.setProperty('--gc', Math.ceil(goals.length / 2));
-  // the finale has seven goals: then the points make room (they still show on the win card)
-  if (over() && row) row.classList.add('noscore');
-  if (over()) box.classList.add('gmini');
+  const reset = () => { box.classList.remove('gtight', 'gtight2', 'grows', 'gmini'); hb.classList.remove('grows'); box.style.removeProperty('--gc'); };
+  const rows = () => { box.classList.remove('gtight', 'gtight2'); box.classList.add('grows'); hb.classList.add('grows'); box.style.setProperty('--gc', Math.ceil(goals.length / 2)); };
+  // one row, then smaller, then (four or more goals) two rows
+  const steps = allowRows => {
+    reset(); if (!over()) return true;
+    box.classList.add('gtight'); if (!over()) return true;
+    box.classList.add('gtight2'); if (!over()) return true;
+    if (allowRows && goals.length >= 2) { rows(); if (!over()) return true; }
+    return false;
+  };
+  if (steps(goals.length >= 4)) return;
+  // still no room (a narrow phone, or the level number as a fourth box in the first levels): the points make room,
+  // they still show on the win card; then the same steps again, from the big icons on
+  if (row) row.classList.add('noscore');
+  if (steps(true)) return;
+  box.classList.add('gmini');
+  // the finale on a small phone: three rows
+  if (over() && goals.length >= 5 && box.classList.contains('grows')) box.style.setProperty('--gc', Math.ceil(goals.length / 3));
 };
 addEventListener('resize', () => requestAnimationFrame(() => { if (!onMap) fitGoals(); }));
 const fitLayoutPlain35c = fitLayout;
