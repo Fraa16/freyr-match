@@ -44,7 +44,7 @@ function extraSvg40(x) {
   return out;
 }
 const iconFor40 = iconFor;
-iconFor = function (x) { return PAIR40 && isColx(x) ? extraSvg40(x) : iconFor40(x); };
+iconFor = function (x) { return PAIR40 && isColx(x) ? (typeof xbmFor === 'function' && xbmFor(x)) || extraSvg40(x) : iconFor40(x); };
 // the tips say how it works now
 const PAIR_TIP = {
   cat: () => 'Flitzekatze! Sie hat die Farbe ihrer Leckerlis. Bring sie in ein Match, dann flitzt sie los.',

@@ -140,3 +140,49 @@ laserRun = function (from, targets, d) {
   if (las39.length >= 5) return;
   las39.push(now); return laserRun39.apply(this, arguments);
 };
+// The extras become finished pictures too, like the treats already were. On the iPhone the catnip was the worst:
+// a dozen catnip drawings (leaves, bow, glow, shadow filter) all popping at once took 150 to 230 ms to paint.
+const XBM = new Map(), xbmWant = new Map();
+let xbmSize = 0, xbmBusy = false;
+function xbmSvg(x) {
+  if (typeof PAIR40 !== 'undefined' && PAIR40 && typeof isColx === 'function' && isColx(x) && typeof extraSvg40 === 'function') return ['x' + x.type + x.col + (x.dir || ''), extraSvg40(x)];
+  if (x.type === 'nip') return ['nip', NIP_SVG];
+  if (x.type === 'laser') return ['laser', LASER_SVG];
+  if (x.type === 'bowl') return ['bowl', BOWL_SVG];
+  return null;
+}
+async function xbmRun() {
+  if (xbmBusy) return; xbmBusy = true;
+  try {
+    const T = bmTileSize(), s = Math.min(3, Math.max(1, devicePixelRatio || 1)), size = Math.round(T * 1.28 * s);
+    if (!T) return;
+    if (Math.abs(size - xbmSize) >= 3) { XBM.clear(); xbmSize = size; }
+    for (const [key, svg] of [...xbmWant]) {
+      if (XBM.has(key)) { xbmWant.delete(key); continue; }
+      try {
+        const u = await bmPaint(svg, T, s, false), im = new Image(); im.src = u; try { await im.decode(); } catch (e) {}
+        BM.keep.push(im); XBM.set(key, u);
+      } catch (e) {}
+      xbmWant.delete(key);
+      await new Promise(r => setTimeout(r, 30));
+    }
+  } finally { xbmBusy = false; }
+}
+// the picture of an extra, or null while it is still being painted (then the drawing is used)
+function xbmFor(x) {
+  const ks = x && BM.url ? xbmSvg(x) : null;
+  if (!ks) return null;
+  const u = XBM.get(ks[0]);
+  if (u) return '<img class="bm' + (x.type === 'cat' ? ' sprint40' : '') + '" src="' + u + '" alt="" draggable="false">';
+  if (!xbmWant.has(ks[0])) { xbmWant.set(ks[0], ks[1]); setTimeout(xbmRun, 50); }
+  return null;
+}
+const iconForX39 = iconFor;
+iconFor = function (x) { return xbmFor(x) || iconForX39(x); };
+const buildBitmaps39 = buildBitmaps;
+buildBitmaps = async function () {
+  const r = await buildBitmaps39.apply(this, arguments);
+  for (const [k, v] of [['nip', NIP_SVG], ['laser', LASER_SVG], ['bowl', BOWL_SVG]]) if (!XBM.has(k)) xbmWant.set(k, v);
+  xbmRun();
+  return r;
+};
