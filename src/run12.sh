@@ -43,4 +43,6 @@ t v38 python3 test_v38.py
 t levels36 python3 test_levels.py 161,162,168,181,196,201,211,220,240,257,260
 GAME=game.html t v40 python3 test_v40.py
 t v41 python3 test_v41.py
+t card41 python3 test_card41.py
+t start41 python3 test_start41.py 1
 echo "== done $(date +%T)" >> r_all.log

@@ -86,3 +86,36 @@ showIntro = function () {
 const labelFor40 = labelFor;
 labelFor = function (x) { const l = labelFor40.apply(this, arguments); return PAIR40 && isColx(x) && NAMES[x.col] ? l + ', mit ' + NAMES[x.col] : l; };
 if (COACH.gift && COACH.gift[2]) COACH.gift[2].ptext = (x, d) => 'Da war ' + EXTRA_A[x.type] + ' drin! Wisch dieses Leckerli ' + d + ', dann legt ' + (x.type === 'laser' ? 'er' : 'sie') + ' los.';
+
+// V41 fix: an extra put on the board outside a match (start extras from the shop, the lucky streak and the plaster,
+// presents) must not line up with its neighbours by its colour. It takes the colour of the treat it replaces (the board
+// had no match, so it still has none), else a colour that makes no match there. After the start extras the board is
+// checked once more: whatever still lines up gets another colour.
+function calmCol40(r, c) {
+  const was = grid[r][c], cols = COLORS.slice().sort(() => Math.random() - .5);
+  let best = cols[0];
+  for (const t of cols) { grid[r][c] = { type: t, id: -1 }; const bad = findMatches().cells.has(r * N + c); if (!bad) { best = t; break; } }
+  grid[r][c] = was;
+  return best;
+}
+function settle40() {
+  if (!PAIR40 || !grid || !grid.length) return 0;
+  let changed = 0;
+  for (let round = 0; round < 6; round++) {
+    const m = findMatches(); if (!m.cells.size) break;
+    let fixed = false;
+    for (const k of m.cells) {
+      const r = k / N | 0, c = k % N, x = grid[r][c];
+      if (!isColx(x)) continue;
+      const keep = x.col; x.col = calmCol40(r, c);
+      if (x.col !== keep) { changed++; fixed = true; }
+    }
+    if (!fixed) break;
+  }
+  if (changed) for (const row of grid) for (const x of row) if (isColx(x)) { const el = els.get(x.id); if (el) { el.innerHTML = iconFor(x); el.setAttribute('aria-label', labelFor(x)); } }
+  return changed;
+}
+const startGifts40 = startGifts;
+startGifts = async function () { const r = await startGifts40.apply(this, arguments); settle40(); return r; };
+const reshuffle40 = reshuffle;
+reshuffle = function () { const r = reshuffle40.apply(this, arguments); settle40(); return r; };

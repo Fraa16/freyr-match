@@ -620,6 +620,12 @@ if not os.environ.get('NO40'):
     # a coloured extra counts for its colour, and the bowl eats it with its colour (then it goes off)
     rep("if (cell && cell.type === g.type) g.left--;", "if (cell && (cell.type === g.type || (PAIR40 && isColx(cell) && cell.col === g.type))) g.left--;")
     rep("      else if (x.type === t) add(i, base + 120 + Math.floor(Math.random() * 280));", "      else if (x.type === t || (PAIR40 && isColx(x) && x.col === t)) add(i, base + 120 + Math.floor(Math.random() * 280));")
+    # V41 fix: extras put on the board outside a match take the colour of the treat they replace (start extras),
+    # or a colour that lines up with nothing (presents)
+    rep("  const [r, c] = spots[Math.floor(Math.random() * spots.length)], old = grid[r][c], sp = mk(id);\n",
+        "  const [r, c] = spots[Math.floor(Math.random() * spots.length)], old = grid[r][c], sp = mk(id);\n  if (PAIR40 && isColx(sp)) sp.col = isNormal(old.type) && COLORS.includes(old.type) ? old.type : calmCol40(r, c);\n")
+    rep("          const kind = giftKind(), sp = mk(kind); if (kind === 'cat') sp.dir = Math.random() < .5 ? 'h' : 'v';\n",
+        "          const kind = giftKind(), sp = mk(kind); if (kind === 'cat') sp.dir = Math.random() < .5 ? 'h' : 'v';\n          if (PAIR40 && isColx(sp)) sp.col = calmCol40(r, c);\n")
     # the magic feather: the Flitzekatze has the colour of the treat it was
     rep("  const sp = mk('cat'); sp.dir = v > h ? 'v' : 'h';\n  stampFx(k, FEATHER_TOOL);", "  const sp = mk('cat'); sp.dir = v > h ? 'v' : 'h';\n  if (PAIR40 && isNormal(old.type) && COLORS.includes(old.type)) sp.col = old.type;\n  stampFx(k, FEATHER_TOOL);")
     rep("say('Hokuspokus, eine Flitzekatze! Tausch sie, dann flitzt sie los.');", "say(PAIR40 ? 'Hokuspokus, eine Flitzekatze! Bring sie mit zwei gleichen Leckerlis in eine Reihe, dann flitzt sie los.' : 'Hokuspokus, eine Flitzekatze! Tausch sie, dann flitzt sie los.');")
