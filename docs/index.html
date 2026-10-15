@@ -3354,10 +3354,22 @@ function flyToCat(items) {
 }
 // boxes and treats stuck in wool stay where they are; everything else falls past them and past holes in the board
 const isStatic = x => !!x && (x.type === 'box' || x.type === 'wet' || x.type === 'boss' || x.type === 'gift' || x.type === 'cuke' || x.locked);
+let lastBellCol = -1, bellWait = 0;
 function gravity() {
   const fresh = [], onBoard = countOnBoard(x => x.type === 'bell');
   let bellNow = bellsLeft > 0 && onBoard < 2 && Math.random() < (onBoard ? .3 : 1);
-  const bellCol = bellNow ? Math.floor(Math.random() * N) : -1;
+  let bellCol = -1;
+  if (bellNow) {
+    const free = [], hasBell = c => grid.some(row => row[c] && row[c].type === 'bell');
+    for (let c = 0; c < N; c++) { for (let r = 0; r < N; r++) if (mask[r][c] && !grid[r][c]) { free.push(c); break; } }
+    const pick0 = Math.floor(Math.random() * N);
+    if (onBoard && !free.some(c => c >= pick0)) bellNow = false;
+    else {
+      let pool = free.filter(c => c !== lastBellCol && !hasBell(c));
+      if (!pool.length && !onBoard && ++bellWait > 2) pool = free;
+      if (pool.length) { bellCol = pool[Math.floor(Math.random() * pool.length)]; bellWait = 0; } else bellNow = false;
+    }
+  }
   let clocksNow = cfg.clockRate ? countOnBoard(x => x.clock > 0) : 99;
   for (let c = 0; c < N; c++) {
     const slots = []; for (let r = N - 1; r >= 0; r--) if (mask[r][c] && !isStatic(grid[r][c])) slots.push(r);
@@ -3368,7 +3380,7 @@ function gravity() {
     for (let i = tiles.length, k = 1; i < slots.length; i++, k++) {
       const r = slots[i];
       let cell;
-      if (bellNow && (c >= bellCol || c === N - 1 || !onBoard) && i === slots.length - 1) { cell = mk('bell'); bellsLeft--; bellNow = false; }
+      if (bellNow && c === bellCol && i === slots.length - 1) { cell = mk('bell'); bellsLeft--; bellNow = false; lastBellCol = c; }
       else { cell = mk(rnd(), cfg.gold && Math.random() < cfg.goldRate); if (cfg.wildRate && !cell.gold && Math.random() < cfg.wildRate && countOnBoard(x => x.type === 'wild') < 2) cell.type = 'wild'; if (!cell.gold && clocksNow < cfg.clockMax && Math.random() < cfg.clockRate) { cell.clock = cfg.clock; clocksNow++; } }
       grid[r][c] = cell;
       const d = tileEl(cell), from = top - k;
@@ -3392,7 +3404,7 @@ function collectBells() {
     if (low < 0) continue;
     const x = grid[low][c];
     if (!x || x.type !== 'bell') continue;
-    n++; grid[low][c] = null;
+    n++; grid[low][c] = null; lastBellCol = c;
     const el = els.get(x.id), [px, py] = cellXY(low * N + c);
     if (el) { el.classList.add('bellout'); setTimeout(() => { el.remove(); els.delete(x.id); }, 520); }
     burst(px, py, 20, 1.5, ['#FFD25A', '#FFF3B0', '#F07CA0', '#ffffff'], 'star'); jingle();
@@ -3523,7 +3535,10 @@ async function resolve(blast, swapPos, label, preFired, quiet, bd) {
   while (true) {
     const clear = new Set(), delay = new Map();
     let spawns = new Map();
-    if (blast) { blast.forEach(k => clear.add(k)); if (bd) bd.forEach((d, k) => delay.set(k, d)); blast = null; bd = null; }
+    if (blast) {
+      blast.forEach(k => clear.add(k)); if (bd) bd.forEach((d, k) => delay.set(k, d)); blast = null; bd = null;
+      if (combo === 0 && swapKeys.length) { const m = findMatches(); if (m.cells.size) { m.cells.forEach(k => clear.add(k)); spawns = extrasFor(m, swapKeys); } }
+    }
     else {
       const m = findMatches();
       if (!m.cells.size) break;
@@ -3774,7 +3789,7 @@ async function trySwap(r1, c1, r2, c2, free) {
       const sp = sa ? a : b, o = sa ? b : a;
       if (sp.type === 'bowl') sp.eat = o.type === 'wild' ? bestColor() : o.type;
     }
-    await resolve(blast, null, label, pre);
+    await resolve(blast, (sa && sb) || (sa ? a : b).type === 'bowl' ? null : [[r1, c1], [r2, c2]], label, pre);
     if (feast2) await nachschlag();
   } else if (findMatches().cells.size) {
     pay();

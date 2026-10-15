@@ -532,6 +532,36 @@ if os.path.exists(D + 'chomp37.json'):
     assert len(_re.findall(r"const CHOMP_B64 = '[A-Za-z0-9+/=]+';", s)) == 1 and len(_re.findall(r"const CHOMPS = \[[0-9., ]+\];", s)) == 1
     s = _re.sub(r"const CHOMP_B64 = '[A-Za-z0-9+/=]+';", lambda m: "const CHOMP_B64 = '" + _c['b64'] + "';", s)
     s = _re.sub(r"const CHOMPS = \[[0-9., ]+\];", lambda m: "const CHOMPS = " + json.dumps(_c['offs']) + ";", s)
+# V38: an extra swapped with a treat: when the treat makes a match where it lands, that match is eaten as well and earns its extra
+# (it used to go off with the blast only, so the four in a row it made never became a cat). Not for the bowl (it eats the whole kind)
+# and not for two extras (their combo is the move).
+rep("    await resolve(blast, null, label, pre);",
+    "    await resolve(blast, (sa && sb) || (sa ? a : b).type === 'bowl' ? null : [[r1, c1], [r2, c2]], label, pre);")
+rep("    if (blast) { blast.forEach(k => clear.add(k)); if (bd) bd.forEach((d, k) => delay.set(k, d)); blast = null; bd = null; }",
+    "    if (blast) {\n      blast.forEach(k => clear.add(k)); if (bd) bd.forEach((d, k) => delay.set(k, d)); blast = null; bd = null;\n"
+    "      if (combo === 0 && swapKeys.length) { const m = findMatches(); if (m.cells.size) { m.cells.forEach(k => clear.add(k)); spawns = extrasFor(m, swapKeys); } }\n    }")
+# V38: bells: a random column that gets new treats, never the column the last bell came down in. A bell that has just dropped out
+# leaves a gap only in its own column, so it used to come right back there; now the next one waits for a gap elsewhere
+# (after two passes with no other gap it may take the same column). How often bells come stays as it was.
+rep("function gravity() {", "let lastBellCol = -1, bellWait = 0;\nfunction gravity() {")
+rep("  const bellCol = bellNow ? Math.floor(Math.random() * N) : -1;",
+    "  let bellCol = -1;\n"
+    "  if (bellNow) {\n"
+    "    const free = [], hasBell = c => grid.some(row => row[c] && row[c].type === 'bell');\n"
+    "    for (let c = 0; c < N; c++) { for (let r = 0; r < N; r++) if (mask[r][c] && !grid[r][c]) { free.push(c); break; } }\n"
+    "    const pick0 = Math.floor(Math.random() * N);\n"
+    "    if (onBoard && !free.some(c => c >= pick0)) bellNow = false;\n"
+    "    else {\n"
+    "      let pool = free.filter(c => c !== lastBellCol && !hasBell(c));\n"
+    "      if (!pool.length && !onBoard && ++bellWait > 2) pool = free;\n"
+    "      if (pool.length) { bellCol = pool[Math.floor(Math.random() * pool.length)]; bellWait = 0; } else bellNow = false;\n"
+    "    }\n"
+    "  }")
+rep("      if (bellNow && (c >= bellCol || c === N - 1 || !onBoard) && i === slots.length - 1) { cell = mk('bell'); bellsLeft--; bellNow = false; }",
+    "      if (bellNow && c === bellCol && i === slots.length - 1) { cell = mk('bell'); bellsLeft--; bellNow = false; lastBellCol = c; }")
+# (the column a bell just dropped out of counts as well, also for the bells that were on the board from the start)
+rep("    n++; grid[low][c] = null;\n    const el = els.get(x.id), [px, py] = cellXY(low * N + c);",
+    "    n++; grid[low][c] = null; lastBellCol = c;\n    const el = els.get(x.id), [px, py] = cellXY(low * N + c);")
 # V35: the game is called Freyr Match now
 rep('<title>Whisker Match</title>', '<title>Freyr Match</title>')
 open(D + os.environ.get('OUT12', 'game.html'), 'w').write(s)
