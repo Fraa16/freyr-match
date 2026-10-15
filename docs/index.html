@@ -3730,7 +3730,7 @@ async function resolve(blast, swapPos, label, preFired, quiet, bd) {
     fxq.boing.slice(0, 6).forEach(d => boing(d / 1000));
     fxq.magic.slice(0, 2).forEach(d => later(d, sparkle));
     }
-    if (best) { if (FX39) SFX.spawn(best); else extraSound(best); }
+    if (best) { if (FX39) { if (audioOk()) SFX.spawn(best); } else extraSound(best); }
     if (cnt) chomp(Math.min(4, 1 + (combo > 2 ? 1 : 0) + (specials ? 2 : 0)), .42, Math.min(1.4, 1 + (combo - 1) * .07));
     buzz(specials ? [30, 40, 30] : best ? [20, 30, 20] : combo > 1 ? 25 : 12);
     if (specials || clear.size >= 12 || broken || wetBroken > 1 || best === 'bowl') later(Math.min(maxD, 200), shake);
