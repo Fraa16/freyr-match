@@ -562,9 +562,10 @@ rep("      if (bellNow && (c >= bellCol || c === N - 1 || !onBoard) && i === slo
 # (the column a bell just dropped out of counts as well, also for the bells that were on the board from the start)
 rep("    n++; grid[low][c] = null;\n    const el = els.get(x.id), [px, py] = cellXY(low * N + c);",
     "    n++; grid[low][c] = null; lastBellCol = c;\n    const el = els.get(x.id), [px, py] = cellXY(low * N + c);")
-# V39 (preview, only with V39=1 for now): new sounds for the extras (sfx39.js), the Krallenkratzer paw and the double Festmahl (fx39.js).
+# V39: new sounds for the extras (sfx39.js), the Krallenkratzer paw, the double Festmahl and the last-move win (fx39.js),
+# smooth big combos (smooth39.js: extras as finished pictures, shake at most every 400 ms, capped effects ...).
 # Every sound that used to be played for an extra asks FX39 first, so the old ones stay for comparing. V39P=1 adds the playground.
-if os.environ.get('V39'):
+if not os.environ.get('NO39'):
     rep('</style>', R('fx39.css') + (R('preview39.css') if os.environ.get('V39P') else '') + '</style>')
     rep("\naddEventListener('resize', sizeFx);\n", "\n" + R('sfx39.js') + R('fx39.js') + R('smooth39.js') + (R('preview39.js') if os.environ.get('V39P') else '') + "\naddEventListener('resize', sizeFx);\n")
     # pictures of tiles, flying treats and flares are parsed once and copied after that (smooth39.js)

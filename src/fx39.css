@@ -5,14 +5,13 @@
 .dim39{position:absolute;inset:0;z-index:3;pointer-events:none;
   background:radial-gradient(circle at var(--fx,50%) var(--fy,50%),rgba(40,10,80,0) 0,rgba(40,10,80,.2) 16%,rgba(25,5,60,.58) 72%)}
 .tile.feast39{z-index:6}
-.tile.feast39 svg{animation:feast39 var(--ch,.62s) cubic-bezier(.4,0,.7,1) forwards}
+.tile.feast39 svg,.tile.feast39 img{animation:feast39 var(--ch,.62s) cubic-bezier(.4,0,.7,1) forwards}
 @keyframes feast39{0%{transform:scale(1) rotate(0)}40%{transform:scale(1.35) rotate(-14deg)}70%{transform:scale(1.5) rotate(10deg);filter:brightness(1.3) drop-shadow(0 0 6px #fff)}
   100%{transform:scale(1.9) rotate(-6deg);filter:brightness(1.9) drop-shadow(0 0 14px #fff)}}
-#board.quake39 .tile:not(.feast39) svg{animation:quake39 .1s linear infinite alternate}
-#board.quake39 .tile:not(.feast39):nth-child(2n) svg{animation-duration:.085s;animation-direction:alternate-reverse}
-#board.quake39 .tile:not(.feast39):nth-child(3n) svg{animation-duration:.115s}
-@keyframes quake39{from{transform:translate(-4%,2%) rotate(-3deg)}to{transform:translate(4%,-2%) rotate(3deg)}}
-@media (prefers-reduced-motion:reduce){#board.quake39 .tile svg,.tile.feast39 svg{animation:none}}
+/* the board trembles while the two bowls charge up: the board as a whole, one moving part instead of sixty */
+#board.quake39{animation:quake39 .09s linear infinite alternate}
+@keyframes quake39{from{transform:translate(-1.5px,1px) rotate(-.35deg)}to{transform:translate(1.5px,-1px) rotate(.35deg)}}
+@media (prefers-reduced-motion:reduce){#board.quake39,.tile.feast39 svg,.tile.feast39 img{animation:none}}
 /* won with the last move */
 .clutch39{position:fixed;inset:0;z-index:29;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(60,0,30,0) 35%,rgba(90,0,40,.38) 75%,rgba(60,0,30,.6))}
 #moves.clutch39{animation:clutchm39 .52s ease-in-out infinite;color:#E8193C}
