@@ -54,7 +54,7 @@ with sync_playwright() as p:
     ok('C2 the cat swapped into a match goes off, one move used', r['moved'] == 1 and r['fired'] >= 1 and r['gained'] >= 160 and not r['check'], r)
     # C3: four 2s across: a cat in colour 2, drawn as the treat with stripes
     pg.evaluate(SETUP, [2, [[3, 1], [3, 2], [3, 4], [2, 3]], []])
-    r = pg.evaluate("""async () => { const seen = []; const g0 = gravity; gravity = function () { if (!seen.length) for (let k = 0; k < N * N; k++) { const x = grid[k / N | 0][k % N]; if (x && x.type === 'cat') seen.push([k, x.col, iconFor(x).includes('m40s')]); } return g0.apply(this, arguments); };
+    r = pg.evaluate("""async () => { const seen = []; const g0 = gravity; gravity = function () { if (!seen.length) for (let k = 0; k < N * N; k++) { const x = grid[k / N | 0][k % N]; if (x && x.type === 'cat') seen.push([k, x.col, iconFor(x).includes('tr41')]); } return g0.apply(this, arguments); };
       try { await trySwap(2, 3, 3, 3); await T_waitIdle(); } finally { gravity = g0; } return { seen, check: T_check() }; }""")
     ok('C3 four 2s make a cat of colour 2, drawn as the treat with the marks', r['seen'] and r['seen'][0][1] == 2 and r['seen'][0][2], r)
     pg.screenshot(path=SHOTS + '/c3.png')

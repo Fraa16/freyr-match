@@ -594,7 +594,7 @@ if os.environ.get('V39'):
 # V40 (test, only with V40=1): extras like in Candy Crush (pair40.js). An extra keeps its colour, counts as that treat in a match
 # and only goes off when it is eaten in one; the bowl and extra + extra stay as they are.
 if os.environ.get('V40'):
-    rep('</style>', '.mk40 *{fill:#fff!important;stroke:#fff!important;opacity:1!important}\n</style>')
+    rep('</style>', '.tile .cx41{position:absolute;left:9%;top:-1%;width:82%;height:82%;display:block} .tile .cx41 .catwrap{width:100%;height:100%} .tile svg.tr41{position:absolute;left:24%;top:43%;width:60%!important;height:60%!important}\n</style>')
     rep("\naddEventListener('resize', sizeFx);\n", "\n" + R('pair40.js') + "\naddEventListener('resize', sizeFx);\n")
     rep("const mk = (type, gold = false) => ({ type, id: ++idc, gold, locked: false });",
         "const mk = (type, gold = false) => { const x = { type, id: ++idc, gold, locked: false }; if (PAIR40 && (type === 'cat' || type === 'nip' || type === 'laser')) x.col = rnd(); return x; };")

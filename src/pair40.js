@@ -14,34 +14,30 @@ function powerMove(a, b) {
   const free = x => isPower(x.type) && !isColx(x);
   return (isPower(a.type) && isPower(b.type)) || free(a) || free(b);
 }
-// a coloured extra is the treat itself, changed (like the striped and wrapped candies in Candy Crush):
-// Flitzekatze: candy stripes run right through the treat, along its line; Katzenminze: the treat is wrapped in a mint bonbon wrapper;
-// Laserpunkt: the treat sits in a glass bubble with a laser-red rim and target marks. Drawn once per kind and colour.
+// a coloured extra: the extra as it always looked, with its treat as part of the picture
+// Flitzekatze: Freyr runs off with the treat in his mouth; Katzenminze: the treat sits in the mint bouquet, bow in front;
+// Laserpunkt: the treat in the laser's glow and star, the red dot right on it (like the dot a cat chases)
 const X40 = new Map();
 function inner40(col) { const m = String(ICONS[col]).match(/<svg[^>]*>([\s\S]*)<\/svg>/); return m ? m[1] : ''; }
+const at40 = (T, x, y, s, r = 0) => `<g transform="translate(${x} ${y}) rotate(${r}) scale(${s}) translate(-50 -50)">${T}</g>`;
 function extraSvg40(x) {
-  const key = x.type + x.col + (x.dir || ''); if (X40.has(key)) return X40.get(key);
-  const T = inner40(x.col), c = x.col;
+  const key = x.type + x.col; if (x.type !== 'cat' && X40.has(key)) return X40.get(key);
+  const T = inner40(x.col);
   let out;
   if (x.type === 'cat') {
-    const v = x.dir === 'v', bars = [21, 44.5, 68].map(p => v ? `<rect x="${p - 5.5}" y="-5" width="11" height="110" rx="5.5"/>` : `<rect x="-5" y="${p - 5.5}" width="110" height="11" rx="5.5"/>`).join('');
-    out = `<svg viewBox="0 0 100 100"><defs><mask id="m40s${c}" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><g class="mk40">${T}</g></mask>` +
-      `<linearGradient id="g40s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#FFE3F0"/></linearGradient></defs>` +
-      `${T}<g mask="url(#m40s${c})"><g fill="url(#g40s)" opacity=".8">${bars}</g><g fill="none" stroke="#FF4F9A" stroke-width="1.6" opacity=".55">${bars}</g></g></svg>`;
+    out = '<span class="cx41">' + CAT_ICON() + '</span><svg class="tr41" viewBox="0 0 100 100">' + at40(T, 50, 50, 1, -12) + '</svg>' + DIR_SVG(x.dir);
+    return out;
   } else if (x.type === 'nip') {
-    const end = s => `<g transform="translate(50 50) scale(${s * .93} .93)"><path d="M-31 -9 Q-38 -10 -47 -24 Q-43 -12 -49 -6 Q-44 0 -49 6 Q-43 12 -47 24 Q-38 10 -31 9Z" fill="url(#g40w)" stroke="#239A3C" stroke-width="2.4" stroke-linejoin="round"/>` +
-      `<path d="M-35 -6 L-45 -15 M-36 0 L-46 0 M-35 6 L-45 15" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".8"/></g>`;
-    out = `<svg viewBox="0 0 100 100"><defs><linearGradient id="g40w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9FFDE"/><stop offset=".55" stop-color="#8FE870"/><stop offset="1" stop-color="#3DBB4F"/></linearGradient>` +
-      `<linearGradient id="g40c" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".35" stop-color="#fff" stop-opacity=".08"/><stop offset=".7" stop-color="#B8F0A8" stop-opacity=".12"/><stop offset="1" stop-color="#5ED83C" stop-opacity=".35"/></linearGradient></defs>` +
-      `${end(1)}${end(-1)}<g transform="translate(50 50) scale(.76) translate(-50 -50)">${T}</g>` +
-      `<rect x="17" y="15" width="66" height="70" rx="24" fill="url(#g40c)" stroke="#2FA84A" stroke-width="3"/><rect x="17" y="15" width="66" height="70" rx="24" fill="none" stroke="#DFFFD0" stroke-width="1.2" opacity=".9"/>` +
-      `<path d="M27 26 Q34 19 46 19" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" opacity=".85"/></svg>`;
+    out = `<svg viewBox="0 0 100 100"><path d="M50 84 V24" stroke="#11621F" stroke-width="8" stroke-linecap="round"/><path d="M50 84 V24" stroke="#6EDB4C" stroke-width="3.5" stroke-linecap="round"/>` +
+      leaf(50, 68, -74, 1.02) + leaf(50, 68, 74, 1.02) + leaf(50, 46, -46, .95) + leaf(50, 46, 46, .95) + leaf(50, 28, 0, .78) +
+      at40(T, 50, 53, .66) +
+      `<g fill="url(#gPink)" ${OL('#9E0C57')}><path d="M47.5 81 L40 96 L46 93.5 L49 97.5Z"/><path d="M52.5 81 L60 96 L54 93.5 L51 97.5Z"/>` +
+      `<path d="M50 79 Q34 68 30 77 Q30 88 50 81Z"/><path d="M50 79 Q66 68 70 77 Q70 88 50 81Z"/><circle cx="50" cy="80" r="5.5"/></g>` + SPARK(16, 18, .8) + SPARK(85, 14, .62) + '</svg>';
   } else {
-    out = `<svg viewBox="0 0 100 100"><defs><radialGradient id="g40b" cx=".42" cy=".38" r=".62"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".72" stop-color="#FFD0DC" stop-opacity=".18"/><stop offset=".93" stop-color="#FF2E63" stop-opacity=".55"/><stop offset="1" stop-color="#C4003A" stop-opacity=".8"/></radialGradient></defs>` +
-      `<g transform="translate(50 50) scale(.74) translate(-50 -50)">${T}</g>` +
-      `<circle cx="50" cy="50" r="42" fill="url(#g40b)" stroke="#E8194F" stroke-width="3.2"/>` +
-      `<g stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M50 4 V14 M50 86 V96 M4 50 H14 M86 50 H96"/></g><g stroke="#FF2E63" stroke-width="2.2" stroke-linecap="round"><path d="M50 4 V14 M50 86 V96 M4 50 H14 M86 50 H96"/></g>` +
-      `<path d="M22 32 Q30 16 50 13" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/><circle cx="71" cy="72" r="3.4" fill="#fff" opacity=".85"/></svg>`;
+    out = `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="url(#gGlow)"/>` +
+      `<path d="M50 2 Q54 46 98 50 Q54 54 50 98 Q46 54 2 50 Q46 46 50 2Z" fill="#FFC9D6" opacity=".9"/>` +
+      at40(T, 50, 50, .68) +
+      `<circle cx="62" cy="44" r="12" fill="#FF2E63" opacity=".32"/><circle cx="62" cy="44" r="7.5" fill="url(#gRed)" stroke="#7A0018" stroke-width="2"/><circle cx="59.5" cy="41.5" r="2.2" fill="#fff"/></svg>`;
   }
   if (X40.size < 200) X40.set(key, out);
   return out;
