@@ -166,7 +166,7 @@
   const sheet = document.createElement('div'); sheet.id = 'p39'; sheet.hidden = true;
   sheet.innerHTML = '<div class="p39card"><div class="p39head"><b>Vorschau</b><small>Neue Sounds und Animationen</small></div>' +
     '<div class="p39lbl">Sounds und Animationen</div><div class="p39seg" role="group"><button type="button" data-v="new">Neu</button><button type="button" data-v="old">Alt</button></div>' +
-    (typeof PAIR40 !== 'undefined' ? '<div class="p39lbl">Extras</div><div class="p39seg" role="group"><button type="button" data-p="on">Erst paaren (Candy Crush)</button><button type="button" data-p="off">Sofort (bisher)</button></div>' : '') +
+    (('PAIR40' in window) ? '<div class="p39lbl">Extras</div><div class="p39seg" role="group"><button type="button" data-p="on">Erst paaren (Candy Crush)</button><button type="button" data-p="off">Sofort (bisher)</button></div>' : '') +
     '<div class="p39grid">' + DEMOS.map((d, i) => `<button type="button" class="${d[2] === 'big' ? 'big' : ''}" data-i="${i}">${d[0]}</button>`).join('') + '</div>' +
     '<p class="p39note">Tipp drauf: das Brett wird neu gelegt und die Extras werden getauscht. Danach kannst du normal weiterspielen.</p>' +
     '<button type="button" class="p39bench">Leistungstest starten (dauert gut eine Minute)</button>' +
