@@ -155,7 +155,7 @@ function feastFx(k, added, delay, base, clear) {
   // the wave: every treat goes when the rainbow ring reaches it
   for (const q of added) if (q !== k2) delay.set(q, bang + 50 + Math.round(cellDist(q, k) * 52));
   calloutDelay39 = CH;
-  if (audioOk()) { SFX.feastCharge(base / 1000, CH / 1000); SFX.feastBang(bang / 1000); }
+  if (audioOk()) SFX.feast(base / 1000);
   if (REDUCED) { later(bang, bigShake); return; }
   const bowl = grid[R][C], elA = bowl && els.get(bowl.id);
   later(base, () => { if (elA) { elA.style.setProperty('--ch', CH + 'ms'); elA.classList.add('feast39'); } boardEl.classList.add('quake39'); });
@@ -180,8 +180,8 @@ function feastFx(k, added, delay, base, clear) {
   added.forEach((q, i) => {
     if (q === k2) return;
     const [tx, ty] = cellXY(q), at = delay.get(q), col = RAINBOW[i % 6];
-    orb(tx, ty, cw * .15, cw * .9, ['#ffffff', withA(col, .9), withA(col, .35)], at - 30, 260, .35);
-    if (i % 2 === 0) sparks(tx, ty, 4, col, cw * .15, at);
+    if (i % 2 === 0) orb(tx, ty, cw * .15, cw * .9, ['#ffffff', withA(col, .9), withA(col, .35)], at - 30, 260, .35);
+    if (i % 3 === 0) sparks(tx, ty, 4, col, cw * .15, at);
   });
   for (let i = 0; i < Q(18); i++) twinkle(x + (Math.random() - .5) * cw * 9, y + (Math.random() - .5) * cw * 9, cw * (.16 + Math.random() * .12), bang + 150 + Math.random() * 600);
   later(bang, () => burst(x, y, 34, 2.6, RAINBOW, 'star'));
@@ -204,9 +204,12 @@ nachschlag = async function () {
     const out = 1 - rad / maxR, arm = (((ang + Math.PI) / TAU + out * 1.4) % 1);
     bd.set(k, Math.round(F + 80 + out * 650 + arm * 420));
   }
-  const last = Math.max(...bd.values());
+  // always the same length (1.6 s), so the sound fits
+  const mx = Math.max(...bd.values()), s0 = F + 80, LAST = 1600;
+  for (const [k, v] of bd) bd.set(k, Math.round(s0 + (v - s0) * (LAST - s0) / Math.max(1, mx - s0)));
+  const last = LAST;
   callout('Nachschlag!', 'Noch eine Runde Festmahl'); buzz([40, 60, 40]);
-  if (audioOk()) SFX.whirl(.05, (last + 60) / 1000);
+  if (audioOk()) SFX.whirl(.05, 1.66);
   if (!REDUCED) {
     const b = boardGeo(), cw = b.cw, x = b.left + b.w / 2, y = b.top + b.h / 2;
     vortex(x, y, cw, 0, last + 300);

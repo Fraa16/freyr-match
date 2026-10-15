@@ -8,10 +8,11 @@
 .p39card{position:relative;width:100%;max-width:440px;background:#fff;border-radius:22px;padding:16px 14px 12px;box-shadow:0 0 0 3px #fff,0 0 0 7px #B9A2F2,0 10px 30px rgba(30,10,80,.35);color:#3B2A6B}
 .p39head b{display:block;font:400 1.35rem 'Lilita One','Nunito',sans-serif;color:#7B3FE0}
 .p39head small{display:block;font-weight:800;color:#7F69AE;font-size:.85rem;margin-top:1px}
-.p39seg{display:flex;margin:12px 0 10px;background:#F1ECFF;border-radius:99px;padding:3px}
-.p39seg button{flex:1;border:0;background:none;border-radius:99px;padding:7px 0;font:400 1rem 'Lilita One','Nunito',sans-serif;color:#7F69AE;cursor:pointer}
+.p39lbl{margin:10px 2px 4px;font-weight:800;font-size:.78rem;color:#7F69AE}
+.p39seg{display:flex;margin:0 0 4px;background:#F1ECFF;border-radius:99px;padding:3px}
+.p39seg button{flex:1;font-size:.9rem!important;border:0;background:none;border-radius:99px;padding:7px 0;font:400 1rem 'Lilita One','Nunito',sans-serif;color:#7F69AE;cursor:pointer}
 .p39seg button.on{background:#7B3FE0;color:#fff;box-shadow:0 2px 0 rgba(60,20,120,.3)}
-.p39grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.p39grid{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .p39grid button{border:2px solid #DCD0FA;background:#F8F5FF;border-radius:14px;padding:9px 6px;font:800 .9rem 'Nunito',sans-serif;color:#3B2A6B;cursor:pointer;line-height:1.15}
 .p39grid button.big{background:#FFF1F8;border-color:#FFC2DD}
 .p39grid button:active{transform:translateY(1px)}

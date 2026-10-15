@@ -10,8 +10,10 @@ const sxT = () => actx.currentTime + .01;
 // F major pentatonic (the music is in F), i counts up from the base note
 const PENT = [0, 2, 4, 7, 9];
 const pent = (i, base = 77) => mf(base + 12 * Math.floor(i / 5) + PENT[((i % 5) + 5) % 5]);
+const SXC = new WeakMap();
 function sxOut() {
-  if (SX.out && SX.ctx === actx) return SX.out;
+  const have = SXC.get(actx);
+  if (have) { SX.out = have.out; SX.verb = have.verb; SX.noise = have.noise; return have.out; }
   SX.ctx = actx;
   const comp = actx.createDynamicsCompressor();
   comp.threshold.value = -16; comp.knee.value = 12; comp.ratio.value = 4; comp.attack.value = .003; comp.release.value = .2;
@@ -21,7 +23,7 @@ function sxOut() {
   const cv = actx.createConvolver(); cv.buffer = ir; const wg = actx.createGain(); wg.gain.value = .55; cv.connect(wg); wg.connect(comp);
   const nl = sr * 2, nb = actx.createBuffer(1, nl, sr), nd = nb.getChannelData(0);
   for (let i = 0; i < nl; i++) nd[i] = Math.random() * 2 - 1;
-  SX.noise = nb; SX.verb = cv; SX.out = g;
+  SX.noise = nb; SX.verb = cv; SX.out = g; SXC.set(actx, { out: g, verb: cv, noise: nb });
   return g;
 }
 // a channel: optionally panned, with some of it sent to the room
@@ -62,7 +64,7 @@ function sxPluck(dest, f, t, vol, dur = .55) {
   o.connect(lp); o2.connect(g2); g2.connect(lp); lp.connect(g); sxEnv(g, t, vol, .004, dur); g.connect(dest);
   o.start(t); o2.start(t); o.stop(t + dur + .05); o2.stop(t + dur + .05);
 }
-const SFX = {
+const SYN = {
   // Flitzekatze: two swishes run out to both ends of the line (left and right in the ears), a rising zip, two little bells
   cat(at, dir, big) {
     const t = sxT() + at, layers = dir === 'v' ? [[0, 1], [0, -1]] : dir === 'x' ? [[-.7, 1], [.7, 1], [0, -1]] : [[-.7, 1], [.7, 1]];
@@ -105,7 +107,7 @@ const SFX = {
   },
   // one crackle for each rainbow bolt
   zap(at, pan) { const t = sxT() + at, b = sxBus(pan, .1); sxN(b, t, .07, .085, 'bandpass', 5200, 2400, 2.5, .001); sxO(b, 'sawtooth', 3200, t, .05, .011, 1200, .05, .001); },
-  zaps(times) { times.slice(0, 14).forEach(at => SFX.zap(Math.max(0, at) / 1000, Math.random() * 1.4 - .7)); },
+  zaps(times) { times.slice(0, 14).forEach(at => SYN.zap(Math.max(0, at) / 1000, Math.random() * 1.4 - .7)); },
   // a new extra appears
   spawn(kind) {
     const t = sxT(), c = sxBus(0, .3);
@@ -162,7 +164,7 @@ const SFX = {
   // ... then a big bang, a full chord, and glitter falling down
   feastBang(at) {
     const t = sxT() + at, c = sxBus(0, .55);
-    SFX.boom(at, 1.4);
+    SYN.boom(at, 1.4);
     [53, 57, 60, 65, 69, 72].forEach((m, i) => sxO(c, 'triangle', mf(m), t + i * .012, 1.8, .04, 0, 0, .01));
     [89, 93, 96, 101].forEach((m, i) => sxBell(c, mf(m), t + .05 + i * .04, 2, .028, 3.5, 1.8));
     for (let i = 0; i < 16; i++) sxBell(sxBus(Math.random() * 1.6 - .8, .4), pent(18 - i, 72), t + .3 + i * .07 + Math.random() * .03, .5, .02, 3.5, 1.3);
@@ -172,7 +174,7 @@ const SFX = {
     const t = sxT() + at, c = sxBus(0, .25);
     for (const u of [0, .52]) { sxO(c, 'sine', 70, t + u, .22, .5, 42, .2, .004); sxO(c, 'sine', 64, t + u + .17, .26, .38, 40, .24, .004); }
     const t2 = t + beat, b = sxBus(0, .5);
-    SFX.boom(at + beat, 1);
+    SYN.boom(at + beat, 1);
     sxN(b, t2, 1.8, .2, 'highpass', 6500, 4000, .6, .002);
     sxN(b, t2, .9, .12, 'bandpass', 3000, 1500, .8, .002);
     // the stab: saws through a closing lowpass
@@ -207,7 +209,6 @@ const SFX = {
 // the sounds of the extras that went off in one round of a resolve (fire() notes them in fxq.x)
 function sxPlay(list) {
   if (!list || !list.length || !audioOk()) return;
-  sxOut();
   const n = { cat: 0, nip: 0, laser: 0 };
   let first = Infinity;
   for (const e of list) {
@@ -218,3 +219,76 @@ function sxPlay(list) {
   }
   if (list.length >= 4) SFX.boom(first / 1000 + .05, Math.min(1.5, .8 + list.length * .05));
 }
+
+/* ---------- every sound is rendered once into a buffer (in the background, after the first tap) ----------
+   Playing a buffer is one node; building a sound live is dozens of oscillators, filters and the room.
+   A bowl combo used to build a few hundred nodes in one go. Until a buffer is ready, the live sound plays. */
+const SXB = new Map(), SXR = 32000;
+const SXDEF = {
+  'cat:h0': [() => SYN.cat(0, 'h'), 1.5, 1], 'cat:h1': [() => SYN.cat(0, 'h'), 1.5, 1], 'cat:v0': [() => SYN.cat(0, 'v'), 1.5, 1], 'cat:v1': [() => SYN.cat(0, 'v'), 1.5, 1],
+  'cat:x': [() => SYN.cat(0, 'x', true), 1.7, 1],
+  'nip:10': [() => SYN.nip(0, 1), 1.6, 1], 'nip:11': [() => SYN.nip(0, 1), 1.6, 1], 'nip:2': [() => SYN.nip(0, 2), 1.8, 1],
+  'bowl': [() => SYN.bowl(0), 2.6], 'zap': [() => SYN.zap(0, 0), .5],
+  'spawn:cat': [() => SYN.spawn('cat'), 1.4], 'spawn:nip': [() => SYN.spawn('nip'), 1.4], 'spawn:laser': [() => SYN.spawn('laser'), 1.2], 'spawn:bowl': [() => SYN.spawn('bowl'), 2.6],
+  'swell': [() => SYN.convStart(0, 12, .045), 1.8],
+  'boom:1': [() => SYN.boom(0, 1), 2.2], 'boom:2': [() => SYN.boom(0, 1.4), 2.6],
+  'scratch': [() => SYN.scratch(.1, N * 46 / 1000), 1.6, 1],
+  'feast': [() => { SYN.feastCharge(0, .62); SYN.feastBang(.62); }, 4.2, 1],
+  'whirl': [() => SYN.whirl(0, 1.66), 3.2, 1],
+  'clutch': [() => SYN.clutch(0, 1), 3.8]
+};
+for (let i = 0; i < 8; i++) { SXDEF['laser:' + i] = [() => SYN.laserHit(0, i, 0), 1]; SXDEF['conv:' + i] = [() => SYN.conv(0, i, 'cat'), 1]; }
+let sxBusy = false, sxStarted = false;
+async function sxRender(key) {
+  const def = SXDEF[key], OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+  if (!def || SXB.has(key) || !OAC || !actx) return;
+  const oc = new OAC(def[2] ? 2 : 1, Math.ceil(def[1] * SXR), SXR), ka = actx, km = master;
+  actx = oc; master = oc.createGain(); master.gain.value = .9; master.connect(oc.destination);
+  try { def[0](); } finally { actx = ka; master = km; }
+  const buf = await new Promise((res, rej) => { const p = oc.startRendering(); if (p && p.then) p.then(res, rej); else oc.oncomplete = e => res(e.renderedBuffer); });
+  SXB.set(key, buf);
+}
+// rendered one at a time in the background, never while something big is going on
+function sxPrewarm() {
+  if (sxStarted || !actx) return; sxStarted = true;
+  const todo = Object.keys(SXDEF);
+  const step = () => {
+    if (!todo.length) return;
+    if ((busy && !onMap) || sxBusy) return setTimeout(step, 400);
+    sxBusy = true;
+    sxRender(todo.shift()).catch(() => {}).finally(() => { sxBusy = false; setTimeout(step, 60); });
+  };
+  setTimeout(step, 1500);
+}
+['pointerdown', 'touchend', 'click'].forEach(ev => document.addEventListener(ev, () => { if (actx && soundOn) sxPrewarm(); }, { passive: true }));
+// the live output for buffers: a light compressor, no room (the room is in the buffer)
+function sxLive() {
+  if (SX.live && SX.liveCtx === actx) return SX.live;
+  const comp = actx.createDynamicsCompressor(); comp.threshold.value = -12; comp.knee.value = 10; comp.ratio.value = 3; comp.attack.value = .003; comp.release.value = .2;
+  comp.connect(master); SX.live = comp; SX.liveCtx = actx; return comp;
+}
+function sxBuf(key, at = 0, pan = 0, vol = 1) {
+  const b = SXB.get(key); if (!b) return false;
+  const s = actx.createBufferSource(); s.buffer = b;
+  let n = s;
+  if (vol !== 1) { const g = actx.createGain(); g.gain.value = vol; n.connect(g); n = g; }
+  if (pan && actx.createStereoPanner) { const p = actx.createStereoPanner(); p.pan.value = Math.max(-1, Math.min(1, pan)); n.connect(p); n = p; }
+  n.connect(sxLive()); s.start(sxT() + Math.max(0, at)); return true;
+}
+const pick2 = () => Math.random() < .5 ? 0 : 1;
+const SFX = {
+  cat(at, dir, big) { if (!sxBuf(big || dir === 'x' ? 'cat:x' : 'cat:' + (dir === 'v' ? 'v' : 'h') + pick2(), at)) SYN.cat(at, dir, big); },
+  nip(at, R = 1) { if (!sxBuf(R > 1 ? 'nip:2' : 'nip:1' + pick2(), at)) SYN.nip(at, R); },
+  laserHit(at, i, pan) { if (!sxBuf('laser:' + (i % 8), at, pan)) SYN.laserHit(at, i, pan); },
+  bowl(at) { if (!sxBuf('bowl', at)) SYN.bowl(at); },
+  zap(at, pan) { if (!sxBuf('zap', at, pan, .9)) SYN.zap(at, pan); },
+  zaps(times) { times.slice(0, 14).forEach(at => SFX.zap(Math.max(0, at) / 1000, Math.random() * 1.4 - .7)); },
+  spawn(kind) { if (!sxBuf('spawn:' + kind, 0)) SYN.spawn(kind); },
+  convStart(at, n, step) { if (!sxBuf('swell', at)) SYN.convStart(at, n, step); },
+  conv(at, i, kind) { if (!sxBuf('conv:' + (i % 8), at, ((i * 37) % 9 - 4) / 6)) SYN.conv(at, i, kind); },
+  boom(at, size = 1) { if (!sxBuf(size > 1.2 ? 'boom:2' : 'boom:1', at)) SYN.boom(at, size); },
+  scratch(at, dur) { if (!sxBuf('scratch', at - .1)) SYN.scratch(at, dur); },
+  feast(at) { if (!sxBuf('feast', at)) { SYN.feastCharge(at, .62); SYN.feastBang(at + .62); } },
+  whirl(at, dur) { if (!sxBuf('whirl', at)) SYN.whirl(at, dur); },
+  clutch(at, beat) { if (!sxBuf('clutch', at)) SYN.clutch(at, beat); }
+};

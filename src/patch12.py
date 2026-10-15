@@ -566,7 +566,11 @@ rep("    n++; grid[low][c] = null;\n    const el = els.get(x.id), [px, py] = cel
 # Every sound that used to be played for an extra asks FX39 first, so the old ones stay for comparing. V39P=1 adds the playground.
 if os.environ.get('V39'):
     rep('</style>', R('fx39.css') + (R('preview39.css') if os.environ.get('V39P') else '') + '</style>')
-    rep("\naddEventListener('resize', sizeFx);\n", "\n" + R('sfx39.js') + R('fx39.js') + (R('preview39.js') if os.environ.get('V39P') else '') + "\naddEventListener('resize', sizeFx);\n")
+    rep("\naddEventListener('resize', sizeFx);\n", "\n" + R('sfx39.js') + R('fx39.js') + R('smooth39.js') + (R('preview39.js') if os.environ.get('V39P') else '') + "\naddEventListener('resize', sizeFx);\n")
+    # pictures of tiles, flying treats and flares are parsed once and copied after that (smooth39.js)
+    rep("  d.innerHTML = iconFor(cell);\n  d.setAttribute('aria-label', labelFor(cell));", "  d.appendChild(iconNode(iconFor(cell)));\n  d.setAttribute('aria-label', labelFor(cell));")
+    rep("    d.className = 'fly'; d.innerHTML = it.html;", "    d.className = 'fly'; d.appendChild(iconNode(it.html));")
+    rep("    const e = document.createElement('div'); e.className = cls; if (html) e.innerHTML = html;", "    const e = document.createElement('div'); e.className = cls; if (html) e.appendChild(iconNode(html));")
     # resolve: the extras that go off are noted with what they are; their sounds come from sxPlay; a new extra gets its own sound
     rep("const firedTypes = [], fxq = { whoosh: [], boing: [], pew: [], magic: [] };", "const firedTypes = [], fxq = { whoosh: [], boing: [], pew: [], magic: [], x: [] };")
     rep("    fxq.pew.slice(0, 12).forEach(d => pew(d / 1000));\n    fxq.whoosh.slice(0, 6).forEach(d => whoosh(d / 1000));\n    fxq.boing.slice(0, 6).forEach(d => boing(d / 1000));\n    fxq.magic.slice(0, 2).forEach(d => later(d, sparkle));\n    if (best) extraSound(best);",
@@ -587,6 +591,31 @@ if os.environ.get('V39'):
         # the preview starts with everything open (it has its own storage, separate from the game)
         rep("<script>", "<script>\ntry { if (!localStorage.getItem('wm-p39')) { localStorage.setItem('wm-p39', '1'); localStorage.setItem('wm-intro', '1'); localStorage.setItem('wm-purr-told', '1'); if ((parseInt(localStorage.getItem('wm-level'), 10) || 1) < 200) localStorage.setItem('wm-level', '200'); } } catch (e) {}")
         rep('<title>Whisker Match</title>', '<title>Freyr Match Vorschau</title>')
+# V40 (test, only with V40=1): extras like in Candy Crush (pair40.js). An extra keeps its colour, counts as that treat in a match
+# and only goes off when it is eaten in one; the bowl and extra + extra stay as they are.
+if os.environ.get('V40'):
+    rep('</style>', '.mk40 *{fill:#fff!important;stroke:#fff!important;opacity:1!important}\n</style>')
+    rep("\naddEventListener('resize', sizeFx);\n", "\n" + R('pair40.js') + "\naddEventListener('resize', sizeFx);\n")
+    rep("const mk = (type, gold = false) => ({ type, id: ++idc, gold, locked: false });",
+        "const mk = (type, gold = false) => { const x = { type, id: ++idc, gold, locked: false }; if (PAIR40 && (type === 'cat' || type === 'nip' || type === 'laser')) x.col = rnd(); return x; };")
+    # matching: a coloured extra counts as its colour
+    rep("  const T = (r, c) => grid[r][c] ? grid[r][c].type : null;", "  const T = (r, c) => colOf(grid[r][c]);")
+    rep("  const typeOf = k => grid[k / N | 0][k % N].type;", "  const typeOf = k => colOf(grid[k / N | 0][k % N]);")
+    rep("  const T = (r, c) => { const x = grid[r][c]; return x ? x.type : null; };", "  const T = (r, c) => colOf(grid[r][c]);")
+    # a new extra takes the colour of the treats that made it
+    rep("out.set(spot([...group], cross), { kind: 'nip' });", "out.set(spot([...group], cross), { kind: 'nip', col: t });")
+    rep("{ kind: 'cat', dir: long.dir });", "{ kind: 'cat', dir: long.dir, col: t });")
+    rep("out.set(spot(sqs.flat(), sqs[0][Math.floor(Math.random() * 4)]), { kind: 'laser' });", "out.set(spot(sqs.flat(), sqs[0][Math.floor(Math.random() * 4)]), { kind: 'laser', col: t });")
+    rep("      const r = k / N | 0, c = k % N, sp = mk(ex.kind);\n      if (ex.dir) sp.dir = ex.dir;", "      const r = k / N | 0, c = k % N, sp = mk(ex.kind);\n      if (ex.dir) sp.dir = ex.dir;\n      if (PAIR40 && ex.col != null && isColx(sp)) sp.col = ex.col;")
+    rep("    const sp = mk(kind); if (kind === 'cat') sp.dir = Math.random() < .5 ? 'h' : 'v';\n    grid[r][c] = sp;", "    const sp = mk(kind); if (kind === 'cat') sp.dir = Math.random() < .5 ? 'h' : 'v';\n    if (PAIR40 && isColx(sp)) sp.col = old.type;\n    grid[r][c] = sp;")
+    # swapping a coloured extra with a treat is an ordinary swap: it needs a match
+    rep("  if (sa || sb) {\n    pay();", "  if ((sa || sb) && !(PAIR40 && !tut && sa !== sb && isColx(sa ? a : b))) {\n    pay();")
+    rep("isPower(a.type) || isPower(grid[r2][c2].type)", "powerMove(a, grid[r2][c2])", 2)
+    rep("      else if (pa || pb) {", "      else if ((pa || pb) && !(PAIR40 && isColx(pa ? a : b))) {")
+    rep("          for (const k of m.cells) v += cellWorth(k, X);", "          for (const k of m.cells) { v += cellWorth(k, X); const y = grid[k / N | 0][k % N]; if (PAIR40 && isColx(y)) v += y.type === 'laser' ? 9 : sum(areaOf(y, k / N | 0, k % N)) * .8; }")
+    # a coloured extra counts for its colour, and the bowl eats it with its colour (then it goes off)
+    rep("if (cell && cell.type === g.type) g.left--;", "if (cell && (cell.type === g.type || (PAIR40 && isColx(cell) && cell.col === g.type))) g.left--;")
+    rep("      else if (x.type === t) add(i, base + 120 + Math.floor(Math.random() * 280));", "      else if (x.type === t || (PAIR40 && isColx(x) && x.col === t)) add(i, base + 120 + Math.floor(Math.random() * 280));")
 # V35: the game is called Freyr Match now
 if not os.environ.get('V39P'): rep('<title>Whisker Match</title>', '<title>Freyr Match</title>')
 open(D + os.environ.get('OUT12', 'game.html'), 'w').write(s)
