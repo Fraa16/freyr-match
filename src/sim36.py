@@ -90,7 +90,9 @@ with sync_playwright() as p:
     pg = b.new_page(viewport={'width': 390, 'height': 844})
     errs = []
     pg.on('pageerror', lambda e: errs.append(str(e)))
-    pg.goto('file://' + simfile); pg.evaluate('localStorage.clear()'); pg.reload(); pg.wait_for_timeout(600)
+    pg.goto('file://' + simfile); pg.evaluate('localStorage.clear()')
+    if os.environ.get('LS'): pg.evaluate('(o) => { for (const [k, v] of Object.entries(o)) localStorage.setItem(k, v); }', json.loads(os.environ['LS']))   # e.g. LS='{"wm-pair40":"off"}'
+    pg.reload(); pg.wait_for_timeout(600)
     pg.evaluate(BOT)
     n = 0
     for L in LEVELS:
