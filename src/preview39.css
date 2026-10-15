@@ -27,3 +27,6 @@
 #p39res td.bad{color:#E0154A;font-weight:900}
 #p39res tr.det td{border-top:0;padding:0 4px 5px;font-size:.68rem;color:#7F69AE;white-space:normal}
 #p39res .p39card{max-height:calc(100vh - 24px);overflow:auto}
+.p39bench.alt{background:#F1ECFF;color:#7B3FE0;margin-top:6px}
+body.np39 .tile.pop{animation:none!important;opacity:0!important}
+body.ng39 .tile::before{display:none!important;animation:none!important}

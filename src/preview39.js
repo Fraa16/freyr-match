@@ -23,6 +23,10 @@
       return r;
     };
   }
+  // switches for the analysis: the shake, the pop of eaten tiles, the glow behind extras, the falling in of new tiles
+  window.OPT39 = {};
+  for (const name of ['bigShake', 'shake']) { const f = window[name]; window[name] = function () { if (OPT39.noshake) return; return f.apply(this, arguments); }; }
+  { const f = window.dropIn; window.dropIn = function (d) { if (OPT39.nodrop) { if (d) d.classList.remove('fadein'); return; } return f.apply(this, arguments); }; }
   const SANDBOX = { name: 'Spielwiese', moves: 99, target: 1000, collect: [[0, 999]], board: ['........', '........', '........', '........', '........', '........', '........', '........'] };
   let LV0 = null;
   const DEMOS = [
@@ -45,7 +49,7 @@
   ];
   const wait = ms => new Promise(r => setTimeout(r, ms));
   let running = false, queued = null;
-  const go = d => { running = true; (d === 'bench' ? bench() : run(d)).catch(() => {}).finally(() => { running = false; if (queued) { const q = queued; queued = null; go(q); } }); };
+  const go = d => { running = true; (d === 'bench' ? bench() : d === 'benchnip' ? bench('nip') : run(d)).catch(() => {}).finally(() => { running = false; if (queued) { const q = queued; queued = null; go(q); } }); };
   const idle = async () => { for (let i = 0; i < 300 && busy; i++) await wait(50); };
   // a board without matches, the extras on top
   function board(place, avoid = -1) {
@@ -114,8 +118,10 @@
     await wait(500);
     window.__p39t = performance.now(); await trySwap(4, 3, 4, 4);
   }
-  async function bench() {
-    const COMBOS = ['Festmahl + Flitzer', 'Festmahl + Minze', 'Festmahl + Laser', 'Doppel-Festmahl'];
+  async function bench(mode) {
+    const COMBOS = mode === 'nip' ? ['Festmahl + Minze'] : ['Festmahl + Flitzer', 'Festmahl + Minze', 'Festmahl + Laser', 'Doppel-Festmahl'];
+    if (mode === 'nip') window.VARS39 = [['normal', {}], ['ohne Effekte', { nofx: true }], ['o. Eff., o. Wackeln', { nofx: true, noshake: 1 }], ['o. Eff., o. Plopp', { nofx: true, nopop: 1 }],
+      ['o. Eff., o. Leuchten', { nofx: true, noglow: 1 }], ['o. Eff., o. Einfallen', { nofx: true, nodrop: 1 }], ['alles aus', { nofx: true, noshake: 1, nopop: 1, noglow: 1, nodrop: 1 }]];
     const VARS = window.VARS39 || [['alles an', {}], ['ohne Effekte', { nofx: true }]];
     const rnd0 = Math.random, snd0 = soundOn, pair0 = typeof PAIR40 !== 'undefined' ? PAIR40 : null, rows = [];
     const pill = document.createElement('div'); pill.id = 'p39pill'; document.body.appendChild(pill);
@@ -125,6 +131,7 @@
       for (const [vn, o] of VARS) for (const cn of COMBOS) {
         pill.textContent = 'Leistungstest läuft … ' + (++i) + ' / ' + COMBOS.length * VARS.length;
         soundOn = snd0 && !o.mute; window.NOFX39 = o.nofx || false;
+        window.OPT39 = o; document.body.classList.toggle('np39', !!o.nopop); document.body.classList.toggle('ng39', !!o.noglow);
         let a = 1234567; Math.random = () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
         const fr = [], fe = []; let last = 0, on = true, t0 = 0;
         const loop = t => { if (window.__p39t && !t0) t0 = t; if (t0 && last) { fr.push(t - last); fe.push(t); } last = t; if (on) requestAnimationFrame(loop); };
@@ -141,7 +148,7 @@
         rows.push([cn, vn, fr.filter(x => x > 50).length, Math.round(Math.max(0, ...fr)), n ? Math.round(n * 1000 / sum) : 0, when, (top.join(', ') || '–') + (before ? ' · davor: ' + before : '')]);
         Math.random = rnd0; await wait(500);
       }
-    } finally { Math.random = rnd0; soundOn = snd0; window.NOFX39 = false; if (pair0 !== null) PAIR40 = pair0; pill.remove(); }
+    } finally { if (mode === 'nip') window.VARS39 = null; Math.random = rnd0; soundOn = snd0; window.NOFX39 = false; window.OPT39 = {}; document.body.classList.remove('np39', 'ng39'); if (pair0 !== null) PAIR40 = pair0; pill.remove(); }
     const ov = document.createElement('div'); ov.id = 'p39res';
     ov.innerHTML = '<div class="p39card"><div class="p39head"><b>Leistungstest</b><small>' + esc(navigator.userAgent.replace(/.*?\((.*?)\).*/, '$1')).slice(0, 60) + '</small></div>' +
       '<table><tr><th>Kombi</th><th></th><th>Ruckler</th><th>längster</th><th>Bilder/s</th></tr>' +
@@ -161,6 +168,7 @@
     '<div class="p39grid">' + DEMOS.map((d, i) => `<button type="button" class="${d[2] === 'big' ? 'big' : ''}" data-i="${i}">${d[0]}</button>`).join('') + '</div>' +
     '<p class="p39note">Tipp drauf: das Brett wird neu gelegt und die Extras werden getauscht. Danach kannst du normal weiterspielen.</p>' +
     '<button type="button" class="p39bench">Leistungstest starten (dauert gut eine Minute)</button>' +
+    '<button type="button" class="p39bench alt" data-m="benchnip">Minze-Analyse (dauert eine Minute)</button>' +
     '<button type="button" class="p39x" aria-label="Schließen">✕</button></div>';
   document.body.append(btn, sheet);
   // in a level the button sits in the gap above the board (when there is one), so it covers nothing
@@ -177,7 +185,7 @@
     const b = e.target.closest('button');
     if (!b) { if (e.target === sheet) close(); return; }
     if (b.classList.contains('p39x')) return close();
-    if (b.classList.contains('p39bench')) { close(); if (running) queued = 'bench'; else go('bench'); return; }
+    if (b.classList.contains('p39bench')) { const m = b.dataset.m || 'bench'; close(); if (running) queued = m; else go(m); return; }
     if (b.dataset.v) { FX39 = b.dataset.v === 'new'; try { localStorage.setItem('wm-fx39', FX39 ? 'new' : 'old'); } catch (er) {} seg(); return; }
     if (b.dataset.p) {
       PAIR40 = b.dataset.p === 'on'; try { localStorage.setItem('wm-pair40', PAIR40 ? 'on' : 'off'); } catch (er) {} seg();
