@@ -30,3 +30,6 @@
 .p39bench.alt{background:#F1ECFF;color:#7B3FE0;margin-top:6px}
 body.np39 .tile.pop{animation:none!important;opacity:0!important}
 body.ng39 .tile::before{display:none!important;animation:none!important}
+body.tl39 .tray{will-change:transform}
+body.ts39 .tray{filter:none!important}
+body.nr39 #board{border-radius:0!important}

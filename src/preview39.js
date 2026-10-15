@@ -119,22 +119,24 @@
     window.__p39t = performance.now(); await trySwap(4, 3, 4, 4);
   }
   async function bench(mode) {
-    const COMBOS = mode === 'nip' ? ['Festmahl + Minze'] : ['Festmahl + Flitzer', 'Festmahl + Minze', 'Festmahl + Laser', 'Doppel-Festmahl'];
-    if (mode === 'nip') window.VARS39 = [['normal', {}], ['ohne Effekte', { nofx: true }], ['o. Eff., o. Wackeln', { nofx: true, noshake: 1 }], ['o. Eff., o. Plopp', { nofx: true, nopop: 1 }],
-      ['o. Eff., o. Leuchten', { nofx: true, noglow: 1 }], ['o. Eff., o. Einfallen', { nofx: true, nodrop: 1 }], ['alles aus', { nofx: true, noshake: 1, nopop: 1, noglow: 1, nodrop: 1 }]];
+    const COMBOS = mode === 'nip' ? ['Festmahl + Minze', 'Festmahl + Laser'] : ['Festmahl + Flitzer', 'Festmahl + Minze', 'Festmahl + Laser', 'Doppel-Festmahl'];
+    if (mode === 'nip') window.VARS39 = [['normal', {}], ['Schale eigene Ebene', { cls: 'tl39' }], ['Schale o. Schatten', { cls: 'ts39' }], ['ohne Wackeln', { noshake: 1 }], ['Brett eckig', { cls: 'nr39' }]];
     const VARS = window.VARS39 || [['alles an', {}], ['ohne Effekte', { nofx: true }]];
     const rnd0 = Math.random, snd0 = soundOn, pair0 = typeof PAIR40 !== 'undefined' ? PAIR40 : null, rows = [];
     const pill = document.createElement('div'); pill.id = 'p39pill'; document.body.appendChild(pill);
     let i = 0;
+    // the sounds are prepared in the background first, so that does not run in the middle of the test
+    if (typeof SXB !== 'undefined' && typeof sxPrewarm === 'function' && soundOn) { initAudio(); sxPrewarm(); for (let w = 0; w < 60 && SXB.size < Object.keys(SXDEF).length; w++) { pill.textContent = 'Sounds werden vorbereitet …'; await wait(250); } }
     try {
       if (pair0 !== null) PAIR40 = false;
       for (const [vn, o] of VARS) for (const cn of COMBOS) {
         pill.textContent = 'Leistungstest läuft … ' + (++i) + ' / ' + COMBOS.length * VARS.length;
         soundOn = snd0 && !o.mute; window.NOFX39 = o.nofx || false;
         window.OPT39 = o; document.body.classList.toggle('np39', !!o.nopop); document.body.classList.toggle('ng39', !!o.noglow);
+        for (const c of ['tl39', 'ts39', 'nr39']) document.body.classList.toggle(c, o.cls === c);
         let a = 1234567; Math.random = () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
         const fr = [], fe = []; let last = 0, on = true, t0 = 0;
-        const loop = t => { if (window.__p39t && !t0) t0 = t; if (t0 && last) { fr.push(t - last); fe.push(t); } last = t; if (on) requestAnimationFrame(loop); };
+        const loop = t => { if (window.__p39t && !t0) t0 = t; if (t0 && last && last >= t0) { fr.push(t - last); fe.push(t); } last = t; if (on) requestAnimationFrame(loop); };
         window.__p39t = 0; MARK.length = 0; marking = true; requestAnimationFrame(loop);
         await run(DEMOS.find(d => d[0] === cn)); await idle(); await wait(300); on = false; marking = false;
         const n = fr.length, sum = fr.reduce((x, y) => x + y, 0);
@@ -148,7 +150,7 @@
         rows.push([cn, vn, fr.filter(x => x > 50).length, Math.round(Math.max(0, ...fr)), n ? Math.round(n * 1000 / sum) : 0, when, (top.join(', ') || '–') + (before ? ' · davor: ' + before : '')]);
         Math.random = rnd0; await wait(500);
       }
-    } finally { if (mode === 'nip') window.VARS39 = null; Math.random = rnd0; soundOn = snd0; window.NOFX39 = false; window.OPT39 = {}; document.body.classList.remove('np39', 'ng39'); if (pair0 !== null) PAIR40 = pair0; pill.remove(); }
+    } finally { if (mode === 'nip') window.VARS39 = null; Math.random = rnd0; soundOn = snd0; window.NOFX39 = false; window.OPT39 = {}; document.body.classList.remove('np39', 'ng39', 'tl39', 'ts39', 'nr39'); if (pair0 !== null) PAIR40 = pair0; pill.remove(); }
     const ov = document.createElement('div'); ov.id = 'p39res';
     ov.innerHTML = '<div class="p39card"><div class="p39head"><b>Leistungstest</b><small>' + esc(navigator.userAgent.replace(/.*?\((.*?)\).*/, '$1')).slice(0, 60) + '</small></div>' +
       '<table><tr><th>Kombi</th><th></th><th>Ruckler</th><th>längster</th><th>Bilder/s</th></tr>' +
@@ -168,7 +170,7 @@
     '<div class="p39grid">' + DEMOS.map((d, i) => `<button type="button" class="${d[2] === 'big' ? 'big' : ''}" data-i="${i}">${d[0]}</button>`).join('') + '</div>' +
     '<p class="p39note">Tipp drauf: das Brett wird neu gelegt und die Extras werden getauscht. Danach kannst du normal weiterspielen.</p>' +
     '<button type="button" class="p39bench">Leistungstest starten (dauert gut eine Minute)</button>' +
-    '<button type="button" class="p39bench alt" data-m="benchnip">Minze-Analyse (dauert eine Minute)</button>' +
+    '<button type="button" class="p39bench alt" data-m="benchnip">Analyse Minze + Laser (dauert gut eine Minute)</button>' +
     '<button type="button" class="p39x" aria-label="Schließen">✕</button></div>';
   document.body.append(btn, sheet);
   // in a level the button sits in the gap above the board (when there is one), so it covers nothing
