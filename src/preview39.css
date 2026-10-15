@@ -25,3 +25,5 @@
 #p39res th{font-weight:800;color:#7F69AE;text-align:left;padding:3px 4px;font-size:.72rem}
 #p39res td{padding:4px;border-top:1px solid #EEE8FF;white-space:nowrap}
 #p39res td.bad{color:#E0154A;font-weight:900}
+#p39res tr.det td{border-top:0;padding:0 4px 5px;font-size:.68rem;color:#7F69AE;white-space:normal}
+#p39res .p39card{max-height:calc(100vh - 24px);overflow:auto}

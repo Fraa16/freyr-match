@@ -96,3 +96,9 @@ flyToCat = function (items) {
   if (fly39.length >= 8) { if (items.length) setTimeout(catEat, 300); return; }
   fly39.push(now); return flyToCat39.apply(this, arguments);
 };
+// the board shakes at most once in 400 ms: a bowl with catnip used to start the shake a dozen times in a row,
+// and every new start can make the phone paint the whole board again
+let shake39 = 0;
+const bigShake39 = bigShake, shakePlain39 = shake;
+bigShake = function () { const now = performance.now(); if (now - shake39 < 400) return; shake39 = now; return bigShake39.apply(this, arguments); };
+shake = function () { const now = performance.now(); if (now - shake39 < 400) return; shake39 = now; return shakePlain39.apply(this, arguments); };

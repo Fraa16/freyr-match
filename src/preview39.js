@@ -11,6 +11,18 @@
     const f = window[name]; if (typeof f !== 'function') continue;
     window[name] = function () { const o = window.NOFX39; if (o === true || o === g) return; return f.apply(this, arguments); };
   }
+  // the test notes every call of these that blocks the phone for more than 2 ms, to find what is inside a long frame
+  const MARK = []; let marking = false;
+  const PHASE39 = new Set(['convert', 'gravity', 'nachschlag', 'bigShake', 'shake', 'collectBells', 'render', 'resolve', 'callout']);
+  for (const name of ['resolve', 'convert', 'gravity', 'render', 'fire', 'bigShake', 'shake', 'callout', 'say', 'updateHud', 'drawGoals', 'feedPurr', 'collectBells', 'nachschlag', 'trySwap', 'tileEl', 'popFx', 'spawnFx', 'flyToCat', 'fxLoop', 'dropIn', 'place', 'extrasFor', 'findMatches', 'hasMove', 'later', 'catEat', 'fitGoals', 'fitPurrTxt', 'drawPurr', 'sxPlay', 'chomp', 'chime']) {
+    const f = window[name]; if (typeof f !== 'function') continue;
+    window[name] = function () {
+      if (!marking) return f.apply(this, arguments);
+      const t = performance.now(), r = f.apply(this, arguments), dt = performance.now() - t;
+      if (dt > 2 || PHASE39.has(name)) MARK.push([t, name, dt]);
+      return r;
+    };
+  }
   const SANDBOX = { name: 'Spielwiese', moves: 99, target: 1000, collect: [[0, 999]], board: ['........', '........', '........', '........', '........', '........', '........', '........'] };
   let LV0 = null;
   const DEMOS = [
@@ -33,7 +45,7 @@
   ];
   const wait = ms => new Promise(r => setTimeout(r, ms));
   let running = false, queued = null;
-  const go = d => { running = true; run(d).catch(() => {}).finally(() => { running = false; if (queued) { const q = queued; queued = null; go(q); } }); };
+  const go = d => { running = true; (d === 'bench' ? bench() : run(d)).catch(() => {}).finally(() => { running = false; if (queued) { const q = queued; queued = null; go(q); } }); };
   const idle = async () => { for (let i = 0; i < 300 && busy; i++) await wait(50); };
   // a board without matches, the extras on top
   function board(place, avoid = -1) {
@@ -104,7 +116,7 @@
   }
   async function bench() {
     const COMBOS = ['Festmahl + Flitzer', 'Festmahl + Minze', 'Festmahl + Laser', 'Doppel-Festmahl'];
-    const VARS = window.VARS39 || [['alles an', {}], ['ohne Sound', { mute: 1 }], ['ohne Effekte', { nofx: true }]];
+    const VARS = window.VARS39 || [['alles an', {}], ['ohne Effekte', { nofx: true }]];
     const rnd0 = Math.random, snd0 = soundOn, pair0 = typeof PAIR40 !== 'undefined' ? PAIR40 : null, rows = [];
     const pill = document.createElement('div'); pill.id = 'p39pill'; document.body.appendChild(pill);
     let i = 0;
@@ -114,19 +126,27 @@
         pill.textContent = 'Leistungstest läuft … ' + (++i) + ' / ' + COMBOS.length * VARS.length;
         soundOn = snd0 && !o.mute; window.NOFX39 = o.nofx || false;
         let a = 1234567; Math.random = () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
-        const fr = []; let last = 0, on = true, t0 = 0;
-        const loop = t => { if (window.__p39t && !t0) t0 = t; if (t0 && last) fr.push(t - last); last = t; if (on) requestAnimationFrame(loop); };
-        window.__p39t = 0; requestAnimationFrame(loop);
-        await run(DEMOS.find(d => d[0] === cn)); await idle(); await wait(300); on = false;
+        const fr = [], fe = []; let last = 0, on = true, t0 = 0;
+        const loop = t => { if (window.__p39t && !t0) t0 = t; if (t0 && last) { fr.push(t - last); fe.push(t); } last = t; if (on) requestAnimationFrame(loop); };
+        window.__p39t = 0; MARK.length = 0; marking = true; requestAnimationFrame(loop);
+        await run(DEMOS.find(d => d[0] === cn)); await idle(); await wait(300); on = false; marking = false;
         const n = fr.length, sum = fr.reduce((x, y) => x + y, 0);
-        rows.push([cn, vn, fr.filter(x => x > 50).length, Math.round(Math.max(0, ...fr)), n ? Math.round(n * 1000 / sum) : 0]);
+        // the worst frame: which calls ran inside it, and how long
+        let wi = 0; fr.forEach((x, j) => { if (x > fr[wi]) wi = j; });
+        const wEnd = fe[wi], wStart = wEnd - fr[wi], inFrame = MARK.filter(([t]) => t >= wStart - 5 && t <= wEnd);
+        const js = {}; for (const [, nm, dt] of inFrame) if (dt > 2) js[nm] = Math.max(js[nm] || 0, dt);
+        const before = MARK.filter(([t, nm]) => PHASE39.has(nm) && t <= wEnd && t >= wStart - 400).slice(-2).map(([t, nm]) => nm + ' ' + Math.round(t - wStart)).join(', ');
+        const top = Object.entries(js).sort((p, q) => q[1] - p[1]).slice(0, 3).map(([k, v]) => k + ' ' + Math.round(v));
+        const when = Math.round(wStart - t0);
+        rows.push([cn, vn, fr.filter(x => x > 50).length, Math.round(Math.max(0, ...fr)), n ? Math.round(n * 1000 / sum) : 0, when, (top.join(', ') || '–') + (before ? ' · davor: ' + before : '')]);
         Math.random = rnd0; await wait(500);
       }
     } finally { Math.random = rnd0; soundOn = snd0; window.NOFX39 = false; if (pair0 !== null) PAIR40 = pair0; pill.remove(); }
     const ov = document.createElement('div'); ov.id = 'p39res';
     ov.innerHTML = '<div class="p39card"><div class="p39head"><b>Leistungstest</b><small>' + esc(navigator.userAgent.replace(/.*?\((.*?)\).*/, '$1')).slice(0, 60) + '</small></div>' +
       '<table><tr><th>Kombi</th><th></th><th>Ruckler</th><th>längster</th><th>Bilder/s</th></tr>' +
-      rows.map(r => `<tr><td>${r[0].replace('Festmahl', 'F.')}</td><td>${r[1]}</td><td class="${r[2] > 2 ? 'bad' : ''}">${r[2]}</td><td class="${r[3] > 100 ? 'bad' : ''}">${r[3]} ms</td><td>${r[4]}</td></tr>`).join('') +
+      rows.map(r => `<tr><td>${r[0].replace('Festmahl', 'F.')}</td><td>${r[1]}</td><td class="${r[2] > 2 ? 'bad' : ''}">${r[2]}</td><td class="${r[3] > 100 ? 'bad' : ''}">${r[3]} ms</td><td>${r[4]}</td></tr>` +
+        `<tr class="det"><td colspan="5">längster bei ${r[5]} ms: ${esc(r[6])}</td></tr>`).join('') +
       '</table><p class="p39note">Ruckler = Bilder, die länger als 50 ms gebraucht haben. Mach bitte einen Screenshot davon und schick ihn mir.</p><button type="button" class="p39x" aria-label="Schließen">✕</button></div>';
     ov.onclick = e => { if (e.target === ov || e.target.closest('.p39x')) ov.remove(); };
     document.body.appendChild(ov);
@@ -157,7 +177,7 @@
     const b = e.target.closest('button');
     if (!b) { if (e.target === sheet) close(); return; }
     if (b.classList.contains('p39x')) return close();
-    if (b.classList.contains('p39bench')) { close(); if (!running) { running = true; bench().catch(() => {}).finally(() => { running = false; }); } return; }
+    if (b.classList.contains('p39bench')) { close(); if (running) queued = 'bench'; else go('bench'); return; }
     if (b.dataset.v) { FX39 = b.dataset.v === 'new'; try { localStorage.setItem('wm-fx39', FX39 ? 'new' : 'old'); } catch (er) {} seg(); return; }
     if (b.dataset.p) {
       PAIR40 = b.dataset.p === 'on'; try { localStorage.setItem('wm-pair40', PAIR40 ? 'on' : 'off'); } catch (er) {} seg();
