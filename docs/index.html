@@ -1558,6 +1558,8 @@ html[class] main .top .goalsbox .goals.grows.gmini .chip b{font-size:.9rem}
 .clutchtxt span:first-child{font-size:clamp(1.6rem,7.5vw,2.5rem);color:#fff}
 .gash39{position:absolute;left:0;width:100%;z-index:3;pointer-events:none;filter:drop-shadow(0 0 4px rgba(255,79,154,.8))}
 .gash39 svg{width:100%;height:100%;display:block;overflow:visible}
+/* a picture outside the board (should not happen): it fits its box instead of showing at full size */
+:not(.tile)>img.bm{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}
 .tile.cat:has(.sprint40)::before{background:radial-gradient(circle,rgba(255,120,190,.38) 0 38%,rgba(255,79,154,0) 72%)}
 
 /* V41: Freyr's letter. The paper stays paper in the dark theme too, so its colours are fixed. */
@@ -9476,9 +9478,10 @@ async function xbmRun() {
     }
   } finally { xbmBusy = false; }
 }
-// the picture of an extra, or null while it is still being painted (then the drawing is used)
+// the picture of an extra, or null while it is still being painted (then the drawing is used).
+// Only for tiles on the board (they have an id): the level card, the legend and the shop keep the drawings.
 function xbmFor(x) {
-  const ks = x && BM.url ? xbmSvg(x) : null;
+  const ks = x && x.id != null && BM.url ? xbmSvg(x) : null;
   if (!ks) return null;
   const u = XBM.get(ks[0]);
   if (u) return '<img class="bm' + (x.type === 'cat' ? ' sprint40' : '') + '" src="' + u + '" alt="" draggable="false">';

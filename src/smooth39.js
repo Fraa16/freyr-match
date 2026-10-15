@@ -168,9 +168,10 @@ async function xbmRun() {
     }
   } finally { xbmBusy = false; }
 }
-// the picture of an extra, or null while it is still being painted (then the drawing is used)
+// the picture of an extra, or null while it is still being painted (then the drawing is used).
+// Only for tiles on the board (they have an id): the level card, the legend and the shop keep the drawings.
 function xbmFor(x) {
-  const ks = x && BM.url ? xbmSvg(x) : null;
+  const ks = x && x.id != null && BM.url ? xbmSvg(x) : null;
   if (!ks) return null;
   const u = XBM.get(ks[0]);
   if (u) return '<img class="bm' + (x.type === 'cat' ? ' sprint40' : '') + '" src="' + u + '" alt="" draggable="false">';
