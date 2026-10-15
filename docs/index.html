@@ -1558,6 +1558,68 @@ html[class] main .top .goalsbox .goals.grows.gmini .chip b{font-size:.9rem}
 .clutchtxt span:first-child{font-size:clamp(1.6rem,7.5vw,2.5rem);color:#fff}
 .gash39{position:absolute;left:0;width:100%;z-index:3;pointer-events:none;filter:drop-shadow(0 0 4px rgba(255,79,154,.8))}
 .gash39 svg{width:100%;height:100%;display:block;overflow:visible}
+.tile.cat:has(.sprint40)::before{background:radial-gradient(circle,rgba(255,120,190,.38) 0 38%,rgba(255,79,154,0) 72%)}
+
+/* V41: Freyr's letter. The paper stays paper in the dark theme too, so its colours are fixed. */
+.overlay.n41ov{z-index:26;background:rgba(46,18,76,.66)}
+.n41wrap{width:100%;max-width:380px;margin:0 auto auto;display:flex;flex-direction:column;align-items:center;padding-top:clamp(104px,16vh,150px)}
+.n41letter{position:relative;width:100%}
+.n41face{position:absolute;left:50%;top:-98px;width:116px;height:116px;margin-left:-58px;z-index:0;animation:n41up .55s .2s cubic-bezier(.3,1.45,.5,1) both}
+.n41face .catwrap svg,.n41face .catwrap img{width:100%;height:100%;display:block}
+.n41face .catwrap img{border-radius:50%;object-fit:cover}
+.n41face.read .catwrap{transform-origin:50% 80%;animation:n41bob 2.6s ease-in-out infinite}
+.n41face .eyes{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
+.n41face.read .eyes>:nth-child(n+3){animation:n41scan 1.8s ease-in-out infinite}
+.n41face .catsvg .m-o{display:none}
+.n41face.eat .catsvg .m-o{display:inline}
+.n41face.eat .catsvg .m-c{display:none}
+.n41paper{position:relative;z-index:1;background:#FFFBF4;color:#6B2E49;border-radius:22px;padding:24px 20px 16px;
+  box-shadow:0 0 0 3px #fff,0 0 0 6px #F07CA0,0 16px 34px rgba(26,4,46,.4);animation:n41in .5s cubic-bezier(.2,1.25,.5,1) both}
+.n41paws{position:absolute;left:0;right:0;top:-20px;display:flex;justify-content:space-between;padding:0 17%;z-index:2;pointer-events:none}
+.n41paws svg{width:52px;height:40px;animation:n41paw .42s .42s cubic-bezier(.3,1.5,.5,1) both}
+.n41paws svg:last-child{transform:scaleX(-1);animation-name:n41pawr}
+.n41body{max-height:calc(100vh - clamp(104px,16vh,150px) - 170px);max-height:calc(100dvh - clamp(104px,16vh,150px) - 170px);overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;text-align:left;padding:0 2px}
+.n41t{font-family:'Lilita One','Nunito',system-ui,sans-serif;font-weight:400;font-size:1.55rem;letter-spacing:.01em;color:#E0457F;text-align:center;margin:2px 0 12px}
+.n41l{margin:0 0 9px;font-size:1rem;line-height:1.4;font-weight:700;display:none}
+.n41l.on{display:block;animation:n41line .4s ease-out both}
+li.n41l.on{display:list-item}
+.n41demo.on{display:flex}
+.n41hi{font-weight:800;color:#5A2140}
+.n41sub{margin-bottom:6px;font-weight:800;color:#5A2140}
+.n41list{margin:0 0 10px;padding:0;list-style:none}
+.n41list li{position:relative;padding-left:25px;margin-bottom:6px}
+.n41list li svg{position:absolute;left:0;top:.2em;width:17px;height:17px;transform:rotate(-12deg)}
+.n41demo{display:flex;justify-content:center;gap:6px;margin:2px 0 12px}
+.n41tile{width:48px;height:48px;border-radius:13px;background:#FCE0EC;box-shadow:inset 0 0 0 2px #F7C3D8;display:grid;place-items:center;padding:4px}
+.n41tile.x{background:radial-gradient(circle,#FFB8D5 0 38%,#FCE0EC 78%)}
+.n41body.more{-webkit-mask-image:linear-gradient(#000 calc(100% - 48px),transparent);mask-image:linear-gradient(#000 calc(100% - 48px),transparent)}
+.n41tile svg,.n41tile img{width:100%;height:100%;display:block;overflow:visible}
+.n41demo.on .n41tile{animation:n41pop 2.8s ease-in-out .6s infinite}
+.n41demo.on .n41tile:nth-child(2){animation-delay:.68s}
+.n41demo.on .n41tile:nth-child(3){animation-delay:.76s}
+.n41sign{text-align:right;font-family:'Lilita One','Nunito',system-ui,sans-serif;font-weight:400;font-size:1.3rem;color:#E0457F;margin:12px 0 4px}
+.n41sign svg{width:24px;height:24px;vertical-align:-4px;transform:rotate(16deg)}
+.n41ps{font-size:.92rem;color:#B5658A;margin-bottom:2px}
+.n41hint{margin:14px 0 0;color:#FFE1EE;font-size:.92rem;text-align:center;cursor:pointer}
+.n41hint[hidden]{display:none}
+.n41go{margin-top:22px;font-size:1.25rem;padding:13px 30px}
+.n41go[hidden]{display:none}
+.n41go.pop-in{animation:n41go .5s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes n41in{from{opacity:0;transform:translateY(46px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes n41up{from{transform:translateY(54px)}to{transform:none}}
+@keyframes n41paw{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes n41pawr{from{opacity:0;transform:scaleX(-1) translateY(-16px)}to{opacity:1;transform:scaleX(-1)}}
+@keyframes n41bob{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-2px)}}
+@keyframes n41scan{0%{transform:translateX(-2.6px)}70%,82%{transform:translateX(2.6px)}100%{transform:translateX(-2.6px)}}
+@keyframes n41pop{0%,58%,100%{transform:none}66%{transform:scale(1.16)}74%{transform:scale(.92)}82%{transform:scale(1.04)}}
+@keyframes n41line{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@keyframes n41go{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .n41face,.n41paper,.n41paws svg,.n41go.pop-in,.n41demo.on .n41tile,.n41face.read .catwrap,.n41face .eyes,.n41face.read .eyes>*{animation:none}
+  .n41paws svg:last-child{transform:scaleX(-1)}
+  .n41l.on{animation:none}
+}
+@media (max-height:700px){.n41wrap{padding-top:90px}.n41body{max-height:calc(100vh - 250px);max-height:calc(100dvh - 250px)}.n41face{width:100px;height:100px;margin-left:-50px;top:-84px}.n41l{font-size:.95rem;margin-bottom:7px}.n41go{margin-top:16px}}
 /* ===== web app: the home screen hint at the bottom of the map ===== */
 .a2hs{position:absolute;z-index:5;left:84px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);max-width:420px;margin-left:auto;
   display:flex;align-items:center;gap:10px;padding:10px 8px 10px 14px;border-radius:18px;background:var(--panel);color:var(--ink);
@@ -2050,16 +2112,16 @@ const LEVELS = [
     board: ['  ....  ', ' ...... ', '........', '..m..m..', '........', '.m.mm.m.', ' ...... ', '  ....  '] },
   { name: "Gießkanne", moves: 18, target: 1000, collect: [[0, 30]],
     board: ['........', '.bb..bb.', '........', '........', '.b....b.', '........', '.bb..bb.', '........'] },
-  { name: "Nachtfalter", moves: 18, target: 1000, intro: 'purr', collect: [[5, 25]],
+  { name: "Nachtfalter", moves: 19, target: 1000, intro: 'purr', collect: [[5, 25]],
     board: ['..    ..', '...  ...', '.mm..mm.', '.mm..mm.', '.mm..mm.', '...  ...', '..    ..', '........'] },
-  { name: "Regenbogenbrücke", moves: 19, target: 1000, intro: 'hard', hard: 1,
+  { name: "Regenbogenbrücke", moves: 22, target: 1000, intro: 'hard', hard: 1,
     board: ['  ....  ', ' ...... ', '........', '...  ...', '...  ...', '...  ...', 'mmm  mmm', 'mmm  mmm'] },
   // Sternennacht
-  { name: "Wölkchen", moves: 20, target: 1200, intro: 'bells', bells: 2,
+  { name: "Wölkchen", moves: 17, target: 1200, intro: 'bells', bells: 2,
     board: ['  ..    ', ' .g.. ..', '........', '........', '........', '........', '........', ' ...... '] },
   { name: "Sanduhr", moves: 25, target: 1300, intro: 'combo', bells: 3,
     board: ['..g..g..', '........', ' ...... ', '  ....  ', '  ....  ', ' ...... ', '........', '........'] },
-  { name: "Gartenzwerg", moves: 25, target: 1000, bells: 3,
+  { name: "Gartenzwerg", moves: 24, target: 1000, bells: 3,
     board: ['.g....g.', '........', '...bb...', '..b..b..', '..b..b..', '...bb...', '........', '........'] },
   { name: "Regenbogen", moves: 18, target: 1300, intro: 'locks', collect: [[1, 24]],
     board: ['  ....  ', ' ...... ', '........', '..w..w..', '...  ...', '..w  w..', '...  ...', '...  ...'] },
@@ -2068,172 +2130,172 @@ const LEVELS = [
   // Zuckerstrand
   { name: "Sternkreuz", moves: 18, target: 1400, intro: 'paw', collect: [[0, 22]],
     board: ['  ....  ', '  .ww.  ', '........', '.w.bb.w.', '.w.bb.w.', '........', '  .ww.  ', '  ....  '] },
-  { name: "Mondschein", moves: 29, target: 1000, long: 1, collect: [[1, 29]],
+  { name: "Mondschein", moves: 30, target: 1000, long: 1, collect: [[1, 29]],
     board: ['   .... ', '  ......', ' ...  ..', ' ..     ', ' ..     ', ' ...  ..', '  ......', '   .... '] },
   { name: "Wolkenloch", moves: 18, target: 1400, intro: 'box2', collect: [[4, 29]],
     board: ['........', '........', '..BbbB..', '..b  b..', '..b  b..', '..BbbB..', '........', '........'] },
-  { name: "Muschelsuche", moves: 21, target: 1000, collect: [[0, 39]],
+  { name: "Muschelsuche", moves: 20, target: 1000, collect: [[0, 39]],
     board: ['..w..w..', '........', 'w..ww..w', '........', '........', 'w..ww..w', '........', '..w..w..'] },
-  { name: "Großes Finale", moves: 24, target: 2000, intro: 'hard2', hard: 2, bells: 3,
+  { name: "Großes Finale", moves: 25, target: 2000, intro: 'hard2', hard: 2, bells: 3,
     board: ['..g..g..', '........', '.w....w.', '..mmmm..', '..mmmm..', 'b......b', 'bb....bb', '........'] },
   // Kirschblütenhain
   { name: "Sandburg", moves: 20, target: 1500, bells: 2,
     board: ['..    ..', '..    ..', '.. .. ..', '........', '...bb...', '..bBBb..', '........', '........'] },
-  { name: "Drachenflug", moves: 19, target: 1000, intro: 'streak', collect: [[2, 20]],
+  { name: "Drachenflug", moves: 17, target: 1000, intro: 'streak', collect: [[2, 20]],
     board: ['   ..   ', '  ....  ', ' .w..w. ', '.wbBBbw.', ' .w..w. ', '  ....  ', '   ..   ', '   ..   '] },
   { name: "Muschel", moves: 22, target: 1500, bells: 3,
     board: ['  ....  ', ' ...... ', '........', '........', ' ..BB.. ', '  ....  ', '   ..   ', '   ..   '] },
-  { name: "Kuscheldecke", moves: 15, target: 1000, intro: 'blanket', cover: 48,
+  { name: "Kuscheldecke", moves: 14, target: 1000, intro: 'blanket', cover: 48,
     board: ['  ....  ', ' ...... ', '........', '...kk...', '...kk...', '........', ' ...... ', '  ....  '] },
-  { name: "Krone", moves: 20, target: 1500, hard: 1, bells: 3,
+  { name: "Krone", moves: 22, target: 1500, hard: 1, bells: 3,
     board: ['.  ..  .', '.. .. ..', '........', '........', '..mmmm..', '..mmmm..', '........', '........'] },
   // Regenbogenhimmel
-  { name: "Deckenburg", moves: 23, target: 1300, intro: 'boosts', cover: 56,
+  { name: "Deckenburg", moves: 24, target: 1300, intro: 'boosts', cover: 56,
     board: ['...  ...', '.k.  .k.', '........', '...kk...', '...kk...', '........', '.k.  .k.', '...  ...'] },
-  { name: "Himmelsleiter", moves: 40, target: 1000, bells: 5, long: 1,
+  { name: "Himmelsleiter", moves: 33, target: 1000, bells: 5, long: 1,
     board: ['g.......', 'bb......', '...g....', '..bbb...', '........', '.....bbb', '........', '........'] },
-  { name: "Blumenbeet", moves: 17, target: 1000, intro: 'gold',
+  { name: "Blumenbeet", moves: 16, target: 1000, intro: 'gold',
     board: ['..w..w..', '.wwwwww.', '..w..w..', '........', '........', '..w..w..', '.wwwwww.', '..w..w..'] },
   { name: "Vogelhaus", moves: 18, target: 1000, collect: [[4, 42]],
     board: ['...bb...', '..bbbb..', '.bwwwwb.', '.bw..wb.', '.bw..wb.', '.bbbbbb.', '........', '........'] },
-  { name: "Sternschnuppe", moves: 24, target: 1000, hard: 1, cover: 63,
+  { name: "Sternschnuppe", moves: 23, target: 1000, hard: 1, cover: 63,
     board: ['k.......', '.w......', '..w.....', '...w....', '....w...', '.....w..', '......w.', '.......k'] },
   // Mondgarten
-  { name: "Diamant", moves: 21, target: 1400, intro: 'milk2', collect: [[2, 29]],
+  { name: "Diamant", moves: 17, target: 1400, intro: 'milk2', collect: [[2, 29]],
     board: ['   ..   ', '  ....  ', ' .mMMm. ', '..mMMm..', '..mMMm..', ' .mMMm. ', '  ....  ', '   ..   '] },
   { name: "Wolkenschaukel", moves: 19, target: 1000, cover: 49, collect: [[3, 36]],
     board: ['  ....  ', ' ...... ', '...kk...', '........', '........', '...kk...', ' ...... ', '  ....  '] },
   { name: "Sandkuchen", moves: 19, target: 1000, intro: 'claw', collect: [[1, 27]],
     board: ['........', '........', '..bbbb..', '.bBBBBb.', '.bBBBBb.', 'bbbbbbbb', '........', '........'] },
-  { name: "Regentropfen", moves: 22, target: 1000, collect: [[0, 35]],
+  { name: "Regentropfen", moves: 16, target: 1000, collect: [[0, 35]],
     board: ['   ..   ', '  .mm.  ', ' .mMMm. ', '.mMMMMm.', '.mMMMMm.', ' .mMMm. ', '  .mm.  ', '   ..   '] },
-  { name: "Leuchtturm", moves: 17, target: 1000, hard: 1, bells: 3,
+  { name: "Leuchtturm", moves: 16, target: 1000, hard: 1, bells: 3,
     board: ['  .gg.  ', '  ....  ', '  .bb.  ', '  ....  ', ' ...... ', ' ...... ', '........', '........'] },
   // Muschelbucht
-  { name: "Nassfutter-Alarm", moves: 23, target: 1400, intro: 'wet', collect: [[3, 44]],
+  { name: "Nassfutter-Alarm", moves: 19, target: 1400, intro: 'wet', collect: [[3, 44]],
     board: ['........', '........', '..n..n..', '........', '........', '..n..n..', '........', '........'] },
-  { name: "Eiswaffel", moves: 18, target: 1000, collect: [[5, 29]],
+  { name: "Eiswaffel", moves: 16, target: 1000, collect: [[5, 29]],
     board: [' ...... ', '.mmmmmm.', '........', ' ...... ', '  ....  ', '  ....  ', '   ..   ', '   ..   '] },
-  { name: "Picknick", moves: 28, target: 1500, intro: 'picnic', colors: 6, cover: 62,
+  { name: "Picknick", moves: 29, target: 1500, intro: 'picnic', colors: 6, cover: 62,
     board: ['n......n', '........', '..k..k..', '........', '........', '..k..k..', '........', 'n......n'] },
-  { name: "Kometenschweif", moves: 36, target: 1000, long: 1, collect: [[3, 92]],
+  { name: "Kometenschweif", moves: 31, target: 1000, long: 1, collect: [[3, 92]],
     board: ['........', '.n......', '..n.....', '........', '........', '.....n..', '......n.', '........'] },
-  { name: "Saugroboter", moves: 26, target: 1000, intro: 'boss', hard: 2, boss: 55,
+  { name: "Saugroboter", moves: 29, target: 1000, intro: 'boss', hard: 2, boss: 55,
     board: ['........', '........', '........', '...VV...', '...VV...', '........', '........', '........'] },
   // Blumenwiese
-  { name: "Kirschblüte", moves: 23, target: 1000, collect: [[5, 38]],
+  { name: "Kirschblüte", moves: 19, target: 1000, collect: [[5, 38]],
     board: [' ..  .. ', ' ...... ', '..mMMm..', '..MMMM..', '..MMMM..', '..mMMm..', ' ...... ', ' ..  .. '] },
-  { name: "Milchstraße", moves: 24, target: 1000, bells: 2, collect: [[2, 31]],
+  { name: "Milchstraße", moves: 20, target: 1000, bells: 2, collect: [[2, 31]],
     board: ['g......g', 'mm......', '.mm.....', '..mm....', '...mm...', '....mm..', '.....mm.', '......mm'] },
   { name: "Strandkorb", moves: 22, target: 1000, intro: 'swap', cover: 30, collect: [[4, 48]],
     board: ['bbbbbbbb', 'b......b', 'b..kk..b', 'b......b', 'b......b', 'b..kk..b', 'b......b', '........'] },
   { name: "Luftballon", moves: 21, target: 1000, collect: [[2, 34]],
     board: ['  ....  ', ' ...... ', '...nn...', '...nn...', ' ...... ', '  ....  ', '   ..   ', '   ..   '] },
-  { name: "Hängematte", moves: 25, target: 1000, hard: 1, bells: 2, cover: 62,
+  { name: "Hängematte", moves: 23, target: 1000, hard: 1, bells: 2, cover: 62,
     board: ['g......g', '........', 'k......k', '.k....k.', '..k..k..', '...kk...', '........', '........'] },
   // Luftschloss
-  { name: "Wolkenburg", moves: 23, target: 1000, collect: [[3, 45]],
+  { name: "Wolkenburg", moves: 21, target: 1000, collect: [[3, 45]],
     board: ['.b.bb.b.', '.bbbbbb.', '........', '..n..n..', '........', '........', '.n....n.', '........'] },
-  { name: "Kartonturm", moves: 20, target: 1000, intro: 'box3', collect: [[1, 36]],
+  { name: "Kartonturm", moves: 19, target: 1000, intro: 'box3', collect: [[1, 36]],
     board: ['.. .. ..', '........', '..b..b..', '...CC...', '........', '..b..b..', '........', '........'] },
-  { name: "Sternbild", moves: 40, target: 1000, bells: 3, long: 1, collect: [[0, 66]],
+  { name: "Sternbild", moves: 32, target: 1000, bells: 3, long: 1, collect: [[0, 66]],
     board: ['g......g', '..w.....', '.....w..', '...w....', '......w.', '.w......', '....w...', '........'] },
-  { name: "Teeparty", moves: 23, target: 1000, collect: [[1, 52]],
+  { name: "Teeparty", moves: 20, target: 1000, collect: [[1, 52]],
     board: ['........', '.mm..mm.', '.mm..mm.', '........', '...nn...', '........', '.mm..mm.', '.mm..mm.'] },
   { name: "Gewitter", moves: 27, target: 1000, hard: 1, boss: 52,
     board: ['........', '.VV.....', '.VV.....', '........', '....b...', '...bBb..', '........', '........'] },
   // Glühwürmchenwald
-  { name: "Mondkatze", moves: 23, target: 1000, cover: 51,
+  { name: "Mondkatze", moves: 22, target: 1000, cover: 51,
     board: ['..    ..', '...  ...', '........', '.k....k.', '........', '........', ' ...... ', '  ....  '] },
-  { name: "Erste Bestellung", moves: 16, target: 1000, intro: 'order', make: [["cat", 3]],
+  { name: "Erste Bestellung", moves: 13, target: 1000, intro: 'order', make: [["cat", 3]],
     board: ['   ..   ', '  ....  ', ' ...... ', '........', '........', ' ...... ', '  ....  ', '   ..   '] },
-  { name: "Nordlicht", moves: 26, target: 1000, collect: [[3, 58]],
+  { name: "Nordlicht", moves: 22, target: 1000, collect: [[3, 58]],
     board: ['mm....mm', '.mm..mm.', '..mmmm..', '...nn...', '........', '..mmmm..', '.mm..mm.', 'mm....mm'] },
   { name: "Kartonstapel", moves: 26, target: 1000, bells: 3,
     board: ['.g....g.', '........', 'C......C', '.. .. ..', '...CC...', '........', ' ...... ', '  ....  '] },
   { name: "Wellenreiter", moves: 25, target: 1000, hard: 1, cover: 64, collect: [[4, 24]],
     board: ['k......k', '........', '...nn...', '........', '........', '...nn...', '........', 'k......k'] },
   // Korallenriff
-  { name: "Schatzinsel", moves: 21, target: 1000, collect: [[5, 37]],
+  { name: "Schatzinsel", moves: 19, target: 1000, collect: [[5, 37]],
     board: ['  ....  ', ' ...... ', '..mBBm..', '.mmBBmm.', '.mmmmmm.', '..mmmm..', ' ...... ', '  ....  '] },
-  { name: "Geschenkekiste", moves: 20, target: 1000, intro: 'gift', collect: [[1, 50]],
+  { name: "Geschenkekiste", moves: 17, target: 1000, intro: 'gift', collect: [[1, 50]],
     board: ['........', '.p....p.', '........', '...pp...', '........', '.p....p.', '........', '........'] },
-  { name: "Flaschenpost", moves: 31, target: 1000, bells: 4, long: 1,
+  { name: "Flaschenpost", moves: 29, target: 1000, bells: 4, long: 1,
     board: ['g......g', '........', '...nn...', '..n..n..', '..n..n..', '...nn...', '........', '........'] },
-  { name: "Wolkenkissen", moves: 25, target: 1000, cover: 50, collect: [[0, 60]],
+  { name: "Wolkenkissen", moves: 21, target: 1000, cover: 50, collect: [[0, 60]],
     board: ['kk....kk', 'k......k', '..MMMM..', '..MMMM..', '..MMMM..', '..MMMM..', 'k......k', 'kk....kk'] },
   { name: "Mitternacht", moves: 30, target: 1000, hard: 2, boss: 55,
     board: ['........', '.mmmmmm.', '.m....m.', '.m.VV.m.', '.m.VV.m.', '.m....m.', '.mmmmmm.', '........'] },
   // Trabzon
-  { name: "Bordo-Mavi", moves: 36, target: 1000, intro: 'trabzon', collect: [[0, 61]], fish: 'Hamsi', kit: 1,
+  { name: "Bordo-Mavi", moves: 34, target: 1000, intro: 'trabzon', collect: [[0, 61]], fish: 'Hamsi', kit: 1,
     board: ['...  ...', '........', '........', ' ...... ', ' ...... ', ' ...... ', ' ...... ', ' ...... '] },
-  { name: "Teeplantage", moves: 21, target: 1000, collect: [[3, 45]],
+  { name: "Teeplantage", moves: 17, target: 1000, collect: [[3, 45]],
     board: ['C.......', '.b......', '..b.....', '...C....', '....b...', '.....b..', '......C.', '.......b'] },
-  { name: "Gurkenbeet", moves: 20, target: 1000, intro: 'cukes', collect: [[4, 44]],
+  { name: "Gurkenbeet", moves: 17, target: 1000, intro: 'cukes', collect: [[4, 44]],
     board: [' ...... ', '........', '..u..u..', '........', '........', '..u..u..', '........', ' ...... '] },
-  { name: "Haselnussernte", moves: 22, target: 1000, bells: 2, collect: [[2, 34]],
+  { name: "Haselnussernte", moves: 20, target: 1000, bells: 2, collect: [[2, 34]],
     board: ['  ....  ', ' .g..g. ', '........', 'mmmmmmmm', '........', 'mmmmmmmm', ' ...... ', '  ....  '] },
-  { name: "Schwarzmeersturm", moves: 24, target: 1000, hard: 1, collect: [[0, 29]],
+  { name: "Schwarzmeersturm", moves: 25, target: 1000, hard: 1, collect: [[0, 29]],
     board: ['w..uu..w', '.w....w.', '..BBBB..', '........', '........', '..BBBB..', '.w....w.', 'w......w'] },
   // Drachenhimmel
-  { name: "Papierdrache", moves: 36, target: 1000, long: 1, collect: [[0, 49]],
+  { name: "Papierdrache", moves: 28, target: 1000, long: 1, collect: [[0, 49]],
     board: ['   ..   ', '  .p..  ', ' ...... ', '.p....p.', ' ...... ', '  ..p.  ', '   ..   ', '   ..   '] },
-  { name: "Windböe", moves: 25, target: 1000, bells: 3,
+  { name: "Windböe", moves: 27, target: 1000, bells: 3,
     board: ['.g....g.', '........', '..n..n..', '...  ...', '...  ...', '..n..n..', '........', '........'] },
-  { name: "Gurken auf der Decke", moves: 22, target: 1000, intro: 'mix_cukecover', cover: 40, collect: [[4, 49]],
+  { name: "Gurken auf der Decke", moves: 19, target: 1000, intro: 'mix_cukecover', cover: 40, collect: [[4, 49]],
     board: [' ...... ', '.u....u.', '........', '...kk...', '...kk...', '........', '.u....u.', ' ...... '] },
   { name: "Laserjagd", moves: 18, target: 1000, collect: [[5, 18]], make: [["laser", 3]],
     board: ['..    ..', '........', '........', '.. .. ..', '.. .. ..', '........', '........', '..    ..'] },
-  { name: "Gartenparty", moves: 26, target: 1000, hard: 1, cover: 36, boss: 50,
+  { name: "Gartenparty", moves: 28, target: 1000, hard: 1, cover: 36, boss: 50,
     board: ['........', '........', 'VV......', 'VV......', '........', '..k..k..', '........', '........'] },
   // Polarlicht
-  { name: "Eisblume", moves: 22, target: 1000,
+  { name: "Eisblume", moves: 18, target: 1000,
     board: ['w......w', '.w.ww.w.', '..w..w..', '.w.ww.w.', '.w.ww.w.', '..w..w..', '.w.ww.w.', 'w......w'] },
-  { name: "Nordwind", moves: 24, target: 1000,
+  { name: "Nordwind", moves: 22, target: 1000,
     board: ['MM....MM', 'M......M', '...CC...', '........', '........', '...CC...', 'M......M', 'MM....MM'] },
-  { name: "Weckruf", moves: 20, target: 1000, intro: 'clock', clock: 12, collect: [[3, 38]],
+  { name: "Weckruf", moves: 18, target: 1000, intro: 'clock', clock: 12, collect: [[3, 38]],
     board: ['  ....  ', ' ...... ', '..a..a..', '........', '........', '........', ' ...... ', '  ....  '] },
-  { name: "Sternenstaub", moves: 18, target: 1000, bells: 3, collect: [[2, 42]],
+  { name: "Sternenstaub", moves: 16, target: 1000, bells: 3, collect: [[2, 42]],
     board: ['..g..g..', '........', 'p......p', ' ...... ', '  .pp.  ', ' ...... ', 'p......p', '........'] },
-  { name: "Polarnacht", moves: 18, target: 1000, hard: 1,
+  { name: "Polarnacht", moves: 19, target: 1000, hard: 1,
     board: ['mmmmmmmm', 'm.u..u.m', 'm......m', 'm..nn..m', 'm..nn..m', 'm......m', 'm.u..u.m', 'mmmmmmmm'] },
   // Leuchtturmküste
   { name: "Leuchtfeuer", moves: 34, target: 1000, bells: 6, long: 1,
     board: ['   gg   ', '  ....  ', '   ..   ', '  ....  ', '  ....  ', '  ....  ', ' ...... ', '........'] },
-  { name: "Wecker im Karton", moves: 22, target: 1000, intro: 'mix_clockbox', clock: 14, clockRate: 0.02, collect: [[1, 44]],
+  { name: "Wecker im Karton", moves: 18, target: 1000, intro: 'mix_clockbox', clock: 14, clockRate: 0.02, collect: [[1, 44]],
     board: [' ...... ', '.C....C.', '..a..a..', '........', '........', '..a..a..', '.C....C.', ' ...... '] },
   { name: "Möwenbucht", moves: 19, target: 1000, cover: 40, make: [["nip", 1]],
     board: ['kk....kk', 'k......k', '........', '...  ...', '..    ..', '........', 'k......k', 'kk....kk'] },
-  { name: "Brandung", moves: 24, target: 1000, collect: [[2, 51]],
+  { name: "Brandung", moves: 21, target: 1000, collect: [[2, 51]],
     board: ['nnnnnnnn', '........', '.p....p.', '........', '.. .. ..', '.p....p.', '........', '........'] },
-  { name: "Turbo-Alarm", moves: 25, target: 1000, intro: 'turbo', hard: 2, boss: 57, turbo: 1,
+  { name: "Turbo-Alarm", moves: 29, target: 1000, intro: 'turbo', hard: 2, boss: 57, turbo: 1,
     board: ['........', '........', '........', '...VV...', '...VV...', '........', '........', '........'] },
   // Tulpenfeld
-  { name: "Tulpenreihen", moves: 23, target: 1000, collect: [[2, 35]],
+  { name: "Tulpenreihen", moves: 20, target: 1000, collect: [[2, 35]],
     board: ['........', '.. .. ..', '........', '........', '.. .. ..', '........', '........', '.. .. ..'] },
-  { name: "Gießwasser", moves: 23, target: 1000, collect: [[1, 51]],
+  { name: "Gießwasser", moves: 18, target: 1000, collect: [[1, 51]],
     board: ['..u..u..', '........', '.mmmmmm.', '.mmmmmm.', '.mmmmmm.', '.mmmmmm.', ' ...... ', '  u..u  '] },
-  { name: "Blumenkasten", moves: 24, target: 1000, collect: [[4, 46]],
+  { name: "Blumenkasten", moves: 20, target: 1000, collect: [[4, 46]],
     board: ['........', 'BBBBBBBB', '.w.ww.w.', '........', '........', '.w.ww.w.', 'bbbbbbbb', '........'] },
-  { name: "Goldfieber", moves: 23, target: 1000, intro: 'goldrush', goldrush: 14,
+  { name: "Goldfieber", moves: 21, target: 1000, intro: 'goldrush', goldrush: 14,
     board: [' ...... ', '........', '........', '........', '........', '........', '........', ' ...... '] },
-  { name: "Tulpenfinale", moves: 22, target: 1000, hard: 1, cover: 50, clock: 18, clockRate: 0.02, collect: [[0, 26]],
+  { name: "Tulpenfinale", moves: 21, target: 1000, hard: 1, cover: 50, clock: 18, clockRate: 0.02, collect: [[0, 26]],
     board: ['..a..a..', '........', '.k....k.', '.. .. ..', '.. .. ..', '.k....k.', '........', '..a..a..'] },
   // Federwolken
-  { name: "Wolkenfeder", moves: 26, target: 1000, long: 1, make: [["laser", 5], ["cat", 3]],
+  { name: "Wolkenfeder", moves: 25, target: 1000, long: 1, make: [["laser", 5], ["cat", 3]],
     board: ['  ....  ', ' ...... ', '........', '........', '........', '........', ' ...... ', '  ....  '] },
-  { name: "Himmelsglocken", moves: 27, target: 1000, bells: 5,
+  { name: "Himmelsglocken", moves: 26, target: 1000, bells: 5,
     board: ['g..gg..g', '........', ' ...... ', ' .p..p. ', ' ...... ', ' ...... ', '........', '........'] },
   { name: "Geschenke-Party", moves: 22, target: 1000, intro: 'mix_giftparty', make: [["nip", 2]],
     board: ['p..  ..p', '........', '..p..p..', ' ...... ', ' ...... ', '..p..p..', '........', 'p..  ..p'] },
   { name: "Schwebebahn", moves: 22, target: 1000, cover: 40, collect: [[2, 33]],
     board: ['........', '.k.kk.k.', '........', 'n.    .n', 'n.    .n', '........', '.k.kk.k.', '........'] },
-  { name: "Sonnenuntergang", moves: 28, target: 1000, hard: 1, boss: 52,
+  { name: "Sonnenuntergang", moves: 29, target: 1000, hard: 1, boss: 52,
     board: ['........', '..VV....', '..VV....', '........', '.n....n.', '........', 'bb....bb', 'bb....bb'] },
   // Sternschnuppenberg
-  { name: "Sternensprung", moves: 18, target: 1000, intro: 'superpounce', collect: [[4, 30]],
+  { name: "Sternensprung", moves: 17, target: 1000, intro: 'superpounce', collect: [[4, 30]],
     board: ['w..  ..w', '........', '..w..w..', ' ...... ', ' ...... ', '..w..w..', '........', 'w..  ..w'] },
-  { name: "Sternenzelt", moves: 24, target: 1000, collect: [[1, 36]],
+  { name: "Sternenzelt", moves: 18, target: 1000, collect: [[1, 36]],
     board: ['   ..   ', '  .MM.  ', ' .M..M. ', '.M.uu.M.', '.M....M.', ' .M..M. ', '  .MM.  ', '   ..   '] },
   { name: "Bergkristall", moves: 22, target: 1000, bells: 3,
     board: ['   gg   ', '  ....  ', ' ..CC.. ', '..B..B..', '..B..B..', '...CC...', '........', '........'] },
@@ -2242,367 +2304,367 @@ const LEVELS = [
   { name: "Sternschnuppenfinale", moves: 24, target: 1000, hard: 1, collect: [[5, 20]], make: [["cat", 2]],
     board: ['n..  ..n', '........', '........', '.. .. ..', '.. .. ..', '........', '........', 'n..  ..n'] },
   // Palmeninsel
-  { name: "Kokosnuss", moves: 39, target: 1000, long: 1, collect: [[4, 88]],
+  { name: "Kokosnuss", moves: 34, target: 1000, long: 1, collect: [[4, 88]],
     board: ['  ....  ', ' ...... ', '..p..p..', '........', '........', '..p..p..', ' ...... ', '  ....  '] },
-  { name: "Zauberstunde", moves: 21, target: 1000, intro: 'feather', collect: [[1, 45]],
+  { name: "Zauberstunde", moves: 18, target: 1000, intro: 'feather', collect: [[1, 45]],
     board: [' ...... ', '........', 'bbb..bbb', '........', '........', 'bbb..bbb', '........', ' ...... '] },
-  { name: "Lagunenwelle", moves: 24, target: 1000, cover: 50, collect: [[4, 60]],
+  { name: "Lagunenwelle", moves: 23, target: 1000, cover: 50, collect: [[4, 60]],
     board: ['kkk..kkk', 'k......k', '..mmmm..', '.mmmmmm.', '.mmmmmm.', '..mmmm..', 'k......k', 'kkk..kkk'] },
-  { name: "Inselhüpfer", moves: 23, target: 1000, collect: [[2, 45]],
+  { name: "Inselhüpfer", moves: 22, target: 1000, collect: [[2, 45]],
     board: ['...  ...', '.u.  .u.', '........', '........', '........', '........', '.u.  .u.', '...  ...'] },
-  { name: "Jubiläum", moves: 25, target: 1000, intro: 'mix_hundred', hard: 2, boss: 62, turbo: 1,
+  { name: "Jubiläum", moves: 26, target: 1000, intro: 'mix_hundred', hard: 2, boss: 62, turbo: 1,
     board: ['p......p', '........', '........', '...VV...', '...VV...', '........', '........', 'p......p'] },
   // Beerenwald
-  { name: "Brombeerpfad", moves: 20, target: 1000, collect: [[1, 20]],
+  { name: "Brombeerpfad", moves: 18, target: 1000, collect: [[1, 20]],
     board: ['....    ', '....    ', '  ....  ', '  ....  ', '    ....', '    ....', '  ....  ', '  ....  '] },
-  { name: "Pilzkreis", moves: 23, target: 1000, bells: 2, collect: [[1, 60]],
+  { name: "Pilzkreis", moves: 15, target: 1000, bells: 2, collect: [[1, 60]],
     board: ['..g..g..', '...pp...', '.p....p.', 'p......p', 'p......p', '.p....p.', '...pp...', '........'] },
   { name: "Fuchsbau", moves: 18, target: 1000,
     board: ['C......C', '.u....u.', '...  ...', '..C..C..', '...  ...', '........', '.u....u.', 'C......C'] },
-  { name: "Goldene Bestellung", moves: 23, target: 1000, intro: 'mix_goldorder', goldrush: 15, make: [["cat", 2], ["laser", 2]],
+  { name: "Goldene Bestellung", moves: 21, target: 1000, intro: 'mix_goldorder', goldrush: 15, make: [["cat", 2], ["laser", 2]],
     board: ['  ....  ', ' ...... ', '........', '........', '........', '........', ' ...... ', '  ....  '] },
-  { name: "Waldfinale", moves: 27, target: 1000, hard: 1, clock: 17, clockRate: 0.02,
+  { name: "Waldfinale", moves: 26, target: 1000, hard: 1, clock: 17, clockRate: 0.02,
     board: ['MwM..MwM', 'w......w', 'M.a..a.M', '........', '........', 'M.a..a.M', 'w......w', 'MwM..MwM'] },
   // Luftballonfest
   { name: "Ballontraube", moves: 33, target: 1000, long: 1, collect: [[5, 38]], make: [["nip", 2]],
     board: [' ..  .. ', '........', '........', ' ...... ', '  ....  ', '   ..   ', '   ..   ', '   ..   '] },
-  { name: "Zuckerwatte", moves: 25, target: 1000, cover: 50, collect: [[1, 57]],
+  { name: "Zuckerwatte", moves: 20, target: 1000, cover: 50, collect: [[1, 57]],
     board: [' k.. .k ', '.p....p.', '........', '........', '........', '........', '.p....p.', ' k.. .k '] },
   { name: "Nassfutter-Party", moves: 25, target: 1000, intro: 'mix_wetcukes', collect: [[4, 55]],
     board: ['..    ..', '.n.u..n.', '........', '..u..u..', '........', '.n..u.n.', '........', '........'] },
-  { name: "Karussell", moves: 30, target: 1000, make: [["laser", 3]],
+  { name: "Karussell", moves: 28, target: 1000, make: [["laser", 3]],
     board: ['  ....  ', ' ...... ', '..    ..', '..    ..', '..    ..', '..    ..', ' ...... ', '  ....  '] },
-  { name: "Sternenfinale", moves: 27, target: 1000, hard: 1, bells: 2, boss: 50,
+  { name: "Sternenfinale", moves: 28, target: 1000, hard: 1, bells: 2, boss: 50,
     board: ['..g..g..', '........', '........', '.VV.....', '.VV.....', '........', '......bb', '......bb'] },
   // Traumland
-  { name: "Schäfchen zählen", moves: 27, target: 1000, clock: 15, clockRate: 0.015, collect: [[3, 48]],
+  { name: "Schäfchen zählen", moves: 26, target: 1000, clock: 15, clockRate: 0.015, collect: [[3, 48]],
     board: [' ..  .. ', '........', '.a....a.', '........', '........', '........', ' ...... ', '  .  .  '] },
-  { name: "Kissenschlacht", moves: 24, target: 1000, cover: 50, collect: [[1, 52]],
+  { name: "Kissenschlacht", moves: 20, target: 1000, cover: 50, collect: [[1, 52]],
     board: [' k.BB.k ', 'k......k', '........', 'B......B', 'B......B', '........', 'k......k', ' k.BB.k '] },
   { name: "Glöckchenregen", moves: 26, target: 1000, intro: 'mix_bellgifts', bells: 6,
     board: ['g.g..g.g', '........', '...pp...', '........', '.p....p.', '........', ' ...... ', '  ....  '] },
-  { name: "Traumfänger", moves: 25, target: 1000, collect: [[2, 51]],
+  { name: "Traumfänger", moves: 22, target: 1000, collect: [[2, 51]],
     board: ['w..ww..w', '.w....w.', '..wuuw..', 'w......w', 'w......w', '..w..w..', '.w....w.', 'w..ww..w'] },
   { name: "Albtraum", moves: 22, target: 1000, hard: 1, clock: 18, clockRate: 0.02,
     board: ['C......C', '.n....n.', '..a..a..', '...  ...', '...  ...', '..a..a..', '.n....n.', 'C......C'] },
   // Piratenbucht
-  { name: "Schatzkarte", moves: 23, target: 1000, goldrush: 8,
+  { name: "Schatzkarte", moves: 20, target: 1000, goldrush: 8,
     board: ['..    ..', '...  ...', ' ...... ', '  ....  ', '  ....  ', ' ...... ', '...  ...', '..    ..'] },
-  { name: "Planke", moves: 36, target: 1000, bells: 7, long: 1,
+  { name: "Planke", moves: 42, target: 1000, bells: 7, long: 1,
     board: ['  ....  ', '  .gg.  ', '  ....  ', '  ....  ', '  ....  ', '  ....  ', '  ....  ', '  ....  '] },
-  { name: "Flaschenschiff", moves: 24, target: 1000, collect: [[4, 47]],
+  { name: "Flaschenschiff", moves: 19, target: 1000, collect: [[4, 47]],
     board: ['   ..   ', '  .MM.  ', '  .MM.  ', ' ...... ', '.p.MM.p.', '..MMMM..', '.p....p.', ' ...... '] },
-  { name: "Kanonenkugeln", moves: 21, target: 1000, make: [["nip", 3]],
+  { name: "Kanonenkugeln", moves: 20, target: 1000, make: [["nip", 3]],
     board: ['b......b', '.b....b.', '........', '  ....  ', '  ....  ', '........', '.b....b.', 'b......b'] },
-  { name: "Robo-Picknick", moves: 29, target: 1000, intro: 'mix_robopicnic', hard: 2, cover: 50, boss: 65, turbo: 1,
+  { name: "Robo-Picknick", moves: 31, target: 1000, intro: 'mix_robopicnic', hard: 2, cover: 50, boss: 65, turbo: 1,
     board: ['kk....kk', 'k......k', '..n..n..', '...VV...', '...VV...', '..n..n..', 'k......k', 'kk....kk'] },
   // Kürbisbeet
-  { name: "Kürbisranke", moves: 18, target: 1000, collect: [[2, 17]],
+  { name: "Kürbisranke", moves: 17, target: 1000, collect: [[2, 17]],
     board: ['..      ', '....    ', ' ....   ', '  ....  ', '   .... ', '    ....', '     ...', '      ..'] },
-  { name: "Vogelscheuche", moves: 22, target: 1000, collect: [[1, 43]],
+  { name: "Vogelscheuche", moves: 19, target: 1000, collect: [[1, 43]],
     board: ['  ....  ', '  ....  ', '..u..u..', '.w....w.', '.w....w.', '..u..u..', '  ....  ', '  ....  '] },
-  { name: "Erntekorb", moves: 16, target: 1000, make: [["nip", 2], ["cat", 1]],
+  { name: "Erntekorb", moves: 11, target: 1000, make: [["nip", 2], ["cat", 1]],
     board: ['.  ..  .', '.p....p.', '........', '........', 'pp....pp', '........', ' ...... ', '  ....  '] },
-  { name: "Kartonberg", moves: 23, target: 1000, intro: 'mix_boxmountain', collect: [[2, 43]], make: [["laser", 2]],
+  { name: "Kartonberg", moves: 21, target: 1000, intro: 'mix_boxmountain', collect: [[2, 43]], make: [["laser", 2]],
     board: ['........', '........', '...CC...', '..CCCC..', '.CCCCCC.', '........', '........', '........'] },
-  { name: "Kürbisfinale", moves: 25, target: 1000, hard: 1, cover: 44, clock: 14, clockRate: 0.02, collect: [[0, 36]],
+  { name: "Kürbisfinale", moves: 24, target: 1000, hard: 1, cover: 44, clock: 14, clockRate: 0.02, collect: [[0, 36]],
     board: [' k.aa.k ', ' ...... ', '.u....u.', '........', '........', '.u....u.', ' ...... ', '  k..k  '] },
   // Sonnenwolken
-  { name: "Sonnenstrahl", moves: 41, target: 1000, bells: 7, long: 1,
+  { name: "Sonnenstrahl", moves: 38, target: 1000, bells: 7, long: 1,
     board: ['  ....  ', ' ...... ', '........', '...gg...', '........', '........', ' ...... ', '  ....  '] },
-  { name: "Regenbogenrutsche", moves: 24, target: 1000, collect: [[1, 55]],
+  { name: "Regenbogenrutsche", moves: 20, target: 1000, collect: [[1, 55]],
     board: ['mmmmmmm.', '.mmmmmmm', 'n.......', '.......n', 'n.......', '.......n', 'mmmmmmm.', '.mmmmmmm'] },
   { name: "Morgenwecker", moves: 21, target: 1000, intro: 'mix_clockmilk', clock: 12, clockRate: 0.02,
     board: ['MM....MM', 'M.a..a.M', '........', '...MM...', '...MM...', '........', 'M.a..a.M', 'MM....MM'] },
-  { name: "Wolkenhüpfer", moves: 22, target: 1000, collect: [[2, 62]],
+  { name: "Wolkenhüpfer", moves: 14, target: 1000, collect: [[2, 62]],
     board: [' .p..p. ', '.u....u.', '........', 'p......p', 'p......p', '........', '.u....u.', ' .p..p. '] },
-  { name: "Wolkenputz", moves: 30, target: 1000, hard: 1, bells: 3, boss: 52,
+  { name: "Wolkenputz", moves: 32, target: 1000, hard: 1, bells: 3, boss: 52,
     board: ['g......g', '........', '........', '..VV....', '..VV....', '........', '........', ' ...... '] },
   // Mitternachtsmarkt
-  { name: "Laternenreihe", moves: 26, target: 1000, collect: [[0, 58]],
+  { name: "Laternenreihe", moves: 22, target: 1000, collect: [[0, 58]],
     board: ['w.w.w.w.', '........', '........', '.w.w.w.w', '........', '........', 'w.w.w.w.', '........'] },
-  { name: "Marktstand", moves: 23, target: 1000, collect: [[1, 42]], make: [["cat", 3]],
+  { name: "Marktstand", moves: 20, target: 1000, collect: [[1, 42]], make: [["cat", 3]],
     board: ['........', 'BCCCCCCB', '........', '........', '.. .. ..', '........', '........', '........'] },
   { name: "Gurkenernte", moves: 23, target: 1000, intro: 'mix_cukeharvest', goldrush: 17,
     board: ['u......u', '........', '..u..u..', '........', '........', '..u..u..', '........', 'u......u'] },
-  { name: "Lebkuchenherz", moves: 24, target: 1000, collect: [[2, 41]],
+  { name: "Lebkuchenherz", moves: 20, target: 1000, collect: [[2, 41]],
     board: [' mM  Mm ', 'mMMmmMMm', 'mm....mm', 'm......m', '.m....m.', ' .m..m. ', '  .mm.  ', '   ..   '] },
-  { name: "Mitternachtsfinale", moves: 27, target: 1000, hard: 1, bells: 3, clock: 18, clockRate: 0.02,
+  { name: "Mitternachtsfinale", moves: 29, target: 1000, hard: 1, bells: 3, clock: 18, clockRate: 0.02,
     board: ['.g....g.', '........', 'n.a..a.n', '........', '.. .. ..', 'n......n', '........', ' ...... '] },
   // Lagune
-  { name: "Seerose", moves: 37, target: 1000, long: 1, collect: [[5, 48]],
+  { name: "Seerose", moves: 33, target: 1000, long: 1, collect: [[5, 48]],
     board: ['  .  .  ', ' ...... ', '........', '...  ...', '...  ...', '........', ' ...... ', '  .  .  '] },
   { name: "Bestellung XXL", moves: 17, target: 1000, intro: 'mix_bigorder', make: [["nip", 2], ["laser", 2], ["cat", 2]],
     board: [' ...... ', '........', '........', '........', '........', '........', '........', ' ...... '] },
-  { name: "Muschelperlen", moves: 27, target: 1000, collect: [[4, 54]],
+  { name: "Muschelperlen", moves: 18, target: 1000, collect: [[4, 54]],
     board: ['..C..C..', '.p....p.', '........', 'C..pp..C', '........', ' .p..p. ', '  ....  ', '   ..   '] },
-  { name: "Ebbe und Flut", moves: 25, target: 1000, cover: 50, collect: [[2, 56]],
+  { name: "Ebbe und Flut", moves: 21, target: 1000, cover: 50, collect: [[2, 56]],
     board: ['MMMMMMMM', '........', 'kk....kk', '........', '........', 'kk....kk', '........', 'MMMMMMMM'] },
-  { name: "Turbo-Hausputz", moves: 29, target: 1000, intro: 'mix_turboclean', hard: 2, boss: 66, turbo: 1,
+  { name: "Turbo-Hausputz", moves: 34, target: 1000, intro: 'mix_turboclean', hard: 2, boss: 66, turbo: 1,
     board: ['n......n', '........', '........', '....VV..', '....VV..', '........', '........', 'n......n'] },
   // Zaubergarten
-  { name: "Zauberkreis", moves: 21, target: 1000, goldrush: 7,
+  { name: "Zauberkreis", moves: 20, target: 1000, goldrush: 7,
     board: ['  ....  ', ' ...... ', '...  ...', '..    ..', '..    ..', '...  ...', ' ...... ', '  ....  '] },
-  { name: "Hexenkessel", moves: 24, target: 1000, clock: 15, collect: [[1, 47]],
+  { name: "Hexenkessel", moves: 22, target: 1000, clock: 15, collect: [[1, 47]],
     board: ['........', '.u....u.', '..nnnn..', '..n..n..', '..nnnn..', ' .a..a. ', '  ....  ', '  .  .  '] },
-  { name: "Feenstaub", moves: 25, target: 1000, bells: 4,
+  { name: "Feenstaub", moves: 22, target: 1000, bells: 4,
     board: ['..g..g..', 'p......p', '........', '.p.pp.p.', '........', '.. .. ..', '........', ' ...... '] },
-  { name: "Alles Gold", moves: 23, target: 1000, intro: 'mix_allgold', goldrush: 15,
+  { name: "Alles Gold", moves: 21, target: 1000, intro: 'mix_allgold', goldrush: 15,
     board: ['w......w', '.w....w.', '..w..w..', '........', '........', '..w..w..', '.w....w.', 'w......w'] },
-  { name: "Zauberfinale", moves: 29, target: 1000, hard: 1, make: [["laser", 2]],
+  { name: "Zauberfinale", moves: 28, target: 1000, hard: 1, make: [["laser", 2]],
     board: ['MM.CC.MM', 'M......M', '........', 'C......C', 'C......C', '........', 'M......M', 'MM.CC.MM'] },
   // Himmelstor
-  { name: "Wolkentreppe", moves: 30, target: 1000, bells: 6, long: 1,
+  { name: "Wolkentreppe", moves: 31, target: 1000, bells: 6, long: 1,
     board: ['..g.    ', '....    ', '......  ', '......  ', '........', '........', '........', '........'] },
-  { name: "Engelsflügel", moves: 27, target: 1000, cover: 40, collect: [[1, 44]],
+  { name: "Engelsflügel", moves: 24, target: 1000, cover: 40, collect: [[1, 44]],
     board: ['..    ..', '...  ...', '........', 'kk....kk', 'kk....kk', '........', '...  ...', '..    ..'] },
-  { name: "Sternentor", moves: 22, target: 1000, collect: [[4, 40]],
+  { name: "Sternentor", moves: 18, target: 1000, collect: [[4, 40]],
     board: ['w..pp..w', '.u....u.', '........', 'w.    .w', 'w.    .w', '........', '.u....u.', 'w..pp..w'] },
-  { name: "Gewitterwolke", moves: 31, target: 1000, clock: 13, clockRate: 0.02, collect: [[2, 65]],
+  { name: "Gewitterwolke", moves: 27, target: 1000, clock: 13, clockRate: 0.02, collect: [[2, 65]],
     board: ['nn....nn', 'n......n', '..a..a..', '........', '........', '..a..a..', ' ...... ', '  .  .  '] },
-  { name: "Großer Showdown", moves: 32, target: 1000, hard: 1, bells: 2, boss: 54,
+  { name: "Großer Showdown", moves: 33, target: 1000, hard: 1, bells: 2, boss: 54,
     board: ['..g..g..', '........', '.VV.....', '.VV..ww.', '.....ww.', '..mm....', '..mm..bb', '......bb'] },
   // Sternenpalast
-  { name: "Thronsaal", moves: 29, target: 1000, collect: [[4, 50]],
+  { name: "Thronsaal", moves: 27, target: 1000, collect: [[4, 50]],
     board: ['C......C', '........', '.. .. ..', '...CC...', '...CC...', '........', '........', 'C......C'] },
-  { name: "Sternenregen", moves: 23, target: 1000, intro: 'mix_starrain', goldrush: 16, make: [["laser", 2]],
+  { name: "Sternenregen", moves: 20, target: 1000, intro: 'mix_starrain', goldrush: 16, make: [["laser", 2]],
     board: ['.p....p.', '........', ' ...... ', '...pp...', ' ...... ', '........', '........', '.p....p.'] },
-  { name: "Kristallkrone", moves: 24, target: 1000, collect: [[4, 43]],
+  { name: "Kristallkrone", moves: 21, target: 1000, collect: [[4, 43]],
     board: ['.  ..  .', '.. .. ..', '........', 'wMMwwMMw', 'MMMMMMMM', 'M......M', '........', '........'] },
-  { name: "Spiegelsaal", moves: 22, target: 1000, clock: 18, clockRate: 0.02, collect: [[2, 32]],
+  { name: "Spiegelsaal", moves: 20, target: 1000, clock: 18, clockRate: 0.02, collect: [[2, 32]],
     board: ['u......u', '.a....a.', '..    ..', '...uu...', '........', '..    ..', '.a....a.', 'u......u'] },
-  { name: "Palastfinale", moves: 26, target: 1000, hard: 1, bells: 3, clock: 18,
+  { name: "Palastfinale", moves: 25, target: 1000, hard: 1, bells: 3, clock: 18,
     board: ['g.C..C.g', '.u....u.', '..p..p..', 'mmmmmmmm', 'mmmmmmmm', '..w..w..', '.a....a.', '........'] },
   // Goldstrand
-  { name: "Goldküste", moves: 41, target: 1000, goldrush: 26, long: 1,
+  { name: "Goldküste", moves: 35, target: 1000, goldrush: 26, long: 1,
     board: ['........', '........', '........', '........', '........', '........', 'mmmmmmmm', 'mmmmmmmm'] },
   { name: "Sandburg-Royal", moves: 27, target: 1000, bells: 3,
     board: ['.g.  .g.', '........', 'C.C..C.C', 'BBBBBBBB', '........', '........', '........', '........'] },
-  { name: "Generalprobe", moves: 21, target: 1000, intro: 'mix_rehearsal', clock: 14, clockRate: 0.02, collect: [[4, 58]],
+  { name: "Generalprobe", moves: 16, target: 1000, intro: 'mix_rehearsal', clock: 14, clockRate: 0.02, collect: [[4, 58]],
     board: ['p......p', '.u....u.', '..a..a..', '........', '........', '..a..a..', '.u....u.', 'p......p'] },
-  { name: "Abendrot", moves: 15, target: 1000, cover: 44, make: [["nip", 2]],
+  { name: "Abendrot", moves: 10, target: 1000, cover: 44, make: [["nip", 2]],
     board: ['kk....kk', 'k.n..n.k', '........', '........', '........', ' ...... ', '  k..k  ', '   ..   '] },
-  { name: "Das große Finale", moves: 33, target: 1000, intro: 'mix_finale', hard: 2, bells: 3, boss: 70, clock: 16, turbo: 1,
+  { name: "Das große Finale", moves: 37, target: 1000, intro: 'mix_finale', hard: 2, bells: 3, boss: 70, clock: 16, turbo: 1,
     board: ['g.p..p.g', '..C..C..', 'u......u', '...VV...', '...VV...', 'n......n', '..a..a..', 'mmmmmmmm'] },
   // Apfelhain
-  { name: "Erste Fahrt", moves: 13, target: 1000, intro: 'belt', colors: 5, collect: [[0, 40]], belts: [[4, 1]],
+  { name: "Erste Fahrt", moves: 10, target: 1000, intro: 'belt', colors: 5, collect: [[0, 40]], belts: [[4, 1]],
     board: ['........', '........', '........', '........', '........', '........', '........', '........'] },
-  { name: "Apfelernte", moves: 15, target: 1000, collect: [[1, 58]], belts: [[3, 1], [5, -1]],
+  { name: "Apfelernte", moves: 10, target: 1000, collect: [[1, 58]], belts: [[3, 1], [5, -1]],
     board: [' ...... ', '........', '........', '........', '........', '........', '........', ' ...... '] },
-  { name: "Kistenband", moves: 18, target: 1000, collect: [[2, 57]], belts: [[5, 1]],
+  { name: "Kistenband", moves: 12, target: 1000, collect: [[2, 57]], belts: [[5, 1]],
     board: ['bb....bb', 'bb....bb', 'b......b', '........', '........', '........', '........', '........'] },
-  { name: "Rollende Äpfel", moves: 19, target: 1000, collect: [[3, 53]], belts: [[3, -1]],
+  { name: "Rollende Äpfel", moves: 13, target: 1000, collect: [[3, 53]], belts: [[3, -1]],
     board: ['  ....  ', ' ...... ', '........', '........', '........', '........', ' .mmmm. ', '  mmmm  '] },
-  { name: "Großes Laufband", moves: 17, target: 1000, hard: 1, collect: [[4, 34]], belts: [[2, 1], [5, -1]],
+  { name: "Großes Laufband", moves: 15, target: 1000, hard: 1, collect: [[4, 34]], belts: [[2, 1], [5, -1]],
     board: ['BB....BB', '........', '........', '........', '........', '........', '........', 'MMMMMMMM'] },
   // Wolkenbäckerei
-  { name: "Brötchenband", moves: 16, target: 1000, cover: 50, collect: [[5, 45]], belts: [[3, 1]],
+  { name: "Brötchenband", moves: 10, target: 1000, cover: 50, collect: [[5, 45]], belts: [[3, 1]],
     board: ['........', '........', '........', '........', '........', ' ...... ', '  kkkk  ', '  kkkk  '] },
-  { name: "Hefezopf", moves: 34, target: 1000, long: 1, collect: [[0, 144], [2, 116]], belts: [[3, 1], [5, -1]],
+  { name: "Hefezopf", moves: 26, target: 1000, long: 1, collect: [[0, 144], [2, 116]], belts: [[3, 1], [5, -1]],
     board: ['bbb..bbb', '........', '........', '........', '........', '........', '........', '........'] },
-  { name: "Glöckchen-Express", moves: 19, target: 1000, intro: 'mix_beltbells', bells: 4, belts: [[4, 1]],
+  { name: "Glöckchen-Express", moves: 20, target: 1000, intro: 'mix_beltbells', bells: 4, belts: [[4, 1]],
     board: [' .g..g. ', '........', '........', '........', '........', '........', '........', ' ...... '] },
-  { name: "Puderzucker", moves: 20, target: 1000, collect: [[1, 36]], belts: [[0, 1], [7, -1]],
+  { name: "Puderzucker", moves: 17, target: 1000, collect: [[1, 36]], belts: [[0, 1], [7, -1]],
     board: ['........', ' ...... ', '  ....  ', '  n..n  ', '  ....  ', '  ....  ', ' ...... ', '........'] },
-  { name: "Backofenhitze", moves: 17, target: 1000, hard: 1, collect: [[3, 36]], belts: [[4, 1], [5, -1]],
+  { name: "Backofenhitze", moves: 11, target: 1000, hard: 1, collect: [[3, 36]], belts: [[4, 1], [5, -1]],
     board: ['........', '........', '........', 'C......C', '........', '........', '.wwwwww.', '........'] },
   // Laternenstadt
   { name: "Laternenweg", moves: 17, target: 1000, collect: [[4, 41]], belts: [[3, 1], [4, -1]],
     board: ['.w.  .w.', '...  ...', '.w.  .w.', '........', '........', '...  ...', '...  ...', '...  ...'] },
-  { name: "Nachtschicht", moves: 17, target: 1000, cover: 59, collect: [[2, 58]], belts: [[4, -1]],
+  { name: "Nachtschicht", moves: 15, target: 1000, cover: 59, collect: [[2, 58]], belts: [[4, -1]],
     board: ['........', '.p....p.', '........', '........', '........', '........', 'kkkkkkkk', 'kkkkkkkk'] },
-  { name: "Lichterkette", moves: 14, target: 1000, clock: 14, collect: [[5, 59]], belts: [[2, 1], [5, 1]],
+  { name: "Lichterkette", moves: 10, target: 1000, clock: 14, collect: [[5, 59]], belts: [[2, 1], [5, 1]],
     board: [' ...... ', '........', '..a..a..', '........', '........', '........', '........', ' ...... '] },
-  { name: "Doppelband", moves: 16, target: 1000, make: [["cat", 6], ["laser", 6]], belts: [[3, 1], [4, -1]],
+  { name: "Doppelband", moves: 10, target: 1000, make: [["cat", 6], ["laser", 6]], belts: [[3, 1], [4, -1]],
     board: ['........', '........', '........', '........', '........', '........', '........', '........'] },
-  { name: "Stadtfest", moves: 18, target: 1000, hard: 1, collect: [[0, 34]], belts: [[3, 1], [4, -1]],
+  { name: "Stadtfest", moves: 14, target: 1000, hard: 1, collect: [[0, 34]], belts: [[3, 1], [4, -1]],
     board: ['  u..u  ', '  ....  ', 'b......b', '........', '........', 'b......b', '  ....  ', '  ....  '] },
   // Sardinenhafen
-  { name: "Fischkutter", moves: 18, target: 1000, collect: [[0, 47]], belts: [[3, 1], [4, 1]],
+  { name: "Fischkutter", moves: 15, target: 1000, collect: [[0, 47]], belts: [[3, 1], [4, 1]],
     board: ['  ...   ', ' .....  ', '....... ', '..mmmm..', '..mmmm..', '....... ', ' .....  ', '  ...   '] },
-  { name: "Ladekran", moves: 26, target: 1000, cover: 47, long: 1, collect: [[2, 117]], belts: [[3, -1], [5, 1]],
+  { name: "Ladekran", moves: 21, target: 1000, cover: 47, long: 1, collect: [[2, 117]], belts: [[3, -1], [5, 1]],
     board: ['B......B', 'B......B', '........', '........', '........', '........', '........', '.kkkkkk.'] },
-  { name: "Netzflicker", moves: 19, target: 1000, collect: [[0, 69]], belts: [[3, 1], [4, -1]],
+  { name: "Netzflicker", moves: 14, target: 1000, collect: [[0, 69]], belts: [[3, 1], [4, -1]],
     board: ['........', '.w.ww.w.', '........', '........', '........', '........', '.w.ww.w.', '........'] },
   { name: "Hafenkante", moves: 15, target: 1000, collect: [[3, 30]], belts: [[2, -1]],
     board: ['........', '........', '........', '........', '...  ...', '...  ...', 'n..  ..n', '.n.  .n.'] },
   { name: "Sturmflut", moves: 20, target: 1000, hard: 2, boss: 55, belts: [[4, 1], [5, -1]],
     board: ['........', '...VV...', '...VV...', '........', '........', '........', 'n......n', '..MMMM..'] },
   // Kräutergarten
-  { name: "Gute Nacht", moves: 16, target: 1000, intro: 'dark', colors: 5, collect: [[1, 29]],
+  { name: "Gute Nacht", moves: 10, target: 1000, intro: 'dark', colors: 5, collect: [[1, 29]],
     board: ['dddddddd', 'dddddddd', '........', '........', '........', '........', '........', '........'] },
-  { name: "Minzbeet", moves: 14, target: 1000, collect: [[4, 32]],
+  { name: "Minzbeet", moves: 10, target: 1000, collect: [[4, 32]],
     board: [' dd..dd ', '.dd..dd.', '.dd..dd.', '........', '........', '........', '........', ' ...... '] },
-  { name: "Schattenbeet", moves: 18, target: 1000, collect: [[0, 42]],
+  { name: "Schattenbeet", moves: 16, target: 1000, collect: [[0, 42]],
     board: ['..dddd..', '..dddd..', '..dddd..', '..dddd..', 'b......b', 'b......b', '........', '........'] },
-  { name: "Mondkraut", moves: 21, target: 1000, collect: [[2, 43]],
+  { name: "Mondkraut", moves: 19, target: 1000, collect: [[2, 43]],
     board: ['  ....  ', ' ...... ', 'dddddddd', 'dddddddd', '........', '........', ' .mmmm. ', '  ....  '] },
-  { name: "Nachtfalter", moves: 19, target: 1000, hard: 1, collect: [[2, 28]],
+  { name: "Nachtfalter", moves: 15, target: 1000, hard: 1, collect: [[2, 28]],
     board: ['dddddddd', 'dd....dd', 'dd....dd', 'dd....dd', '........', '..wwww..', '........', '........'] },
   // Kissenwolken
   { name: "Kissenschlacht", moves: 12, target: 1000, cover: 50, collect: [[2, 26]],
     board: ['dddddddd', 'dddddddd', '........', '........', '........', ' ...... ', '  kkkk  ', '  kkkk  '] },
-  { name: "Federbett", moves: 33, target: 1000, long: 1, collect: [[5, 79], [3, 72]],
+  { name: "Federbett", moves: 28, target: 1000, long: 1, collect: [[5, 79], [3, 72]],
     board: ['dddddddd', 'dddddddd', 'dddddddd', '........', '........', '........', '........', '........'] },
-  { name: "Daunendecke", moves: 18, target: 1000, cover: 55, collect: [[1, 40]],
+  { name: "Daunendecke", moves: 15, target: 1000, cover: 55, collect: [[1, 40]],
     board: [' ...... ', '........', 'dd....dd', 'dd.kk.dd', 'dd.kk.dd', 'dd....dd', '........', ' ...... '] },
-  { name: "Schlummerland", moves: 18, target: 1000, bells: 3,
+  { name: "Schlummerland", moves: 19, target: 1000, bells: 3,
     board: ['...gg...', ' ...... ', '  dddd  ', '  dddd  ', '  dddd  ', '  dddd  ', ' ...... ', '........'] },
-  { name: "Albtraum", moves: 19, target: 1000, hard: 1, collect: [[0, 27]],
+  { name: "Albtraum", moves: 18, target: 1000, hard: 1, collect: [[0, 27]],
     board: ['dddddddd', 'dddddddd', 'dddddddd', 'dddddddd', '........', '.n....n.', '........', 'u......u'] },
   // Sternwarte
-  { name: "Fernrohr", moves: 19, target: 1000, clock: 14, collect: [[0, 36]],
+  { name: "Fernrohr", moves: 17, target: 1000, clock: 14, collect: [[0, 36]],
     board: ['  dddd  ', '  dddd  ', '..dddd..', '........', '.a....a.', '........', '  ....  ', '  ....  '] },
-  { name: "Sternbild", moves: 19, target: 1000, collect: [[3, 46]],
+  { name: "Sternbild", moves: 18, target: 1000, collect: [[3, 46]],
     board: ['.d...d..', '...d...d', '..d...d.', 'd...d...', '........', '........', '........', '........'] },
-  { name: "Mondfinsternis", moves: 20, target: 1000, collect: [[4, 40]],
+  { name: "Mondfinsternis", moves: 19, target: 1000, collect: [[4, 40]],
     board: ['p......p', '........', '..dddd..', '..d  d..', '..d  d..', '..dddd..', '........', '........'] },
-  { name: "Komet", moves: 18, target: 1000, collect: [[1, 36]],
+  { name: "Komet", moves: 16, target: 1000, collect: [[1, 36]],
     board: ['  dddd  ', ' .dddd. ', '..dddd..', '........', '........', '........', ' ...... ', '  .CC.  '] },
-  { name: "Schwarzes Loch", moves: 18, target: 1000, hard: 1, boss: 40,
+  { name: "Schwarzes Loch", moves: 20, target: 1000, hard: 1, boss: 40,
     board: ['........', '.dddddd.', '.dddddd.', '.ddVVdd.', '.ddVVdd.', '.dddddd.', '.dddddd.', '........'] },
   // Wellenstrand
-  { name: "Nachtband", moves: 20, target: 1000, intro: 'mix_beltdark', collect: [[0, 69]], belts: [[4, 1]],
+  { name: "Nachtband", moves: 17, target: 1000, intro: 'mix_beltdark', collect: [[0, 69]], belts: [[4, 1]],
     board: ['dddddddd', 'dddddddd', 'dddddddd', '........', '........', '........', '........', '........'] },
-  { name: "Ebbe", moves: 39, target: 1000, long: 1, collect: [[4, 129]], belts: [[3, -1]],
+  { name: "Ebbe", moves: 33, target: 1000, long: 1, collect: [[4, 129]], belts: [[3, -1]],
     board: [' dddddd ', '.dddddd.', '........', '........', '........', '........', '.MMMMMM.', ' MMMMMM '] },
-  { name: "Flut", moves: 17, target: 1000, collect: [[0, 54]], belts: [[2, 1]],
+  { name: "Flut", moves: 10, target: 1000, collect: [[0, 54]], belts: [[2, 1]],
     board: ['...nn...', '........', '........', '........', '........', 'dd....dd', 'dd....dd', 'dd....dd'] },
-  { name: "Muschelsuche", moves: 22, target: 1000, collect: [[2, 66]], belts: [[2, 1], [5, -1]],
+  { name: "Muschelsuche", moves: 18, target: 1000, collect: [[2, 66]], belts: [[2, 1], [5, -1]],
     board: ['  ...   ', ' .p...  ', '....... ', 'dddddddd', 'dddddddd', '....... ', ' .p...  ', '  ...   '] },
   { name: "Leuchtfeuer", moves: 21, target: 1000, hard: 2, boss: 68, turbo: 1, collect: [[0, 17]], belts: [[4, 1], [5, -1]],
     board: ['dddddddd', 'dddddddd', 'dddddddd', 'dddddddd', '........', '........', '...VV...', '...VV...'] },
   // Sonnenblumenfeld
-  { name: "Regenbogen", moves: 18, target: 1000, intro: 'wild', colors: 5, collect: [[2, 42]], wildRate: 0.04,
+  { name: "Regenbogen", moves: 11, target: 1000, intro: 'wild', colors: 5, collect: [[2, 42]], wildRate: 0.04,
     board: ['........', '........', '........', '...r....', '.....r..', '........', '........', '........'] },
-  { name: "Sonnenschein", moves: 20, target: 1000, collect: [[0, 53], [5, 47]], wildRate: 0.035,
+  { name: "Sonnenschein", moves: 15, target: 1000, collect: [[0, 53], [5, 47]], wildRate: 0.035,
     board: [' ...... ', '........', '..r..r..', '........', '........', '........', '........', ' ...... '] },
-  { name: "Blütenstaub", moves: 16, target: 1000, collect: [[0, 32]], wildRate: 0.03,
+  { name: "Blütenstaub", moves: 13, target: 1000, collect: [[0, 32]], wildRate: 0.03,
     board: [' ..  .. ', '.mmmmmm.', '.mmmmmm.', '........', '...r....', ' ...... ', '  ....  ', '   ..   '] },
-  { name: "Bienenflug", moves: 17, target: 1000, collect: [[4, 46]], wildRate: 0.03,
+  { name: "Bienenflug", moves: 14, target: 1000, collect: [[4, 46]], wildRate: 0.03,
     board: ['........', '........', 'www..www', '........', '........', '..r..r..', '........', '........'] },
-  { name: "Erntefest", moves: 16, target: 1000, hard: 1, collect: [[1, 18]], make: [["nip", 1]], wildRate: 0.03,
+  { name: "Erntefest", moves: 17, target: 1000, hard: 1, collect: [[1, 18]], make: [["nip", 1]], wildRate: 0.03,
     board: ['BB....BB', 'BB....BB', '........', '........', '..r..r..', '........', '........', '........'] },
   // Himmelsbrücke
   { name: "Brückenzoll", moves: 22, target: 1000, bells: 3, wildRate: 0.03,
     board: ['g.    .g', '..    ..', '........', '...r....', '........', '........', '..    ..', '..    ..'] },
-  { name: "Wolkenkratzer", moves: 29, target: 1000, long: 1, collect: [[3, 68], [0, 60]], wildRate: 0.03,
+  { name: "Wolkenkratzer", moves: 24, target: 1000, long: 1, collect: [[3, 68], [0, 60]], wildRate: 0.03,
     board: ['b...    ', 'b....   ', 'b.....  ', '....... ', '........', '....r...', '........', '........'] },
-  { name: "Seiltanz", moves: 14, target: 1000, collect: [[2, 41]], wildRate: 0.03,
+  { name: "Seiltanz", moves: 10, target: 1000, collect: [[2, 41]], wildRate: 0.03,
     board: ['........', '........', '........', '...nn...', '...nn...', '........', '.r....r.', '........'] },
-  { name: "Windböe", moves: 19, target: 1000, clock: 14, clockRate: 0.015, collect: [[5, 42]], wildRate: 0.04,
+  { name: "Windböe", moves: 17, target: 1000, clock: 14, clockRate: 0.015, collect: [[5, 42]], wildRate: 0.04,
     board: [' ...... ', ' ...... ', ' .a..a. ', ' ...... ', ' ...r.. ', ' ..a... ', ' ...... ', ' ...... '] },
   { name: "Gewitter", moves: 18, target: 1000, hard: 1, cover: 59, collect: [[3, 32]], wildRate: 0.03,
     board: ['........', '.u....u.', '........', '...r....', '........', '..u..u..', '........', 'kkkkkkkk'] },
   // Mondsee
-  { name: "Spiegelung", moves: 20, target: 1000, intro: 'mix_darkfish', collect: [[4, 58]], wildRate: 0.035,
+  { name: "Spiegelung", moves: 18, target: 1000, intro: 'mix_darkfish', collect: [[4, 58]], wildRate: 0.035,
     board: [' ...... ', '..r..r..', '........', '........', 'dddddddd', 'dddddddd', 'dddddddd', ' dddddd '] },
-  { name: "Mondfische", moves: 17, target: 1000, collect: [[0, 39]], wildRate: 0.04,
+  { name: "Mondfische", moves: 14, target: 1000, collect: [[0, 39]], wildRate: 0.04,
     board: ['  ddd   ', ' ddddd  ', 'ddddddd ', '........', '...r....', '....... ', ' .....  ', '  ...   '] },
-  { name: "Nebelbank", moves: 20, target: 1000, collect: [[2, 59]], wildRate: 0.03,
+  { name: "Nebelbank", moves: 16, target: 1000, collect: [[2, 59]], wildRate: 0.03,
     board: ['dd....dd', 'dd....dd', 'dd....dd', 'dd.r..dd', 'dd..r.dd', 'dd....dd', 'dd....dd', 'dd....dd'] },
-  { name: "Glühfische", moves: 18, target: 1000, collect: [[4, 42]], wildRate: 0.03,
+  { name: "Glühfische", moves: 16, target: 1000, collect: [[4, 42]], wildRate: 0.03,
     board: ['..dddd..', '..dddd..', '..dddd..', '...  ...', '...  ...', 'p......p', '...r....', '........'] },
-  { name: "Seeungeheuer", moves: 21, target: 1000, hard: 1, boss: 50, wildRate: 0.03,
+  { name: "Seeungeheuer", moves: 22, target: 1000, hard: 1, boss: 50, wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', 'dddddddd', '........', '...VV...', '...VV...', '........', '.r....r.'] },
   // Schatzinsel
-  { name: "Schatzkarte", moves: 23, target: 1000, goldrush: 24, belts: [[4, 1]], wildRate: 0.03,
+  { name: "Schatzkarte", moves: 18, target: 1000, goldrush: 24, belts: [[4, 1]], wildRate: 0.03,
     board: ['w......w', '.w....w.', '..w..w..', '........', '........', '...r....', '........', '........'] },
-  { name: "Flaschenpost", moves: 27, target: 1000, long: 1, collect: [[1, 104]], belts: [[3, -1]], wildRate: 0.03,
+  { name: "Flaschenpost", moves: 23, target: 1000, long: 1, collect: [[1, 104]], belts: [[3, -1]], wildRate: 0.03,
     board: [' dddddd ', '.dddddd.', '........', '........', '........', '........', '.mmmmmm.', ' mmmmmm '] },
   { name: "Kokosnuss", moves: 18, target: 1000, bells: 4, belts: [[4, 1]],
     board: ['C..gg..C', '........', '........', '........', '........', ' ...... ', '  ....  ', '  ....  '] },
-  { name: "Piratenband", moves: 21, target: 1000, collect: [[2, 100]], belts: [[3, 1], [4, -1]], wildRate: 0.03,
+  { name: "Piratenband", moves: 17, target: 1000, collect: [[2, 100]], belts: [[3, 1], [4, -1]], wildRate: 0.03,
     board: ['.p....p.', '........', '........', '........', '........', '........', 'u......u', '........'] },
   { name: "Goldkiste", moves: 19, target: 1000, hard: 2, boss: 58, turbo: 1, collect: [[1, 12]], belts: [[5, 1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', '........', 'C......C', 'C......C', '........', '...VV...', '...VV...'] },
   // Pilzwald
-  { name: "Fliegenpilz", moves: 21, target: 1000, collect: [[5, 69]], belts: [[4, 1]],
+  { name: "Fliegenpilz", moves: 15, target: 1000, collect: [[5, 69]], belts: [[4, 1]],
     board: [' ...... ', '..d..d..', '...dd...', '........', '........', 'b......b', '.b....b.', ' ...... '] },
-  { name: "Moosweg", moves: 20, target: 1000, cover: 59, collect: [[0, 57]], wildRate: 0.03,
+  { name: "Moosweg", moves: 16, target: 1000, cover: 59, collect: [[0, 57]], wildRate: 0.03,
     board: ['k......k', 'k......k', 'k......k', 'k..r...k', 'k......k', 'k......k', 'k......k', 'k......k'] },
-  { name: "Pilzkreis", moves: 21, target: 1000, collect: [[2, 41]],
+  { name: "Pilzkreis", moves: 19, target: 1000, collect: [[2, 41]],
     board: ['dddddddd', '........', '..u..u..', '...  ...', '...  ...', '..u..u..', '........', '........'] },
-  { name: "Wichtelpfad", moves: 20, target: 1000, collect: [[0, 65]], belts: [[3, 1]],
+  { name: "Wichtelpfad", moves: 16, target: 1000, collect: [[0, 65]], belts: [[3, 1]],
     board: ['dddddddd', 'dddddddd', '........', '........', '........', '........', 'wwwwwwww', '........'] },
   { name: "Waldgeist", moves: 19, target: 1000, hard: 1, collect: [[0, 41]], belts: [[6, -1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', 'dddddddd', '..r..r..', 'n......n', '.n....n.', '........', '........'] },
   // Zeppelinhafen
-  { name: "Startbahn", moves: 15, target: 1000, bells: 3, belts: [[3, 1]],
+  { name: "Startbahn", moves: 11, target: 1000, bells: 3, belts: [[3, 1]],
     board: [' .g..g. ', ' ...... ', ' ...... ', ' ...... ', ' ...... ', ' ...... ', ' dddddd ', ' dddddd '] },
-  { name: "Luftschiff", moves: 35, target: 1000, cover: 42, long: 1, collect: [[3, 124]], belts: [[2, 1], [5, -1]], wildRate: 0.03,
+  { name: "Luftschiff", moves: 29, target: 1000, cover: 42, long: 1, collect: [[3, 124]], belts: [[2, 1], [5, -1]], wildRate: 0.03,
     board: ['  ...   ', ' .r...  ', '....... ', 'kkkkkkkk', 'kkkkkkkk', '....... ', ' .r...  ', '  ...   '] },
-  { name: "Ballast", moves: 17, target: 1000, collect: [[1, 36]], wildRate: 0.03,
+  { name: "Ballast", moves: 16, target: 1000, collect: [[1, 36]], wildRate: 0.03,
     board: ['CC....CC', 'C......C', '..dddd..', '..dddd..', '........', '........', '........', '........'] },
-  { name: "Wolkenpost", moves: 21, target: 1000, clock: 14, collect: [[4, 75]], belts: [[4, -1]],
+  { name: "Wolkenpost", moves: 13, target: 1000, clock: 14, collect: [[4, 75]], belts: [[4, -1]],
     board: [' ...... ', '........', '.p....p.', '...a....', '....a...', '.p....p.', '........', ' ...... '] },
-  { name: "Sturmfahrt", moves: 19, target: 1000, hard: 1, boss: 55, turbo: 1, belts: [[6, 1]], wildRate: 0.03,
+  { name: "Sturmfahrt", moves: 20, target: 1000, hard: 1, boss: 55, turbo: 1, belts: [[6, 1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', '........', '...VV...', '...VV...', '........', '.u....u.', '........'] },
   // Eulenwald
-  { name: "Eulenruf", moves: 19, target: 1000, collect: [[4, 37]], wildRate: 0.03,
+  { name: "Eulenruf", moves: 15, target: 1000, collect: [[4, 37]], wildRate: 0.03,
     board: ['d      d', 'dd    dd', 'dddddddd', 'dddddddd', '........', '...r....', ' ...... ', '  ....  '] },
-  { name: "Baumhaus", moves: 20, target: 1000, collect: [[2, 34]], wildRate: 0.03,
+  { name: "Baumhaus", moves: 18, target: 1000, collect: [[2, 34]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', '........', 'wwwwwwww', '...  ...', '...  ...', '...  ...', '...  ...'] },
-  { name: "Nachtwanderung", moves: 18, target: 1000, collect: [[1, 75]], belts: [[3, 1], [4, -1]],
+  { name: "Nachtwanderung", moves: 10, target: 1000, collect: [[1, 75]], belts: [[3, 1], [4, -1]],
     board: ['d...d...', '...d...d', '..d...d.', '.d...d..', 'd...d...', '...d...d', '..d...d.', '.d...d..'] },
-  { name: "Uhu", moves: 18, target: 1000, collect: [[1, 37]], wildRate: 0.03,
+  { name: "Uhu", moves: 14, target: 1000, collect: [[1, 37]], wildRate: 0.03,
     board: ['  ....  ', '  ....  ', 'dd....dd', 'dd.mm.dd', 'dd.mm.dd', 'dd....dd', '  ....  ', '  ....  '] },
-  { name: "Mitternacht", moves: 26, target: 1000, hard: 1, clock: 15, collect: [[2, 58]], belts: [[5, 1]], wildRate: 0.03,
+  { name: "Mitternacht", moves: 21, target: 1000, hard: 1, clock: 15, collect: [[2, 58]], belts: [[5, 1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', 'dddddddd', 'dddddddd', '........', '..n..n..', '.a....a.', '........'] },
   // Korallengarten
-  { name: "Seepferdchen", moves: 21, target: 1000, collect: [[2, 58]], belts: [[2, -1]], wildRate: 0.03,
+  { name: "Seepferdchen", moves: 18, target: 1000, collect: [[2, 58]], belts: [[2, -1]], wildRate: 0.03,
     board: ['  ...   ', ' .r...  ', '....... ', '.MMMMMM.', '.MMMMMM.', '....... ', ' .....  ', '  ...   '] },
-  { name: "Seestern", moves: 32, target: 1000, cover: 59, long: 1, collect: [[0, 163]], belts: [[3, 1], [5, -1]], wildRate: 0.03,
+  { name: "Seestern", moves: 24, target: 1000, cover: 59, long: 1, collect: [[0, 163]], belts: [[3, 1], [5, -1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', '........', '........', 'p......p', '........', '........', 'kkkkkkkk'] },
   { name: "Perlentaucher", moves: 17, target: 1000, collect: [[2, 40]], wildRate: 0.03,
     board: [' dddddd ', '.dddddd.', '........', '...CC...', '...CC...', '........', '........', ' ...... '] },
-  { name: "Muränenhöhle", moves: 22, target: 1000, collect: [[0, 47]], belts: [[4, 1]],
+  { name: "Muränenhöhle", moves: 19, target: 1000, collect: [[0, 47]], belts: [[4, 1]],
     board: ['.u.  .u.', '...  ...', '...  ...', 'dddddddd', 'dddddddd', '...  ...', '.u.  .u.', '...  ...'] },
-  { name: "Tiefsee", moves: 19, target: 1000, hard: 2, boss: 60, turbo: 1, belts: [[4, 1]], wildRate: 0.03,
+  { name: "Tiefsee", moves: 21, target: 1000, hard: 2, boss: 60, turbo: 1, belts: [[4, 1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', 'dddddddd', 'dddddddd', '.r....r.', '...VV...', '...VV...', 'n......n'] },
   // Erdbeerfest
-  { name: "Festzelt", moves: 17, target: 1000, bells: 4, belts: [[2, 1]], wildRate: 0.035,
+  { name: "Festzelt", moves: 15, target: 1000, bells: 4, belts: [[2, 1]], wildRate: 0.035,
     board: ['.g....g.', '........', '........', '...r....', '........', ' ...... ', '  ....  ', '  ....  '] },
-  { name: "Erdbeerbowle", moves: 18, target: 1000, collect: [[2, 68]], belts: [[3, -1]], wildRate: 0.03,
+  { name: "Erdbeerbowle", moves: 11, target: 1000, collect: [[2, 68]], belts: [[3, -1]], wildRate: 0.03,
     board: ['dd....dd', 'dd....dd', '........', '........', '........', '..MMMM..', '..MMMM..', '..MMMM..'] },
-  { name: "Tanzfläche", moves: 19, target: 1000, cover: 59, collect: [[1, 90]], make: [["cat", 5], ["laser", 3]], belts: [[2, 1], [5, -1]], wildRate: 0.035,
+  { name: "Tanzfläche", moves: 10, target: 1000, cover: 59, collect: [[1, 90]], make: [["cat", 5], ["laser", 3]], belts: [[2, 1], [5, -1]], wildRate: 0.035,
     board: ['........', '........', '........', '..kkkk..', '..kkkk..', '........', '........', '........'] },
-  { name: "Kuchenbuffet", moves: 22, target: 1000, collect: [[5, 63]], wildRate: 0.03,
+  { name: "Kuchenbuffet", moves: 18, target: 1000, collect: [[5, 63]], wildRate: 0.03,
     board: [' ...... ', '.BB..BB.', '........', '........', '...pp...', '........', '........', ' ...... '] },
-  { name: "Feuerwerk", moves: 20, target: 1000, hard: 1, goldrush: 16, belts: [[5, 1]], wildRate: 0.03,
+  { name: "Feuerwerk", moves: 16, target: 1000, hard: 1, goldrush: 16, belts: [[5, 1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', 'dddddddd', '........', 'u......u', '........', '..u..u..', '..wwww..'] },
   // Himmelsschloss
   { name: "Schlosstor", moves: 20, target: 1000, collect: [[2, 39]], wildRate: 0.03,
     board: ['C.dddd.C', '..dddd..', '........', '........', '...  ...', '...  ...', '...  ...', '...  ...'] },
-  { name: "Thronsaal", moves: 32, target: 1000, cover: 59, long: 1, collect: [[4, 170]], belts: [[2, 1], [5, -1]], wildRate: 0.03,
+  { name: "Thronsaal", moves: 25, target: 1000, cover: 59, long: 1, collect: [[4, 170]], belts: [[2, 1], [5, -1]], wildRate: 0.03,
     board: ['kkkkkkkk', '........', '........', 'dddddddd', 'dddddddd', '........', '........', 'kkkkkkkk'] },
-  { name: "Turmzimmer", moves: 19, target: 1000, bells: 3, wildRate: 0.03,
+  { name: "Turmzimmer", moves: 21, target: 1000, bells: 3, wildRate: 0.03,
     board: ['dddddddd', ' dddddd ', '  .g..  ', '  ....  ', '  ....  ', '  ....  ', ' ...... ', '........'] },
-  { name: "Wendeltreppe", moves: 24, target: 1000, collect: [[2, 76]], belts: [[5, 1]], wildRate: 0.03,
+  { name: "Wendeltreppe", moves: 19, target: 1000, collect: [[2, 76]], belts: [[5, 1]], wildRate: 0.03,
     board: ['dddd    ', 'dddd.   ', '......  ', '...w... ', '....w...', '.....w..', '......w.', '........'] },
-  { name: "Königsball", moves: 24, target: 1000, hard: 1, boss: 60, belts: [[6, -1]], wildRate: 0.03,
+  { name: "Königsball", moves: 22, target: 1000, hard: 1, boss: 60, belts: [[6, -1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', '........', '...VV...', '...VV...', '........', 'C......C', 'C......C'] },
   // Sternenzelt
-  { name: "Zeltlager", moves: 17, target: 1000, collect: [[3, 30]], wildRate: 0.03,
+  { name: "Zeltlager", moves: 14, target: 1000, collect: [[3, 30]], wildRate: 0.03,
     board: ['d      d', 'dd    dd', 'dddddddd', '........', '........', '...nn...', ' ...... ', '  ....  '] },
-  { name: "Lagerfeuer", moves: 19, target: 1000, clock: 15, clockRate: 0.015, collect: [[3, 72]], belts: [[4, 1]], wildRate: 0.03,
+  { name: "Lagerfeuer", moves: 15, target: 1000, clock: 15, clockRate: 0.015, collect: [[3, 72]], belts: [[4, 1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', '........', '..a..a..', '........', '.a....a.', '........', '........'] },
   { name: "Sternschnuppen-Nacht", moves: 22, target: 1000, goldrush: 19, wildRate: 0.04,
     board: [' ..d..d ', '..d..d..', '.d..d..d', 'd..d..d.', '..d..d..', '.d..d..d', 'd..d..d.', ' .d..d. '] },
-  { name: "Milchstraße", moves: 19, target: 1000, collect: [[2, 68]], belts: [[6, 1]], wildRate: 0.03,
+  { name: "Milchstraße", moves: 10, target: 1000, collect: [[2, 68]], belts: [[6, 1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', '........', 'MMMMMMMM', 'MMMMMMMM', '........', '........', '........'] },
-  { name: "Nordstern", moves: 23, target: 1000, hard: 1, cover: 59, collect: [[0, 55]], belts: [[5, -1]], wildRate: 0.03,
+  { name: "Nordstern", moves: 17, target: 1000, hard: 1, cover: 59, collect: [[0, 55]], belts: [[5, -1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', 'dddddddd', 'dddddddd', '........', 'u......u', '..p..p..', '...kk...'] },
   // Katzenparadies
-  { name: "Ankunft", moves: 20, target: 1000, collect: [[3, 62]], belts: [[3, 1]], wildRate: 0.035,
+  { name: "Ankunft", moves: 16, target: 1000, collect: [[3, 62]], belts: [[3, 1]], wildRate: 0.035,
     board: [' dd  dd ', 'dddddddd', '........', '........', '........', ' .mmmm. ', '  mmmm  ', '   ..   '] },
-  { name: "Sardinenbuffet", moves: 37, target: 1000, long: 1, collect: [[0, 177], [5, 126]], belts: [[5, 1], [6, -1]], wildRate: 0.03,
+  { name: "Sardinenbuffet", moves: 29, target: 1000, long: 1, collect: [[0, 177], [5, 126]], belts: [[5, 1], [6, -1]], wildRate: 0.03,
     board: ['p.p..p.p', '........', '........', 'dddddddd', '........', '........', '........', '........'] },
-  { name: "Hängematte", moves: 17, target: 1000, cover: 34, collect: [[0, 28]], wildRate: 0.03,
+  { name: "Hängematte", moves: 15, target: 1000, cover: 34, collect: [[0, 28]], wildRate: 0.03,
     board: ['d      d', 'dd    dd', '...  ...', '........', '...r....', '........', ' kkkkkk ', '  kkkk  '] },
-  { name: "Sonnenbad", moves: 19, target: 1000, collect: [[2, 72]], belts: [[4, 1]], wildRate: 0.035,
+  { name: "Sonnenbad", moves: 15, target: 1000, collect: [[2, 72]], belts: [[4, 1]], wildRate: 0.035,
     board: ['........', '........', '........', 'u......u', '........', '........', 'MMMMMMMM', 'MMMMMMMM'] },
-  { name: "Das zweite Finale", moves: 24, target: 1000, intro: 'mix_newfinale', hard: 2, bells: 2, boss: 70, turbo: 1, belts: [[5, 1]], wildRate: 0.03,
+  { name: "Das zweite Finale", moves: 25, target: 1000, intro: 'mix_newfinale', hard: 2, bells: 2, boss: 70, turbo: 1, belts: [[5, 1]], wildRate: 0.03,
     board: ['dddddddd', 'dddddddd', '........', 'C..VV..C', '...VV...', '..r..r..', '.u....u.', '..MMMM..'] }
 ];
 function levelConfig(L) {
@@ -3084,7 +3146,7 @@ const COMBO_WORDS = { 2: 'Lecker!', 3: 'Mjamm!', 4: 'Miau-tastisch!', 5: 'Fressr
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let COLORS = [0, 1, 2, 3, 4, 5];
 const rnd = () => COLORS[Math.floor(Math.random() * COLORS.length)];
-const mk = (type, gold = false) => ({ type, id: ++idc, gold, locked: false });
+const mk = (type, gold = false) => { const x = { type, id: ++idc, gold, locked: false }; if (PAIR40 && (type === 'cat' || type === 'nip' || type === 'laser')) x.col = rnd(); return x; };
 const isNormal = t => typeof t === 'number';
 const isPower = t => t === 'cat' || t === 'bowl' || t === 'laser' || t === 'nip';
 const canSwap = x => !!x && x.type !== 'box' && x.type !== 'wet' && x.type !== 'boss' && x.type !== 'gift' && x.type !== 'cuke' && !x.locked;
@@ -3116,7 +3178,7 @@ function refreshCats() {
 function sw(r1, c1, r2, c2) { const t = grid[r1][c1]; grid[r1][c1] = grid[r2][c2]; grid[r2][c2] = t; }
 function findMatches() {
   const cells = new Set(), runs = [], squares = [];
-  const T = (r, c) => grid[r][c] ? grid[r][c].type : null;
+  const T = (r, c) => colOf(grid[r][c]);
   for (let r = 0; r < N; r++) {
     let c = 0;
     while (c < N) {
@@ -3148,7 +3210,7 @@ function findMatches() {
 // which extra each matched group earns: 5 in a row > L/T shape > 4 in a row > 2x2 square
 function extrasFor(m, swapKeys) {
   const out = new Map(), seenK = new Set();
-  const typeOf = k => grid[k / N | 0][k % N].type;
+  const typeOf = k => colOf(grid[k / N | 0][k % N]);
   for (const k0 of m.cells) {
     if (seenK.has(k0)) continue;
     const t = typeOf(k0), group = new Set([k0]), stack = [k0]; seenK.add(k0);
@@ -3171,9 +3233,9 @@ function extrasFor(m, swapKeys) {
     // extras only appear once they have been introduced; a five or an L falls back to a cat while those are still new
     const long = four || five;
     if (five && isUnlocked('bowl')) out.set(spot(five.keys, five.keys[2]), { kind: 'bowl' });
-    else if (cross !== undefined && isUnlocked('nip')) out.set(spot([...group], cross), { kind: 'nip' });
-    else if (long && isUnlocked('cat')) out.set(spot(long.keys, long.keys[1 + Math.floor(Math.random() * 2)]), { kind: 'cat', dir: long.dir });
-    else if (sqs.length && isUnlocked('laser')) out.set(spot(sqs.flat(), sqs[0][Math.floor(Math.random() * 4)]), { kind: 'laser' });
+    else if (cross !== undefined && isUnlocked('nip')) out.set(spot([...group], cross), { kind: 'nip', col: t });
+    else if (long && isUnlocked('cat')) out.set(spot(long.keys, long.keys[1 + Math.floor(Math.random() * 2)]), { kind: 'cat', dir: long.dir, col: t });
+    else if (sqs.length && isUnlocked('laser')) out.set(spot(sqs.flat(), sqs[0][Math.floor(Math.random() * 4)]), { kind: 'laser', col: t });
   }
   return out;
 }
@@ -3184,7 +3246,7 @@ function findMove() {
     for (const [dr, dc] of [[0, 1], [1, 0]]) {
       const r2 = r + dr, c2 = c + dc;
       if (r2 >= N || c2 >= N || !canSwap(grid[r2][c2])) continue;
-      if (isPower(a.type) || isPower(grid[r2][c2].type)) return [[r, c], [r2, c2]];
+      if (powerMove(a, grid[r2][c2])) return [[r, c], [r2, c2]];
       sw(r, c, r2, c2); const ok = findMatches().cells.size > 0; sw(r, c, r2, c2);
       if (ok) return [[r, c], [r2, c2]];
       if (!bellMove && (a.type === 'bell' || grid[r2][c2].type === 'bell')) bellMove = [[r, c], [r2, c2]];
@@ -3525,7 +3587,7 @@ function fire(cell, k, clear, delay, base, fxq) {
     for (let i = 0; i < N * N; i++) {
       const x = grid[i / N | 0][i % N]; if (!x) continue;
       if (t === 'all') add(i, base + 60 + Math.max(Math.abs((i / N | 0) - r), Math.abs(i % N - c)) * 70);
-      else if (x.type === t) add(i, base + 120 + Math.floor(Math.random() * 280));
+      else if (x.type === t || (PAIR40 && isColx(x) && x.col === t)) add(i, base + 120 + Math.floor(Math.random() * 280));
     }
     ring(k, 3, base, 'ring rainbow'); fxq.magic.push(base);
   }
@@ -3539,6 +3601,7 @@ async function convert(keys, kind, fromKey, viaLaser) {
     out.push(k);
     if (old.locked || old.gold) return;
     const sp = mk(kind); if (kind === 'cat') sp.dir = Math.random() < .5 ? 'h' : 'v';
+    if (PAIR40 && isColx(sp)) sp.col = old.type;
     grid[r][c] = sp;
     const oldEl = els.get(old.id);
     later(viaLaser ? LEG * (i + 1) : 80 + i * 45, () => {
@@ -3680,7 +3743,7 @@ async function resolve(blast, swapPos, label, preFired, quiet, bd) {
       }
     }
     for (const k of clear) { const cell = grid[k / N | 0][k % N]; if (cell && cell.gold) golds++; }
-    for (const g of goals) if (g.kind === 'collect') for (const k of clear) { const cell = grid[k / N | 0][k % N]; if (cell && cell.type === g.type) g.left--; }
+    for (const g of goals) if (g.kind === 'collect') for (const k of clear) { const cell = grid[k / N | 0][k % N]; if (cell && (cell.type === g.type || (PAIR40 && isColx(cell) && cell.col === g.type))) g.left--; }
     if (golds) for (const g of goals) if (g.kind === 'gold') g.left -= golds;
     for (const [, ex] of spawns) for (const g of goals) if (g.kind === 'make' && g.what === ex.kind && g.left > 0) g.left--;
     if (!quiet) feedPurr(clear);
@@ -3706,6 +3769,7 @@ async function resolve(blast, swapPos, label, preFired, quiet, bd) {
     for (const [k, ex] of spawns) {
       const r = k / N | 0, c = k % N, sp = mk(ex.kind);
       if (ex.dir) sp.dir = ex.dir;
+      if (PAIR40 && ex.col != null && isColx(sp)) sp.col = ex.col;
       grid[r][c] = sp; const el = tileEl(sp); place(sp, r, c); el.classList.add('spawn');
       const [x, y] = cellXY(k);
       burst(x, y, ex.kind === 'bowl' ? 28 : 14, ex.kind === 'bowl' ? 1.8 : 1.2); spawnFx(k, ex.kind);
@@ -3785,7 +3849,7 @@ async function trySwap(r1, c1, r2, c2, free) {
   await sleep(190);
   const sa = isPower(a.type), sb = isPower(b.type), ka = r2 * N + c2, kb = r1 * N + c1;
   const pay = () => { if (!free) { moves--; updateHud(); } };
-  if (sa || sb) {
+  if ((sa || sb) && !(PAIR40 && sa !== sb && isColx(sa ? a : b))) {
     pay();
     const blast = new Set([ka, kb]); let label = null, pre = [], feast2 = false;
     if (sa && sb) {
@@ -5013,7 +5077,7 @@ function rankMoves() {
       const b = grid[r2][c2], pa = isPower(a.type), pb = isPower(b.type);
       let v = -1;
       if (pa && pb) v = 40 + (a.type === 'bowl' || b.type === 'bowl' ? 30 : 0) + (X.make.has('combo') ? 40 : 0);
-      else if (pa || pb) {
+      else if ((pa || pb) && !(PAIR40 && isColx(pa ? a : b))) {
         const sp = pa ? a : b, other = pa ? b : a, at = pa ? [r2, c2] : [r, c];
         if (sp.type === 'bowl') { let s = 0; if (isNormal(other.type)) for (let k = 0; k < N * N; k++) { const y = grid[k / N | 0][k % N]; if (y && y.type === other.type) s += cellWorth(k, X); } v = 8 + s; }
         else if (sp.type === 'laser') v = 9;
@@ -5023,7 +5087,7 @@ function rankMoves() {
         const m = findMatches();
         if (m.cells.size) {
           v = 0;
-          for (const k of m.cells) v += cellWorth(k, X);
+          for (const k of m.cells) { v += cellWorth(k, X); const y = grid[k / N | 0][k % N]; if (PAIR40 && isColx(y)) v += y.type === 'laser' ? 9 : sum(areaOf(y, k / N | 0, k % N)) * .8; }
           for (const [, ex] of extrasFor(m, [r * N + c, r2 * N + c2])) v += SPAWN_V[ex.kind] + (X.make.has(ex.kind) ? 30 : 0);
         } else if (a.type === 'bell' || b.type === 'bell') v = a.type === 'bell' && dr === 1 ? 6 : .5;
         sw(r, c, r2, c2);
@@ -5053,7 +5117,7 @@ function countMoves() {
     for (const [dr, dc] of [[0, 1], [1, 0]]) {
       const r2 = r + dr, c2 = c + dc;
       if (r2 >= N || c2 >= N || !canSwap(grid[r2][c2])) continue;
-      if (isPower(a.type) || isPower(grid[r2][c2].type)) { n++; continue; }
+      if (powerMove(a, grid[r2][c2])) { n++; continue; }
       sw(r, c, r2, c2); if (findMatches().cells.size) n++; sw(r, c, r2, c2);
     }
   }
@@ -6044,12 +6108,13 @@ async function featherAt(r, c) {
   let h = 0, v = 0;
   for (let i = 0; i < N; i++) { h += cellWorth(r * N + i, X); v += cellWorth(i * N + c, X); }
   const sp = mk('cat'); sp.dir = v > h ? 'v' : 'h';
+  if (PAIR40 && isNormal(old.type) && COLORS.includes(old.type)) sp.col = old.type;
   stampFx(k, FEATHER_TOOL); await sleep(260);
   const oe = els.get(old.id); if (oe) oe.remove(); els.delete(old.id);
   grid[r][c] = sp; const el = tileEl(sp); place(sp, r, c); el.classList.add('spawn');
   const [x, y] = cellXY(k); burst(x, y, 18, 1.3, ['#FF9CC6', '#FFD6EA', '#ffffff', '#FFE14D'], 'star'); sparkle(); extraSound('cat');
   callout('Zauberfeder!', 'Eine Flitzekatze');
-  if (!toldFeather) { toldFeather = true; say('Hokuspokus, eine Flitzekatze! Tausch sie, dann flitzt sie los.'); }
+  if (!toldFeather) { toldFeather = true; say(PAIR40 ? 'Hokuspokus, eine Flitzekatze! Bring sie mit zwei gleichen Leckerlis in eine Reihe, dann flitzt sie los.' : 'Hokuspokus, eine Flitzekatze! Tausch sie, dann flitzt sie los.'); }
   await sleep(320);
 }
 
@@ -8454,7 +8519,7 @@ const findMatchesPlain36 = findMatches;
 findMatches = function () {
   if (!hasWild()) return findMatchesPlain36();
   const cells = new Set(), runs = [], squares = [], wildColor = new Map();
-  const T = (r, c) => { const x = grid[r][c]; return x ? x.type : null; };
+  const T = (r, c) => colOf(grid[r][c]);
   const scan = (line, dir) => {
     const ts = line.map(([r, c]) => T(r, c)), kinds = new Set(ts.filter(isNormal));
     for (const col of kinds) {
@@ -9427,6 +9492,406 @@ buildBitmaps = async function () {
   const r = await buildBitmaps39.apply(this, arguments);
   for (const [k, v] of [['nip', NIP_SVG], ['laser', LASER_SVG], ['bowl', BOWL_SVG]]) if (!XBM.has(k)) xbmWant.set(k, v);
   xbmRun();
+  return r;
+};
+
+
+/* ===================== V40 test: extras like in Candy Crush ===================== */
+// An extra keeps the colour of the treats it was made from and counts as that treat in a match. It only goes off when it
+// is eaten in a match (or caught by another extra). Swapping it with a treat only works if that makes a match.
+// The bowl still goes with anything, and two extras swapped together are still a combo. PAIR40 switches the rule.
+var PAIR40;
+try { PAIR40 = localStorage.getItem('wm-pair40') !== 'off'; } catch (e) { PAIR40 = true; }
+function isColx(x) { return !!x && x.col != null && (x.type === 'cat' || x.type === 'nip' || x.type === 'laser'); }
+// the kind a tile counts as in a match
+function colOf(x) { return !x ? null : PAIR40 && isColx(x) ? x.col : x.type; }
+// does swapping these two always do something, match or not?
+function powerMove(a, b) {
+  if (!PAIR40) return isPower(a.type) || isPower(b.type);
+  const free = x => isPower(x.type) && !isColx(x);
+  return (isPower(a.type) && isPower(b.type)) || free(a) || free(b);
+}
+// a coloured extra shows its treat:
+// Flitzekatze: the treat sprints off both ways at once (faded copies and speed lines along its row or column);
+// Katzenminze: the treat sits in the mint bouquet, bow in front; Laserpunkt: the treat in the laser's glow and star
+const X40 = new Map();
+function inner40(col) { const m = String(ICONS[col]).match(/<svg[^>]*>([\s\S]*)<\/svg>/); return m ? m[1] : ''; }
+const at40 = (T, x, y, s, o = 1) => `<g${o < 1 ? ` opacity="${o}"` : ''} transform="translate(${x} ${y}) scale(${s}) translate(-50 -50)">${T}</g>`;
+const SPEED40 = `<g stroke-linecap="round"><g stroke="#FF4F9A" stroke-width="7" opacity=".55"><path d="M5 34 H24"/><path d="M3 50 H20"/><path d="M5 66 H24"/><path d="M95 34 H76"/><path d="M97 50 H80"/><path d="M95 66 H76"/></g>` +
+  `<g stroke="#fff" stroke-width="3"><path d="M5 34 H24"/><path d="M3 50 H20"/><path d="M5 66 H24"/><path d="M95 34 H76"/><path d="M97 50 H80"/><path d="M95 66 H76"/></g></g>`;
+function extraSvg40(x) {
+  const key = x.type + x.col + (x.dir || ''); if (X40.has(key)) return X40.get(key);
+  const T = inner40(x.col);
+  let out;
+  if (x.type === 'cat') {
+    const v = x.dir === 'v';
+    out = `<svg class="sprint40" viewBox="0 0 100 100">${v ? `<g transform="rotate(90 50 50)">${SPEED40}</g>` : SPEED40}` +
+      (v ? at40(T, 50, 29, .54, .3) + at40(T, 50, 71, .54, .3) : at40(T, 29, 50, .54, .3) + at40(T, 71, 50, .54, .3)) + at40(T, 50, 50, .74) + '</svg>';
+  } else if (x.type === 'nip') {
+    out = `<svg viewBox="0 0 100 100"><path d="M50 84 V24" stroke="#11621F" stroke-width="8" stroke-linecap="round"/><path d="M50 84 V24" stroke="#6EDB4C" stroke-width="3.5" stroke-linecap="round"/>` +
+      leaf(50, 68, -74, 1.02) + leaf(50, 68, 74, 1.02) + leaf(50, 46, -46, .95) + leaf(50, 46, 46, .95) + leaf(50, 28, 0, .78) +
+      at40(T, 50, 53, .7) +
+      `<g fill="url(#gPink)" ${OL('#9E0C57')}><path d="M47.5 81 L40 96 L46 93.5 L49 97.5Z"/><path d="M52.5 81 L60 96 L54 93.5 L51 97.5Z"/>` +
+      `<path d="M50 79 Q34 68 30 77 Q30 88 50 81Z"/><path d="M50 79 Q66 68 70 77 Q70 88 50 81Z"/><circle cx="50" cy="80" r="5.5"/></g>` + SPARK(16, 18, .8) + SPARK(85, 14, .62) + '</svg>';
+  } else {
+    out = `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="url(#gGlow)"/>` +
+      `<path d="M50 2 Q54 46 98 50 Q54 54 50 98 Q46 54 2 50 Q46 46 50 2Z" fill="#FFC9D6" opacity=".9"/>` + at40(T, 50, 50, .74) + '</svg>';
+  }
+  if (X40.size < 200) X40.set(key, out);
+  return out;
+}
+const iconFor40 = iconFor;
+iconFor = function (x) { return PAIR40 && isColx(x) ? (typeof xbmFor === 'function' && xbmFor(x)) || extraSvg40(x) : iconFor40(x); };
+// the tips say how it works now
+const PAIR_TIP = {
+  cat: () => 'Flitzekatze! Sie hat die Farbe ihrer Leckerlis. Bring sie in ein Match, dann flitzt sie los.',
+  nip: () => 'Katzenminze! Mach ein Match mit ihr, dann fliegt alles rundherum weg.',
+  laser: () => 'Laserpunkt! Mach ein Match mit ihm, dann jag ich 3 Leckerlis.'
+};
+for (const k of ['cat', 'nip', 'laser']) { const t0 = EXTRA[k].tip; EXTRA[k].tip = function () { return PAIR40 ? PAIR_TIP[k]() : t0.apply(this, arguments); }; }
+// a swap that does nothing now: say once why
+let toldPair40 = false;
+const trySwap40 = trySwap;
+trySwap = async function (r1, c1, r2, c2, free) {
+  let warn = false;
+  if (PAIR40 && !busy && !tut && !free && inB(r1, c1) && inB(r2, c2)) {
+    const a = grid[r1][c1], b = grid[r2][c2];
+    if (a && b && canSwap(a) && canSwap(b) && a.type !== 'bell' && b.type !== 'bell' && !powerMove(a, b) && (isColx(a) || isColx(b))) {
+      sw(r1, c1, r2, c2); warn = !findMatches().cells.size; sw(r1, c1, r2, c2);
+    }
+  }
+  const res = await trySwap40.apply(this, arguments);
+  if (warn && !toldPair40) { toldPair40 = true; say('Extras legen nur in einem Match los. Zwei Extras miteinander gehen immer!'); }
+  return res;
+};
+
+// the texts on the level cards and in the lessons say how it works now (V41: the rule is the game's own)
+const PAIR_ICON = k => `<span class="lico"><span class="ico">${extraSvg40({ type: k, col: 2, dir: 'h' })}</span>${PATS[k]}</span>`;
+const PAIR_INTRO = {
+  cat: () => [PAIR_ICON('cat'), 'Neu: Flitzekatze', 'Vier gleiche in einer Reihe ergeben eine Flitzekatze. Bring sie mit zwei gleichen Leckerlis in eine Reihe, dann flitzt sie quer über das Feld.'],
+  laser: () => [PAIR_ICON('laser'), 'Neu: Laserpunkt', 'Vier gleiche als Quadrat ergeben einen Laserpunkt. Bring ihn mit zwei gleichen Leckerlis in eine Reihe, dann jagt ' + catName + ' drei Leckerlis, die du gerade brauchst.'],
+  nip: () => [PAIR_ICON('nip'), 'Neu: Katzenminze', 'Fünf gleiche als L oder T ergeben Katzenminze. Bring sie mit zwei gleichen Leckerlis in eine Reihe, dann fliegt alles rundherum weg.']
+};
+for (const k of Object.keys(PAIR_INTRO)) { const i0 = INTRO[k]; INTRO[k] = function () { return PAIR40 ? PAIR_INTRO[k]() : i0.apply(this, arguments); }; }
+const showIntro40 = showIntro;
+showIntro = function () {
+  const r = showIntro40.apply(this, arguments);
+  if (PAIR40) $('tipline').textContent = 'Bring ein Extra mit zwei gleichen Leckerlis in eine Reihe, dann legt es los. Den Napf tauschst du einfach.' +
+    (isUnlocked('combo') || learnt.combo ? ' Zwei Extras miteinander tauschen gibt eine Riesen-Kombi.' : '');
+  return r;
+};
+const labelFor40 = labelFor;
+labelFor = function (x) { const l = labelFor40.apply(this, arguments); return PAIR40 && isColx(x) && NAMES[x.col] ? l + ', mit ' + NAMES[x.col] : l; };
+if (COACH.gift && COACH.gift[2]) COACH.gift[2].ptext = (x, d) => 'Da war ' + EXTRA_A[x.type] + ' drin! Wisch dieses Leckerli ' + d + ', dann legt ' + (x.type === 'laser' ? 'er' : 'sie') + ' los.';
+
+
+/* ===================== V41: a letter from Freyr, and a test level for the new extras ===================== */
+// Everyone who played before finds a letter on the next start. Freyr holds it up and reads it out, line by line.
+// It has no close button: the only way on is the button into a short test level, where the new rule (an extra goes off
+// in a match) is shown step by step and then tried alone. Until that level is finished once, the letter comes back.
+const NEWS41 = 'wm-news41';
+let TRY41 = null;
+function news41Done() { try { return localStorage.getItem(NEWS41) === 'done'; } catch (e) { return true; } }
+function news41Mark() { try { localStorage.setItem(NEWS41, 'done'); } catch (e) {} }
+const PAW41 = `<svg viewBox="0 0 60 46" aria-hidden="true"><path d="M6 31 Q4 13 16 9 Q19 2 26 6 Q30 0 34 6 Q41 2 44 9 Q56 13 54 31 Q54 44 30 44 Q6 44 6 31Z" fill="#fff" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>` +
+  `<path d="M22 9 Q23 15 21.5 20 M30 7 V18 M38 9 Q37 15 38.5 20" fill="none" stroke="#E2CFDA" stroke-width="2.4" stroke-linecap="round"/></svg>`;
+const PRINT41 = `<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="#F07CA0"><ellipse cx="50" cy="64" rx="20" ry="17"/><ellipse cx="25" cy="42" rx="8.5" ry="10.5"/><ellipse cx="41" cy="27" rx="8.5" ry="10.5"/><ellipse cx="59" cy="27" rx="8.5" ry="10.5"/><ellipse cx="75" cy="42" rx="8.5" ry="10.5"/></g></svg>`;
+// the little picture in the letter: a Flitzekatze with two of its treats, in a row
+function demo41() {
+  const t = 0, tile = (h, cls) => `<span class="n41tile${cls ? ' ' + cls : ''}">${h}</span>`;
+  return tile(ICONS[t]) + tile(typeof extraSvg40 === 'function' ? extraSvg40({ type: 'cat', col: t, dir: 'h' }) : iconFor({ type: 'cat', dir: 'h' }), 'x') + tile(ICONS[t]);
+}
+function letter41() {
+  const n = esc(catName);
+  return `<h2 class="n41t" id="n41title">Post von ${n}</h2>` +
+    `<p class="n41l n41hi">Liebe Ahsi,</p>` +
+    `<p class="n41l">ich hab Neuigkeiten für dich!</p>` +
+    `<p class="n41l">Extras gehen nicht mehr einfach so los. In jedem Extra steckt jetzt das Leckerli, aus dem du es gebaut hast. Bring es mit zwei gleichen Leckerlis in eine Reihe, dann geht’s los.</p>` +
+    `<div class="n41l n41demo" aria-hidden="true">${demo41()}</div>` +
+    `<p class="n41l">Zwei Extras miteinander gehen weiterhin immer, und den Napf tauschst du wie bisher mit jedem Leckerli.</p>` +
+    `<p class="n41l n41sub">Außerdem neu:</p>` +
+    `<ul class="n41list">` + ['neue Geräusche für die Extras', 'ein wilderer Krallenkratzer', 'Napf + Napf = Riesen-Festmahl', 'Sieg im letzten Zug? Überraschung!', 'die Level sind etwas kniffliger']
+      .map(t => `<li class="n41l">${PRINT41}${t}</li>`).join('') + `</ul>` +
+    `<p class="n41l">Im Testlevel zeig ich dir alles.</p>` +
+    `<p class="n41l n41sign">Dein ${n} ${PRINT41}</p>` +
+    `<p class="n41l n41ps">PS: Ich hab Hunger.</p>`;
+}
+// Freyr behind the paper, his paws on its edge
+function sheet41(id, body, btn) {
+  const ov = document.createElement('div');
+  ov.className = 'overlay show n41ov'; ov.id = id;
+  ov.innerHTML = `<div class="n41wrap" role="dialog" aria-modal="true" aria-labelledby="n41title">` +
+    `<div class="n41letter"><div class="n41face" aria-hidden="true">${CAT_ICON()}</div>` +
+    `<div class="n41paper"><div class="n41paws" aria-hidden="true">${PAW41}${PAW41}</div><div class="n41body">${body}</div></div></div>` +
+    `<p class="n41hint">Tipp auf den Brief, dann lese ich schneller.</p>` +
+    `<button class="btn big n41go" type="button" hidden>${btn}</button></div>`;
+  document.body.appendChild(ov);
+  return ov;
+}
+// he reads it out: one line after the other comes up, his mouth moves, his eyes follow the lines
+async function read41(ov) {
+  const lines = [...ov.querySelectorAll('.n41l')], face = ov.querySelector('.n41face'), body = ov.querySelector('.n41body');
+  let fast = REDUCED, wake = null, talking = false;
+  const hurry = () => { fast = true; if (wake) wake(); };
+  ov.querySelector('.n41paper').addEventListener('click', hurry);
+  ov.querySelector('.n41hint').addEventListener('click', hurry);
+  const wait = ms => fast ? Promise.resolve() : new Promise(r => { wake = r; setTimeout(r, ms); });
+  // more below: the bottom edge of the text fades out
+  const cue = () => body.classList.toggle('more', body.scrollTop + body.clientHeight < body.scrollHeight - 6);
+  body.addEventListener('scroll', cue, { passive: true });
+  const mouth = setInterval(() => face.classList.toggle('eat', talking && Math.random() < .55), 130);
+  face.classList.add('read');
+  await wait(700);
+  for (const el of lines) {
+    if (!ov.isConnected) break;
+    el.classList.add('on');
+    if (fast) continue;
+    if (body.scrollHeight > body.clientHeight + 4) { const b = el.getBoundingClientRect(), p = body.getBoundingClientRect(); if (b.bottom > p.bottom - 8) body.scrollTop += b.bottom - p.bottom + 24; }
+    cue();
+    const dur = Math.max(450, Math.min(2600, el.textContent.length * 26));
+    talking = true; await wait(dur); talking = false; face.classList.remove('eat');
+    await wait(200);
+  }
+  clearInterval(mouth); face.classList.remove('eat', 'read');
+  lines.forEach(el => el.classList.add('on'));
+  if (!ov.isConnected) return;
+  cue();
+  ov.querySelector('.n41hint').hidden = true;
+  const go = ov.querySelector('.n41go'); go.hidden = false; go.classList.add('pop-in');
+  try { go.focus({ preventScroll: true }); } catch (e) {}
+  if (typeof meow === 'function') meow(.5);
+}
+function news41Open() {
+  if ($('news41') || TRY41) return;
+  if (!onMap) showMap();
+  const ov = sheet41('news41', letter41(), 'Zum Testlevel');
+  ov.querySelector('.n41go').onclick = () => { blip(); try41Start(); };
+  read41(ov);
+}
+// for the preview: the letter again, from the start
+function news41Again() {
+  try { localStorage.removeItem(NEWS41); } catch (e) {}
+  const e1 = $('news41'), e2 = $('news41end'); if (e1) e1.remove(); if (e2) e2.remove();
+  if (TRY41 || !onMap) { TRY41 = null; tutAbort(); showMap(); }
+  setTimeout(news41Open, 250);
+}
+// a new player starts with the rule as it is and never gets the letter; everyone else gets it before the wake-up scene
+const startGame41 = startGame;
+startGame = function () {
+  if (!introSeen()) { news41Mark(); return startGame41.apply(this, arguments); }
+  if (!news41Done()) { showMap(); return setTimeout(news41Open, 400); }
+  return startGame41.apply(this, arguments);
+};
+
+/* ---------- the test level ---------- */
+// a plain open board (level 1's), five kinds of treats, plenty of moves; the goal: set off 3 extras alone at the end
+const levelConfig41 = levelConfig;
+levelConfig = function (L) {
+  if (!(TRY41 && TRY41.building)) return levelConfig41.apply(this, arguments);
+  const c = levelConfig41(1), w = levelConfig41(L).world;
+  return Object.assign(c, { name: 'Testlevel', world: w, moves: 30, target: 0, gold: false, intro: null, bells: 0, hard: 0, kit: 0, fish: null, goals: [{ kind: 'fire41', n: 3 }] });
+};
+const remaining41 = remaining, goalText41 = goalText, goalIcon41 = goalIcon;
+remaining = function (g) { return g.kind === 'fire41' ? Math.max(0, g.left) : remaining41.apply(this, arguments); };
+goalText = function (g, n) { return g.kind === 'fire41' ? n + (n === 1 ? ' Extra' : ' Extras') + ' zünden' : goalText41.apply(this, arguments); };
+goalIcon = g => g.kind === 'fire41' ? (typeof extraSvg40 === 'function' ? extraSvg40({ type: 'nip', col: 2 }) : NIP_SVG) : goalIcon41(g);
+// every extra that goes off in the free part counts
+const fire41 = fire;
+fire = function (cell) {
+  if (TRY41 && TRY41.count && cell && isPower(cell.type)) { const g = goals.find(x => x.kind === 'fire41'); if (g && g.left > 0) g.left--; }
+  return fire41.apply(this, arguments);
+};
+// nobody loses the test level: out of moves, there are five more
+const afterTurn41 = afterTurn;
+afterTurn = async function () {
+  if (TRY41 && moves <= 0 && !goalsDone()) { moves += 5; updateHud(); say('Hier, noch 5 Züge. Im Testlevel kann man nicht verlieren.'); }
+  return afterTurn41.apply(this, arguments);
+};
+// the level tab says Test
+const updateHud41 = updateHud;
+updateHud = function () { const r = updateHud41.apply(this, arguments); if (TRY41) $('level').textContent = 'Test'; return r; };
+const openPause41 = openPause;
+openPause = function () { const r = openPause41.apply(this, arguments); if (TRY41) $('pauseWhere').textContent = 'Testlevel'; return r; };
+$('pauseBtn').onclick = openPause;
+// leaving it brings the letter back, without a life lost or a loss counted
+document.addEventListener('click', e => {
+  if (!TRY41 || !e.target.closest || !e.target.closest('#toMap')) return;
+  e.stopImmediatePropagation(); e.preventDefault();
+  try41Leave();
+}, true);
+async function try41Leave() {
+  $('pauseOv').classList.remove('show');
+  for (let i = 0; busy && i < 120; i++) await sleep(50);
+  TRY41 = null; tutAbort(); showMap(); setTimeout(news41Open, 450);
+}
+async function try41Start() {
+  const ov = $('news41'); if (ov) ov.remove();
+  initAudio(); startMusic(); duck(false);
+  pick = null; TRY41 = { count: false, building: true };
+  try { startLevel(); } finally { TRY41.building = false; }
+  $('introOv').classList.remove('show');
+  if (onMap) { hideMap(); render(true); }
+  busy = true;
+  setTimeout(() => { chime(3); chomp(1); }, 80);
+  await sleep(450);
+  if (!TRY41) return;
+  busy = false; resetIdle();
+  say('Mein Testlevel! Ich zeig dir alles.');
+  try41Run();
+}
+const TRY41_STEPS = [
+  [{ plant: 'cat' }, { move: d => 'Wisch es ' + d + '. Vier gleiche in einer Reihe ergeben eine Flitzekatze.' }],
+  [{ see41: true }, { use: 'colx' }],
+  [{ pair: ['cat', 'nip'] }, { move: () => 'Zwei Extras miteinander gehen weiterhin immer, auch ohne Match. Tausch sie!' }],
+  [{ pair: ['bowl', 'bowl'] }, { move: () => 'Und jetzt das Beste: zwei Näpfe zusammen. Tausch sie!' }],
+  [{ free41: true }]
+];
+async function try41Run() {
+  const me = tut = { id: 'try41', ctx: {} };
+  try {
+    for (const group of TRY41_STEPS) for (const st of group) {
+      if (tut !== me || !TRY41 || onMap) return;
+      if (!(await tutStep(st))) break;
+    }
+  } finally {
+    if (tut === me) { tutHide(); tut = null; }
+    if (TRY41 && !onMap) { if (!TRY41.count) { TRY41.count = true; updateHud(); } resetIdle(); }
+  }
+}
+const winSequence41 = winSequence;
+winSequence = async function () {
+  if (!TRY41) return winSequence41.apply(this, arguments);
+  cancelAim(true); clearPreview(); clearTimeout(idleTimer); busy = true;
+  news41Mark();
+  celebrate(); say('Pfotastisch!');
+  await sleep(2300);
+  if (!TRY41) return;
+  const ov = sheet41('news41end', `<h2 class="n41t" id="n41title">Geschafft!</h2><p class="n41l n41hi">Pfotastisch, Ahsi!</p>` +
+    `<p class="n41l">Jetzt weißt du, wie die Extras gehen. Viel Spaß beim Weiterspielen!</p><p class="n41l n41sign">Dein ${esc(catName)} ${PRINT41}</p>`, 'Weiterspielen');
+  ov.querySelector('.n41go').onclick = () => {
+    blip(); ov.remove(); TRY41 = null; showMap();
+    setTimeout(() => { if (onMap && !mapAnimating && !introRun && !tut && lives > 0 && !document.querySelector('.overlay.show')) openLevel(maxLevel); }, 750);
+  };
+  read41(ov);
+};
+
+/* ---------- the coach, for the new rule ---------- */
+// the extra stays where it is; two treats of its kind are laid out so that one swap puts all three in a row
+function plantPair41(k) {
+  const x = grid[k / N | 0][k % N];
+  if (!isColx(x) || !COLORS.includes(x.col)) return null;
+  const r0 = k / N | 0, c0 = k % N, sh = SHAPES.three, cands = [];
+  for (const f of TF) {
+    const s = sh.s.map(f), m = f(sh.m), t = f(sh.t);
+    for (const an of s) {
+      const P = p => [r0 - an[0] + p[0], c0 - an[1] + p[1]];
+      const S = s.map(P), M = P(m), T = P(t), O = S.find(([r, c]) => r * N + c !== k);
+      cands.push({ S, M, T, O, d: Math.hypot(T[0] - 3.5, T[1] - 3.5) + Math.random() });
+    }
+  }
+  cands.sort((a, b) => a.d - b.d);
+  for (const P of cands) if ([P.O, P.M, P.T].every(([r, c]) => plainAt(r, c)) && paintPair41(P, k, x.col)) return P;
+  return null;
+}
+function paintPair41(P, k, col) {
+  const { S, M, T, O } = P, key = ([r, c]) => r * N + c, fixed = new Set([...S, M, T].map(key));
+  const snap = grid.map(row => row.map(y => y && y.type));
+  const free = q => { const y = grid[q / N | 0][q % N]; return !fixed.has(q) && y && isNormal(y.type) && !y.gold; };
+  const reroll = q => { if (free(q)) grid[q / N | 0][q % N].type = rnd(); };
+  const others = COLORS.filter(t => t !== col);
+  for (let attempt = 0; attempt < 12; attempt++) {
+    grid[O[0]][O[1]].type = col; grid[M[0]][M[1]].type = col; grid[T[0]][T[1]].type = others[Math.floor(Math.random() * others.length)];
+    for (let it = 0; it < 80; it++) {
+      const pre = findMatches();
+      if (pre.cells.size) { const bad = [...pre.cells].filter(free); if (!bad.length) break; bad.forEach(reroll); continue; }
+      sw(M[0], M[1], T[0], T[1]);
+      const m = findMatches(), expect = new Set([...S, T].map(key));
+      const extra = [...m.cells].filter(q => !expect.has(q)), missing = [...expect].filter(q => !m.cells.has(q));
+      const ok = !extra.length && !missing.length && extrasFor(m, [key(T), key(M)]).size === 0;
+      sw(M[0], M[1], T[0], T[1]);
+      if (ok) { render(false); return true; }
+      if (!extra.length || missing.length || extra.some(q => !free(q))) break;
+      extra.forEach(reroll);
+    }
+  }
+  for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) if (grid[r][c]) grid[r][c].type = snap[r][c];
+  return false;
+}
+// a coloured extra on a free spot, without making a match
+function placeExtra41(type) {
+  const spots = [];
+  for (let r = 1; r < N - 1; r++) for (let c = 1; c < N - 1; c++) if (plainAt(r, c)) spots.push([r, c, Math.hypot(r - 3.5, c - 3.5) + Math.random() * 2.5]);
+  spots.sort((a, b) => a[2] - b[2]);
+  for (const [r, c] of spots) {
+    const old = grid[r][c], x = mk(type);
+    if (type === 'cat') x.dir = Math.random() < .5 ? 'h' : 'v';
+    for (const col of COLORS.slice().sort(() => Math.random() - .5)) {
+      x.col = col; grid[r][c] = x;
+      if (!findMatches().cells.size) return r * N + c;
+    }
+    grid[r][c] = old;
+  }
+  return null;
+}
+const nearColx41 = at => {
+  let best = null;
+  for (let k = 0; k < N * N; k++) { const x = grid[k / N | 0][k % N]; if (isColx(x) && COLORS.includes(x.col)) { const d = at == null ? Math.hypot((k / N | 0) - 3.5, k % N - 3.5) : Math.abs((k / N | 0) - (at / N | 0)) + Math.abs(k % N - at % N); if (!best || d < best.d) best = { k, d }; } }
+  return best && best.k;
+};
+const DER41 = { cat: ['in der Flitzekatze', 'Mit der Flitzekatze sind es drei gleiche, und sie flitzt los!'], laser: ['im Laserpunkt', 'Mit dem Laserpunkt sind es drei gleiche, und ich jage drei Leckerlis!'],
+  nip: ['in der Katzenminze', 'Mit der Katzenminze sind es drei gleiche, und alles rundherum fliegt weg!'] };
+const pairText41 = (x, d) => 'Wisch dieses Leckerli ' + d + '. ' + DER41[x.type][1];
+const tutStep41 = tutStep;
+tutStep = async function (st) {
+  const ctx = tut && tut.ctx;
+  if (st.see41) {
+    let k = nearColx41(ctx.at);
+    if (k == null) { k = placeExtra41('cat'); if (k != null) render(false); }
+    if (k == null) return false;
+    ctx.at = k;
+    const x = grid[k / N | 0][k % N];
+    tutShow({ box: () => cellBox(k), text: 'Schau, ' + DER41[x.type][0] + ' steckt jetzt das Leckerli, aus dem ' + (x.type === 'laser' ? 'er' : 'sie') + ' gebaut ist. Einfach tauschen reicht nicht mehr.', next: true });
+    await new Promise(res => { tut.expect = null; tut.res = res; tutEls.next.onclick = () => { blip(); if (tut && tut.res === res) { tut.res = null; res(); } }; });
+    return true;
+  }
+  if (st.free41) {
+    const ks = ['laser', 'nip', 'cat'].map(placeExtra41).filter(k => k != null);
+    if (ks.length) plantPair41(ks[0]);
+    render(false);
+    await tutInfo('goals', 'Jetzt du! Zünde 3 Extras ganz allein. Immer mit zwei gleichen Leckerlis in eine Reihe.');
+    if (TRY41) { TRY41.count = true; updateHud(); }
+    return true;
+  }
+  // an extra that has a colour goes off in a match: lay out the match and show it
+  if (st.use && PAIR40) {
+    let k = null;
+    if (st.use === 'colx') k = nearColx41(ctx.at);
+    else if (st.use !== 'bowl') {
+      let best = null;
+      for (let q = 0; q < N * N; q++) { const x = grid[q / N | 0][q % N]; if (x && (st.use === 'any' ? isPower(x.type) : x.type === st.use)) { const d = ctx.at == null ? 0 : Math.abs((q / N | 0) - (ctx.at / N | 0)) + Math.abs(q % N - ctx.at % N); if (!best || d < best.d) best = { k: q, d }; } }
+      if (best && isColx(grid[best.k / N | 0][best.k % N])) k = best.k;
+    }
+    if (k != null) {
+      const P = plantPair41(k); if (!P) return false;
+      const x = grid[k / N | 0][k % N], a = K(P.M), b = K(P.T), area = areaOf(x, k / N | 0, k % N);
+      if (area.length) showPreview(area, 'ex');
+      const d = dirWord(a, b);
+      await tutMove(st.ptext ? st.ptext(x, d) : pairText41(x, d), [a, b], [...P.S, P.M, P.T].map(K).concat(area));
+      ctx.at = k;
+      return true;
+    }
+    if (st.use === 'colx') return false;
+  }
+  const r = await tutStep41.apply(this, arguments);
+  // two extras laid next to each other must not make a match with their colours
+  if (r && st.pair && PAIR40 && ctx && ctx.P) {
+    let changed = false;
+    for (const [rr, cc] of [ctx.P.M, ctx.P.T]) {
+      const y = grid[rr][cc]; if (!isColx(y)) continue;
+      for (const col of [y.col, ...COLORS]) { y.col = col; if (!findMatches().cells.has(rr * N + cc)) break; changed = true; }
+    }
+    if (changed) render(false);
+  }
   return r;
 };
 
