@@ -21,7 +21,7 @@ with sync_playwright() as p:
     ctx = b.new_context(viewport={'width': 402, 'height': 874}, device_scale_factor=2, has_touch=True, is_mobile=True,
                         record_video_dir=VID, record_video_size={'width': 402, 'height': 874})
     pg = ctx.new_page()
-    errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
+    errs = []; pg.on('pageerror', lambda e: errs.append(str(e))); pg.on('console', lambda m: print('   console:', m.text[:300]) if 'P39' in m.text else None)
     pg.goto('file://' + D + '/' + GAME); pg.wait_for_timeout(900); fonts(pg)
     pg.evaluate("localStorage.setItem('wm-music','off')")
     pg.evaluate("() => { try { if (introRun) mapSkip = true; } catch (e) {} }"); pg.wait_for_timeout(1500)
@@ -36,6 +36,11 @@ with sync_playwright() as p:
     pg.add_script_tag(content=HN)
     def demo(name, wait=4500, shot=None):
         pg.click('#p39btn'); pg.wait_for_timeout(250)
+        pg.evaluate('''() => { if (window.__mo39) return; window.__mo39 = 1; const el = document.getElementById('p39'); let was = el.hidden;
+          new MutationObserver(() => { if (el.hidden !== was) { was = el.hidden; console.log('P39 hidden=' + el.hidden + ' ' + (new Error().stack || '').split('\\n').slice(1, 4).join(' / ')); } }).observe(el, { attributes: true }); }''')
+        if not pg.is_visible(f'#p39 .p39grid button:text-is("{name}")'):
+            print('   not visible:', pg.evaluate("({ hidden: document.getElementById('p39').hidden, ov: [...document.querySelectorAll('.overlay.show')].map(o => o.id), top: [...document.querySelectorAll('#p39, #p39btn')].map(e => getComputedStyle(e).zIndex), card: JSON.stringify(document.querySelector('#p39 .p39card').getBoundingClientRect()) })"))
+            pg.screenshot(path=SHOTS + '/notvisible.png')
         pg.click(f'#p39 .p39grid button:text-is("{name}")')
         if shot:
             for i, t in enumerate(shot):
@@ -61,13 +66,13 @@ with sync_playwright() as p:
     res = pg.evaluate("""async () => {
       const out = {}, keep = { a: actx, m: master };
       const tests = {
-        cat: () => SFX.cat(0, 'h'), catBig: () => SFX.cat(0, 'x', true), nip: () => SFX.nip(0, 1), nip2: () => SFX.nip(0, 2),
-        laser: () => [0, .15, .3].forEach((t, i) => SFX.laserHit(t, i, (i - 1) * .5)), bowl: () => { SFX.bowl(0); SFX.zaps([200, 260, 320, 380, 440, 500, 560, 620]); },
-        spawnCat: () => SFX.spawn('cat'), spawnNip: () => SFX.spawn('nip'), spawnLaser: () => SFX.spawn('laser'), spawnBowl: () => SFX.spawn('bowl'),
-        conv: () => { SFX.convStart(0, 12, .045); for (let i = 0; i < 12; i++) SFX.conv(.08 + i * .045, i, 'cat'); },
-        boom: () => SFX.boom(0, 1.3), scratch: () => SFX.scratch(.15, .37),
-        feast: () => { SFX.feastCharge(0, .62); SFX.feastBang(.62); }, whirl: () => SFX.whirl(0, 1.4),
-        combo: () => { for (let i = 0; i < 5; i++) SFX.cat(.1 * i, i % 2 ? 'v' : 'h'); for (let i = 0; i < 4; i++) SFX.nip(.05 + .1 * i, 1); SFX.boom(.05, 1.3); }
+        cat: () => SYN.cat(0, 'h'), catBig: () => SYN.cat(0, 'x', true), nip: () => SYN.nip(0, 1), nip2: () => SYN.nip(0, 2),
+        laser: () => [0, .15, .3].forEach((t, i) => SYN.laserHit(t, i, (i - 1) * .5)), bowl: () => { SYN.bowl(0); SYN.zaps([200, 260, 320, 380, 440, 500, 560, 620]); },
+        spawnCat: () => SYN.spawn('cat'), spawnNip: () => SYN.spawn('nip'), spawnLaser: () => SYN.spawn('laser'), spawnBowl: () => SYN.spawn('bowl'),
+        conv: () => { SYN.convStart(0, 12, .045); for (let i = 0; i < 12; i++) SYN.conv(.08 + i * .045, i, 'cat'); },
+        boom: () => SYN.boom(0, 1.3), scratch: () => SYN.scratch(.15, .37),
+        feast: () => { SYN.feastCharge(0, .62); SYN.feastBang(.62); }, whirl: () => SYN.whirl(0, 1.4),
+        combo: () => { for (let i = 0; i < 5; i++) SYN.cat(.1 * i, i % 2 ? 'v' : 'h'); for (let i = 0; i < 4; i++) SYN.nip(.05 + .1 * i, 1); SYN.boom(.05, 1.3); }
       };
       for (const [name, fn] of Object.entries(tests)) {
         const oc = new OfflineAudioContext(2, 48000 * 3.5, 48000);
@@ -84,6 +89,8 @@ with sync_playwright() as p:
     for k, v in res.items(): print(f'   sound {k:10s} peak {v["peak"]:.3f} rms {v["rms"]:.4f}')
     ok('A1 no sound clips (peak < 1)', all(v['peak'] < 1 for v in res.values()), res)
     ok('A2 every sound is audible (peak > 0.05)', all(v['peak'] > .05 for v in res.values()), res)
+    nb = pg.evaluate('SXB.size'); print('   pre-rendered sounds:', nb, '/', pg.evaluate('Object.keys(SXDEF).length'))
+    ok('A3 the sounds were rendered into buffers in the background', nb >= 20, nb)
     ok('no page errors at the end', not errs, errs[:4])
     pg.close(); ctx.close(); b.close()
 print('FAILS', len(fails))

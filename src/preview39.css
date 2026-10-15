@@ -18,3 +18,10 @@
 .p39grid button:active{transform:translateY(1px)}
 .p39note{margin:10px 2px 0;font-size:.78rem;font-weight:700;color:#7F69AE;line-height:1.35}
 .p39x{position:absolute;top:10px;right:10px;width:34px;height:34px;border:0;border-radius:50%;background:#F1ECFF;color:#7B3FE0;font-size:1rem;cursor:pointer}
+.p39bench{display:block;width:100%;margin-top:10px;border:0;border-radius:14px;padding:10px;background:#7B3FE0;color:#fff;font:800 .9rem 'Nunito',sans-serif;cursor:pointer}
+#p39pill{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 8px);transform:translateX(-50%);z-index:45;padding:7px 14px;border-radius:99px;background:#7B3FE0;color:#fff;font:800 .85rem 'Nunito',sans-serif;box-shadow:0 0 0 2.5px #fff;pointer-events:none}
+#p39res{position:fixed;inset:0;z-index:46;display:flex;align-items:center;justify-content:center;background:rgba(40,20,90,.45);padding:12px}
+#p39res table{width:100%;border-collapse:collapse;margin-top:10px;font:700 .8rem 'Nunito',sans-serif;color:#3B2A6B}
+#p39res th{font-weight:800;color:#7F69AE;text-align:left;padding:3px 4px;font-size:.72rem}
+#p39res td{padding:4px;border-top:1px solid #EEE8FF;white-space:nowrap}
+#p39res td.bad{color:#E0154A;font-weight:900}

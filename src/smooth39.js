@@ -71,3 +71,28 @@ fitPurrTxt = function () {
     fp39k = k; fitPurr39();
   });
 };
+// rings of light are drawn on the effects canvas (the old ones were page elements with a masked rainbow gradient,
+// which a phone has to paint again in every frame while they grow)
+ring = function (k, R, d, cls = 'ring') {
+  if (REDUCED) return;
+  const [x, y, cw] = cellXY(k), r1 = cw * (R + .6);
+  if (/rainbow/.test(cls)) { shock(x, y, cw * .3, r1, '#FFB3C9', d, 600, cw * .28); shock(x, y, cw * .25, r1 * .86, '#FFE08A', d + 40, 560, cw * .2); shock(x, y, cw * .2, r1 * .72, '#A8D8FF', d + 80, 520, cw * .16); }
+  else if (/white/.test(cls)) shock(x, y, cw * .3, r1, '#ffffff', d, 560, cw * .22);
+  else shock(x, y, cw * .3, r1, '#8ED77F', d, 600, cw * .3, 'rgba(142,215,127,1)');
+};
+// the flare of an extra going off: at most six at once (a bowl with a cat sets off a dozen in one go)
+let xf39 = [];
+const xflash39 = xflash;
+xflash = function (cell, k, d) {
+  const now = performance.now() + d; xf39 = xf39.filter(t => t > now - 400);
+  if (xf39.length >= 6) return;
+  xf39.push(now); return xflash39.apply(this, arguments);
+};
+// treats flying up to Freyr: fewer when the whole board goes at once
+const flyToCat39 = flyToCat;
+let fly39 = [];
+flyToCat = function (items) {
+  const now = performance.now(); fly39 = fly39.filter(t => t > now - 600);
+  if (fly39.length >= 8) { if (items.length) setTimeout(catEat, 300); return; }
+  fly39.push(now); return flyToCat39.apply(this, arguments);
+};

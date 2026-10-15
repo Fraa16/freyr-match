@@ -4,6 +4,13 @@
 // on the "Spielwiese" (a level with plenty of moves), puts the extras in the middle and swaps them. Neu/Alt switches
 // between the new and the old sounds and animations, so they can be compared right away.
 (function () {
+  // the performance test can switch all effects off, to see what costs the time on this phone
+  window.NOFX39 = false;
+  const GROUP39 = { canvas: ['addVfx', 'addPart', 'sparks', 'twinkle', 'burst', 'popFx', 'orb', 'shock', 'bolt', 'catBeam'], dom: ['fxEl', 'ring', 'dashers', 'flyToCat', 'boardFx', 'xflash', 'floatText'] };
+  for (const [g, names] of Object.entries(GROUP39)) for (const name of names) {
+    const f = window[name]; if (typeof f !== 'function') continue;
+    window[name] = function () { const o = window.NOFX39; if (o === true || o === g) return; return f.apply(this, arguments); };
+  }
   const SANDBOX = { name: 'Spielwiese', moves: 99, target: 1000, collect: [[0, 999]], board: ['........', '........', '........', '........', '........', '........', '........', '........'] };
   let LV0 = null;
   const DEMOS = [
@@ -55,7 +62,7 @@
   const showMap39 = showMap;
   showMap = function () { if (LV0 && LEVELS[0] === SANDBOX) { LEVELS[0] = LV0; LV0 = null; } return showMap39.apply(this, arguments); };
   async function run(d) {
-    close();
+    // (the tap already closed the list; a demo that was waiting must not close it again if it was opened meanwhile)
     await sandbox(); await idle();
     if (d[1] === 'claw') {
       board([]); await wait(350);
@@ -95,6 +102,35 @@
     await wait(500);
     window.__p39t = performance.now(); await trySwap(4, 3, 4, 4);
   }
+  async function bench() {
+    const COMBOS = ['Festmahl + Flitzer', 'Festmahl + Minze', 'Festmahl + Laser', 'Doppel-Festmahl'];
+    const VARS = window.VARS39 || [['alles an', {}], ['ohne Sound', { mute: 1 }], ['ohne Effekte', { nofx: true }]];
+    const rnd0 = Math.random, snd0 = soundOn, pair0 = typeof PAIR40 !== 'undefined' ? PAIR40 : null, rows = [];
+    const pill = document.createElement('div'); pill.id = 'p39pill'; document.body.appendChild(pill);
+    let i = 0;
+    try {
+      if (pair0 !== null) PAIR40 = false;
+      for (const [vn, o] of VARS) for (const cn of COMBOS) {
+        pill.textContent = 'Leistungstest läuft … ' + (++i) + ' / ' + COMBOS.length * VARS.length;
+        soundOn = snd0 && !o.mute; window.NOFX39 = o.nofx || false;
+        let a = 1234567; Math.random = () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+        const fr = []; let last = 0, on = true, t0 = 0;
+        const loop = t => { if (window.__p39t && !t0) t0 = t; if (t0 && last) fr.push(t - last); last = t; if (on) requestAnimationFrame(loop); };
+        window.__p39t = 0; requestAnimationFrame(loop);
+        await run(DEMOS.find(d => d[0] === cn)); await idle(); await wait(300); on = false;
+        const n = fr.length, sum = fr.reduce((x, y) => x + y, 0);
+        rows.push([cn, vn, fr.filter(x => x > 50).length, Math.round(Math.max(0, ...fr)), n ? Math.round(n * 1000 / sum) : 0]);
+        Math.random = rnd0; await wait(500);
+      }
+    } finally { Math.random = rnd0; soundOn = snd0; window.NOFX39 = false; if (pair0 !== null) PAIR40 = pair0; pill.remove(); }
+    const ov = document.createElement('div'); ov.id = 'p39res';
+    ov.innerHTML = '<div class="p39card"><div class="p39head"><b>Leistungstest</b><small>' + esc(navigator.userAgent.replace(/.*?\((.*?)\).*/, '$1')).slice(0, 60) + '</small></div>' +
+      '<table><tr><th>Kombi</th><th></th><th>Ruckler</th><th>längster</th><th>Bilder/s</th></tr>' +
+      rows.map(r => `<tr><td>${r[0].replace('Festmahl', 'F.')}</td><td>${r[1]}</td><td class="${r[2] > 2 ? 'bad' : ''}">${r[2]}</td><td class="${r[3] > 100 ? 'bad' : ''}">${r[3]} ms</td><td>${r[4]}</td></tr>`).join('') +
+      '</table><p class="p39note">Ruckler = Bilder, die länger als 50 ms gebraucht haben. Mach bitte einen Screenshot davon und schick ihn mir.</p><button type="button" class="p39x" aria-label="Schließen">✕</button></div>';
+    ov.onclick = e => { if (e.target === ov || e.target.closest('.p39x')) ov.remove(); };
+    document.body.appendChild(ov);
+  }
   // the button and the list
   const btn = document.createElement('button'); btn.id = 'p39btn'; btn.type = 'button';
   btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="#fff"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg><b>Vorschau</b>';
@@ -104,6 +140,7 @@
     (typeof PAIR40 !== 'undefined' ? '<div class="p39lbl">Extras</div><div class="p39seg" role="group"><button type="button" data-p="on">Erst paaren (Candy Crush)</button><button type="button" data-p="off">Sofort (bisher)</button></div>' : '') +
     '<div class="p39grid">' + DEMOS.map((d, i) => `<button type="button" class="${d[2] === 'big' ? 'big' : ''}" data-i="${i}">${d[0]}</button>`).join('') + '</div>' +
     '<p class="p39note">Tipp drauf: das Brett wird neu gelegt und die Extras werden getauscht. Danach kannst du normal weiterspielen.</p>' +
+    '<button type="button" class="p39bench">Leistungstest starten (dauert gut eine Minute)</button>' +
     '<button type="button" class="p39x" aria-label="Schließen">✕</button></div>';
   document.body.append(btn, sheet);
   // in a level the button sits in the gap above the board (when there is one), so it covers nothing
@@ -120,6 +157,7 @@
     const b = e.target.closest('button');
     if (!b) { if (e.target === sheet) close(); return; }
     if (b.classList.contains('p39x')) return close();
+    if (b.classList.contains('p39bench')) { close(); if (!running) { running = true; bench().catch(() => {}).finally(() => { running = false; }); } return; }
     if (b.dataset.v) { FX39 = b.dataset.v === 'new'; try { localStorage.setItem('wm-fx39', FX39 ? 'new' : 'old'); } catch (er) {} seg(); return; }
     if (b.dataset.p) {
       PAIR40 = b.dataset.p === 'on'; try { localStorage.setItem('wm-pair40', PAIR40 ? 'on' : 'off'); } catch (er) {} seg();
