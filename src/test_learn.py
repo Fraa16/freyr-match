@@ -21,7 +21,7 @@ def fresh(pg, L, extra=''):
     pg.goto('file://' + D + '/game.html'); pg.evaluate('localStorage.clear()')
     got = {k: True for k, u in [('paw', 16), ('claw', 33), ('swap', 43), ('feather', 97)] if u < L}
     tools = json.dumps({'inv': {k: 1 for k in got}, 'got': got})
-    pg.evaluate(f"localStorage.setItem('wm-level', {L}); localStorage.setItem('wm-treats', 300); localStorage.setItem('wm-tools', '{tools}'); localStorage.setItem('wm-learn', JSON.stringify({{chest: true}})); {extra}")
+    pg.evaluate(f"localStorage.setItem('wm-level', {L}); localStorage.setItem('wm-treats', 300); localStorage.setItem('wm-tools', '{tools}'); localStorage.setItem('wm-learn', JSON.stringify({{chest: true}})); localStorage.setItem('wm-news41', 'done'); {extra}")
     pg.reload(); pg.wait_for_timeout(700)
 def center(pg, k):
     return pg.evaluate(f"(() => {{ const [x, y] = cellXY({k}); return [x, y]; }})()")

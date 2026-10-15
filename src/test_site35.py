@@ -11,7 +11,7 @@ def ok(c, m):
     print(('OK   ' if c else 'FAIL ') + m)
     if not c: fails.append(m)
 hearts = json.dumps({str(L): 3 for L in range(1, 31)})
-VET = f"localStorage.setItem('wm-intro', '1'); localStorage.setItem('wm-level', 31); localStorage.setItem('wm-hearts', '{hearts}'); localStorage.setItem('wm-learn', JSON.stringify({{chest: true}})); localStorage.setItem('wm-purr-told', '1'); localStorage.setItem('wm-music', 'off')"
+VET = f"localStorage.setItem('wm-intro', '1'); localStorage.setItem('wm-news41', 'done'); localStorage.setItem('wm-level', 31); localStorage.setItem('wm-hearts', '{hearts}'); localStorage.setItem('wm-learn', JSON.stringify({{chest: true}})); localStorage.setItem('wm-purr-told', '1'); localStorage.setItem('wm-music', 'off')"
 def to_map(pg):
     pg.wait_for_function('typeof introRun !== "undefined"', timeout=10000); pg.wait_for_timeout(700)
     pg.evaluate("() => { try { if (introRun && introRun.kind === 'wake') mapSkip = true; } catch (e) {} }")

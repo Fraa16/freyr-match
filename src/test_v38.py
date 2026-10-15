@@ -1,4 +1,5 @@
-"""V38: tile logic.
+"""(V41: the swap checks are for the old rule, without pairs; the pair rule has its own test, test_v40.py)
+V38: tile logic.
 S: an extra swapped with a treat that makes a match where it lands: the extra goes off AND the match is eaten and earns its extra
    (S1 the user's case: a cat swapped sideways out of a column of paws, the paw that comes in makes four: a new cat appears;
     S2 the same across; S3 the new extra's cell is inside the blast of the old one: it still appears; S4 no match: as before)
@@ -36,7 +37,7 @@ with sync_playwright() as p:
     errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
     veteran.veteran(pg)
     pg.goto('file://' + (GAME if GAME.startswith('/') else D + '/' + GAME))
-    pg.evaluate("localStorage.setItem('wm-intro','1'); localStorage.setItem('wm-level', 200); localStorage.setItem('wm-purr-told','1'); localStorage.setItem('wm-music','off')")
+    pg.evaluate("localStorage.setItem('wm-intro','1'); localStorage.setItem('wm-news41','done'); localStorage.setItem('wm-pair40','off'); localStorage.setItem('wm-level', 200); localStorage.setItem('wm-purr-told','1'); localStorage.setItem('wm-music','off')")
     pg.reload(); pg.wait_for_timeout(600); fonts(pg)
     pg.evaluate("() => { try { if (introRun && introRun.kind === 'wake') mapSkip = true; } catch (e) {} }"); pg.wait_for_function('!introRun', timeout=10000); pg.wait_for_timeout(900)
     if pg.evaluate("document.getElementById('introOv').classList.contains('show')"): pg.click('#introX'); pg.wait_for_timeout(300)

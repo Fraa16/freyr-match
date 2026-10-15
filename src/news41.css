@@ -1,0 +1,61 @@
+
+/* V41: Freyr's letter. The paper stays paper in the dark theme too, so its colours are fixed. */
+.overlay.n41ov{z-index:26;background:rgba(46,18,76,.66)}
+.n41wrap{width:100%;max-width:380px;margin:0 auto auto;display:flex;flex-direction:column;align-items:center;padding-top:clamp(104px,16vh,150px)}
+.n41letter{position:relative;width:100%}
+.n41face{position:absolute;left:50%;top:-98px;width:116px;height:116px;margin-left:-58px;z-index:0;animation:n41up .55s .2s cubic-bezier(.3,1.45,.5,1) both}
+.n41face .catwrap svg,.n41face .catwrap img{width:100%;height:100%;display:block}
+.n41face .catwrap img{border-radius:50%;object-fit:cover}
+.n41face.read .catwrap{transform-origin:50% 80%;animation:n41bob 2.6s ease-in-out infinite}
+.n41face .eyes{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
+.n41face.read .eyes>:nth-child(n+3){animation:n41scan 1.8s ease-in-out infinite}
+.n41face .catsvg .m-o{display:none}
+.n41face.eat .catsvg .m-o{display:inline}
+.n41face.eat .catsvg .m-c{display:none}
+.n41paper{position:relative;z-index:1;background:#FFFBF4;color:#6B2E49;border-radius:22px;padding:24px 20px 16px;
+  box-shadow:0 0 0 3px #fff,0 0 0 6px #F07CA0,0 16px 34px rgba(26,4,46,.4);animation:n41in .5s cubic-bezier(.2,1.25,.5,1) both}
+.n41paws{position:absolute;left:0;right:0;top:-20px;display:flex;justify-content:space-between;padding:0 17%;z-index:2;pointer-events:none}
+.n41paws svg{width:52px;height:40px;animation:n41paw .42s .42s cubic-bezier(.3,1.5,.5,1) both}
+.n41paws svg:last-child{transform:scaleX(-1);animation-name:n41pawr}
+.n41body{max-height:calc(100vh - clamp(104px,16vh,150px) - 170px);max-height:calc(100dvh - clamp(104px,16vh,150px) - 170px);overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;text-align:left;padding:0 2px}
+.n41t{font-family:'Lilita One','Nunito',system-ui,sans-serif;font-weight:400;font-size:1.55rem;letter-spacing:.01em;color:#E0457F;text-align:center;margin:2px 0 12px}
+.n41l{margin:0 0 9px;font-size:1rem;line-height:1.4;font-weight:700;display:none}
+.n41l.on{display:block;animation:n41line .4s ease-out both}
+li.n41l.on{display:list-item}
+.n41demo.on{display:flex}
+.n41hi{font-weight:800;color:#5A2140}
+.n41sub{margin-bottom:6px;font-weight:800;color:#5A2140}
+.n41list{margin:0 0 10px;padding:0;list-style:none}
+.n41list li{position:relative;padding-left:25px;margin-bottom:6px}
+.n41list li svg{position:absolute;left:0;top:.2em;width:17px;height:17px;transform:rotate(-12deg)}
+.n41demo{display:flex;justify-content:center;gap:6px;margin:2px 0 12px}
+.n41tile{width:48px;height:48px;border-radius:13px;background:#FCE0EC;box-shadow:inset 0 0 0 2px #F7C3D8;display:grid;place-items:center;padding:4px}
+.n41tile.x{background:radial-gradient(circle,#FFB8D5 0 38%,#FCE0EC 78%)}
+.n41body.more{-webkit-mask-image:linear-gradient(#000 calc(100% - 48px),transparent);mask-image:linear-gradient(#000 calc(100% - 48px),transparent)}
+.n41tile svg,.n41tile img{width:100%;height:100%;display:block;overflow:visible}
+.n41demo.on .n41tile{animation:n41pop 2.8s ease-in-out .6s infinite}
+.n41demo.on .n41tile:nth-child(2){animation-delay:.68s}
+.n41demo.on .n41tile:nth-child(3){animation-delay:.76s}
+.n41sign{text-align:right;font-family:'Lilita One','Nunito',system-ui,sans-serif;font-weight:400;font-size:1.3rem;color:#E0457F;margin:12px 0 4px}
+.n41sign svg{width:24px;height:24px;vertical-align:-4px;transform:rotate(16deg)}
+.n41ps{font-size:.92rem;color:#B5658A;margin-bottom:2px}
+.n41hint{margin:14px 0 0;color:#FFE1EE;font-size:.92rem;text-align:center;cursor:pointer}
+.n41hint[hidden]{display:none}
+.n41go{margin-top:22px;font-size:1.25rem;padding:13px 30px}
+.n41go[hidden]{display:none}
+.n41go.pop-in{animation:n41go .5s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes n41in{from{opacity:0;transform:translateY(46px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes n41up{from{transform:translateY(54px)}to{transform:none}}
+@keyframes n41paw{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes n41pawr{from{opacity:0;transform:scaleX(-1) translateY(-16px)}to{opacity:1;transform:scaleX(-1)}}
+@keyframes n41bob{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-2px)}}
+@keyframes n41scan{0%{transform:translateX(-2.6px)}70%,82%{transform:translateX(2.6px)}100%{transform:translateX(-2.6px)}}
+@keyframes n41pop{0%,58%,100%{transform:none}66%{transform:scale(1.16)}74%{transform:scale(.92)}82%{transform:scale(1.04)}}
+@keyframes n41line{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@keyframes n41go{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .n41face,.n41paper,.n41paws svg,.n41go.pop-in,.n41demo.on .n41tile,.n41face.read .catwrap,.n41face .eyes,.n41face.read .eyes>*{animation:none}
+  .n41paws svg:last-child{transform:scaleX(-1)}
+  .n41l.on{animation:none}
+}
+@media (max-height:700px){.n41wrap{padding-top:90px}.n41body{max-height:calc(100vh - 250px);max-height:calc(100dvh - 250px)}.n41face{width:100px;height:100px;margin-left:-50px;top:-84px}.n41l{font-size:.95rem;margin-bottom:7px}.n41go{margin-top:16px}}

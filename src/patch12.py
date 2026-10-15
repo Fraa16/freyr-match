@@ -225,6 +225,9 @@ if os.path.exists(D + 'levels36.json') and not os.environ.get('NO36'):
     LV += json.load(open(D + 'levels36.json'))
     if os.path.exists(D + 'fix36.json'):
         for k, v in json.load(open(D + 'fix36.json')).items(): LV[int(k) - 1].update(v)
+# V41: the moves for the pair rule (tune41.py: with pairs the bot wins about 10 points less than before, intro levels and 1-10 as they were)
+if os.path.exists(D + 'fix41.json') and not os.environ.get('NO40') and not os.environ.get('NOFIX41'):
+    for k, v in json.load(open(D + 'fix41.json')).items(): LV[int(k) - 1].update(v)
 def lvdef(d):
     parts = ["name: " + json.dumps(d['name'], ensure_ascii=False), "moves: %d" % d['moves'], "target: %d" % d.get('target', 1000)]
     if d.get('intro'): parts.append("intro: '%s'" % d['intro'])
@@ -592,9 +595,9 @@ if not os.environ.get('NO39'):
         # the preview starts with everything open (it has its own storage, separate from the game)
         rep("<script>", "<script>\ntry { if (!localStorage.getItem('wm-p39')) { localStorage.setItem('wm-p39', '1'); localStorage.setItem('wm-intro', '1'); localStorage.setItem('wm-purr-told', '1'); if ((parseInt(localStorage.getItem('wm-level'), 10) || 1) < 200) localStorage.setItem('wm-level', '200'); } } catch (e) {}")
         rep('<title>Whisker Match</title>', '<title>Freyr Match Vorschau</title>')
-# V40 (test, only with V40=1): extras like in Candy Crush (pair40.js). An extra keeps its colour, counts as that treat in a match
-# and only goes off when it is eaten in one; the bowl and extra + extra stay as they are.
-if os.environ.get('V40'):
+# V40: extras like in Candy Crush (pair40.js). An extra keeps its colour, counts as that treat in a match
+# and only goes off when it is eaten in one; the bowl and extra + extra stay as they are. Part of the game since V41 (NO40=1 leaves it out).
+if not os.environ.get('NO40'):
     rep("\naddEventListener('resize', sizeFx);\n", "\n" + R('pair40.js') + "\naddEventListener('resize', sizeFx);\n")
     rep('</style>', '.tile.cat:has(.sprint40)::before{background:radial-gradient(circle,rgba(255,120,190,.38) 0 38%,rgba(255,79,154,0) 72%)}\n</style>')
     rep("const mk = (type, gold = false) => ({ type, id: ++idc, gold, locked: false });",
@@ -610,13 +613,20 @@ if os.environ.get('V40'):
     rep("      const r = k / N | 0, c = k % N, sp = mk(ex.kind);\n      if (ex.dir) sp.dir = ex.dir;", "      const r = k / N | 0, c = k % N, sp = mk(ex.kind);\n      if (ex.dir) sp.dir = ex.dir;\n      if (PAIR40 && ex.col != null && isColx(sp)) sp.col = ex.col;")
     rep("    const sp = mk(kind); if (kind === 'cat') sp.dir = Math.random() < .5 ? 'h' : 'v';\n    grid[r][c] = sp;", "    const sp = mk(kind); if (kind === 'cat') sp.dir = Math.random() < .5 ? 'h' : 'v';\n    if (PAIR40 && isColx(sp)) sp.col = old.type;\n    grid[r][c] = sp;")
     # swapping a coloured extra with a treat is an ordinary swap: it needs a match
-    rep("  if (sa || sb) {\n    pay();", "  if ((sa || sb) && !(PAIR40 && !tut && sa !== sb && isColx(sa ? a : b))) {\n    pay();")
+    rep("  if (sa || sb) {\n    pay();", "  if ((sa || sb) && !(PAIR40 && sa !== sb && isColx(sa ? a : b))) {\n    pay();")
     rep("isPower(a.type) || isPower(grid[r2][c2].type)", "powerMove(a, grid[r2][c2])", 2)
     rep("      else if (pa || pb) {", "      else if ((pa || pb) && !(PAIR40 && isColx(pa ? a : b))) {")
     rep("          for (const k of m.cells) v += cellWorth(k, X);", "          for (const k of m.cells) { v += cellWorth(k, X); const y = grid[k / N | 0][k % N]; if (PAIR40 && isColx(y)) v += y.type === 'laser' ? 9 : sum(areaOf(y, k / N | 0, k % N)) * .8; }")
     # a coloured extra counts for its colour, and the bowl eats it with its colour (then it goes off)
     rep("if (cell && cell.type === g.type) g.left--;", "if (cell && (cell.type === g.type || (PAIR40 && isColx(cell) && cell.col === g.type))) g.left--;")
     rep("      else if (x.type === t) add(i, base + 120 + Math.floor(Math.random() * 280));", "      else if (x.type === t || (PAIR40 && isColx(x) && x.col === t)) add(i, base + 120 + Math.floor(Math.random() * 280));")
+    # the magic feather: the Flitzekatze has the colour of the treat it was
+    rep("  const sp = mk('cat'); sp.dir = v > h ? 'v' : 'h';\n  stampFx(k, FEATHER_TOOL);", "  const sp = mk('cat'); sp.dir = v > h ? 'v' : 'h';\n  if (PAIR40 && isNormal(old.type) && COLORS.includes(old.type)) sp.col = old.type;\n  stampFx(k, FEATHER_TOOL);")
+    rep("say('Hokuspokus, eine Flitzekatze! Tausch sie, dann flitzt sie los.');", "say(PAIR40 ? 'Hokuspokus, eine Flitzekatze! Bring sie mit zwei gleichen Leckerlis in eine Reihe, dann flitzt sie los.' : 'Hokuspokus, eine Flitzekatze! Tausch sie, dann flitzt sie los.');")
+# V41: a letter from Freyr for everyone who played before, and a test level for the new extras (news41.js)
+if not os.environ.get('NO40') and not os.environ.get('NO41'):
+    rep('</style>', R('news41.css') + '</style>')
+    rep("\naddEventListener('resize', sizeFx);\n", "\n" + R('news41.js') + "\naddEventListener('resize', sizeFx);\n")
 # V35: the game is called Freyr Match now
 if not os.environ.get('V39P'): rep('<title>Whisker Match</title>', '<title>Freyr Match</title>')
 open(D + os.environ.get('OUT12', 'game.html'), 'w').write(s)

@@ -20,7 +20,7 @@ def boot(pg, state):
     if pg.evaluate("document.getElementById('introOv').classList.contains('show')"): pg.click('#introX'); pg.wait_for_timeout(400)
 
 hearts = {str(L): (3 if L % 4 else 2) for L in range(1, 47)}
-A = {'wm-intro': '1', 'wm-level': '47', 'wm-hearts': json.dumps(hearts), 'wm-treats': '83', 'wm-owned': '["bow","hat"]', 'wm-wear': 'hat',
+A = {'wm-intro': '1', 'wm-news41': 'done', 'wm-level': '47', 'wm-hearts': json.dumps(hearts), 'wm-treats': '83', 'wm-owned': '["bow","hat"]', 'wm-wear': 'hat',
      'wm-purr-told': '1', 'wm-music': 'off', 'wm-learn': json.dumps({'chest': True}), 'wm-chests': '5', 'wm-test-62': '1'}
 with sync_playwright() as p:
     b = p.chromium.launch()
@@ -45,7 +45,7 @@ with sync_playwright() as p:
 
     # a fresh device: level 1, one test marker
     pg2 = ctx.new_page(); pg2.on('pageerror', lambda e: errs.append(str(e)))
-    boot(pg2, {'wm-intro': '1', 'wm-level': '3', 'wm-purr-told': '1', 'wm-test-62': 'keep'})
+    boot(pg2, {'wm-intro': '1', 'wm-news41': 'done', 'wm-level': '3', 'wm-purr-told': '1', 'wm-test-62': 'keep'})
     pg2.click('#mFace'); pg2.wait_for_timeout(300); pg2.click('#saveOpen'); pg2.wait_for_timeout(300)
     pg2.fill('#saveIn', 'WM1-kaputt'); pg2.click('#saveLoad'); pg2.wait_for_timeout(200)
     ok('passt nicht' in pg2.inner_text('#saveMsg'), 'broken code refused')

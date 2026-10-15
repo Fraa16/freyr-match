@@ -10,7 +10,7 @@ function isColx(x) { return !!x && x.col != null && (x.type === 'cat' || x.type 
 function colOf(x) { return !x ? null : PAIR40 && isColx(x) ? x.col : x.type; }
 // does swapping these two always do something, match or not?
 function powerMove(a, b) {
-  if (!PAIR40 || tut) return isPower(a.type) || isPower(b.type);
+  if (!PAIR40) return isPower(a.type) || isPower(b.type);
   const free = x => isPower(x.type) && !isColx(x);
   return (isPower(a.type) && isPower(b.type)) || free(a) || free(b);
 }
@@ -64,6 +64,25 @@ trySwap = async function (r1, c1, r2, c2, free) {
     }
   }
   const res = await trySwap40.apply(this, arguments);
-  if (warn && !toldPair40) { toldPair40 = true; say('Extras gehen jetzt nur in einem Match los. Zwei Extras miteinander gehen immer!'); }
+  if (warn && !toldPair40) { toldPair40 = true; say('Extras legen nur in einem Match los. Zwei Extras miteinander gehen immer!'); }
   return res;
 };
+
+// the texts on the level cards and in the lessons say how it works now (V41: the rule is the game's own)
+const PAIR_ICON = k => `<span class="lico"><span class="ico">${extraSvg40({ type: k, col: 2, dir: 'h' })}</span>${PATS[k]}</span>`;
+const PAIR_INTRO = {
+  cat: () => [PAIR_ICON('cat'), 'Neu: Flitzekatze', 'Vier gleiche in einer Reihe ergeben eine Flitzekatze. Bring sie mit zwei gleichen Leckerlis in eine Reihe, dann flitzt sie quer über das Feld.'],
+  laser: () => [PAIR_ICON('laser'), 'Neu: Laserpunkt', 'Vier gleiche als Quadrat ergeben einen Laserpunkt. Bring ihn mit zwei gleichen Leckerlis in eine Reihe, dann jagt ' + catName + ' drei Leckerlis, die du gerade brauchst.'],
+  nip: () => [PAIR_ICON('nip'), 'Neu: Katzenminze', 'Fünf gleiche als L oder T ergeben Katzenminze. Bring sie mit zwei gleichen Leckerlis in eine Reihe, dann fliegt alles rundherum weg.']
+};
+for (const k of Object.keys(PAIR_INTRO)) { const i0 = INTRO[k]; INTRO[k] = function () { return PAIR40 ? PAIR_INTRO[k]() : i0.apply(this, arguments); }; }
+const showIntro40 = showIntro;
+showIntro = function () {
+  const r = showIntro40.apply(this, arguments);
+  if (PAIR40) $('tipline').textContent = 'Bring ein Extra mit zwei gleichen Leckerlis in eine Reihe, dann legt es los. Den Napf tauschst du einfach.' +
+    (isUnlocked('combo') || learnt.combo ? ' Zwei Extras miteinander tauschen gibt eine Riesen-Kombi.' : '');
+  return r;
+};
+const labelFor40 = labelFor;
+labelFor = function (x) { const l = labelFor40.apply(this, arguments); return PAIR40 && isColx(x) && NAMES[x.col] ? l + ', mit ' + NAMES[x.col] : l; };
+if (COACH.gift && COACH.gift[2]) COACH.gift[2].ptext = (x, d) => 'Da war ' + EXTRA_A[x.type] + ' drin! Wisch dieses Leckerli ' + d + ', dann legt ' + (x.type === 'laser' ? 'er' : 'sie') + ' los.';

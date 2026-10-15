@@ -74,7 +74,7 @@ with sync_playwright() as p:
     ok('I3 no page errors', not errs, errs[:3]); pg.close()
 
     # I4: watch it again from Freyr's card
-    pg, errs = page(); fresh(pg, 'localStorage.setItem("wm-level", 5); localStorage.setItem("wm-intro", "1");')
+    pg, errs = page(); fresh(pg, 'localStorage.setItem("wm-level", 5); localStorage.setItem("wm-intro", "1"); localStorage.setItem("wm-news41", "done");')
     st = pg.evaluate(STATE); ok('I4 seen before: his nap by level 5, not the intro', pg.evaluate("introRun && introRun.kind") == 'wake' and 'lock' not in st['n1'], st)
     pg.evaluate('mapSkip = true'); pg.wait_for_function('!introRun', timeout=6000, polling=50); pg.wait_for_timeout(900)
     pg.click('#mFace'); pg.wait_for_timeout(400)

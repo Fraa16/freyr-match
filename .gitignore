@@ -15,3 +15,10 @@ __pycache__/
 /src/vid39/
 /src/game40*.html
 /src/shots40/
+/src/game41*.html
+/src/shots41/
+/src/game_no40.html
+/src/game_live.html
+/src/tune41_obs.json
+/src/_tune41.out
+/src/_ovr_*.json

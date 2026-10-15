@@ -3,7 +3,7 @@ import json
 ALL = ['basics', 'cat', 'laser', 'milk', 'nip', 'boxes', 'bowl', 'purr', 'hard', 'bells', 'combo', 'boosts', 'locks', 'streak', 'paw',
        'box2', 'gold', 'milk2', 'hard2', 'claw', 'blanket', 'swap', 'wet', 'picnic', 'boss', 'chest',
        'box3', 'order', 'gift', 'cukes', 'clock', 'feather', 'turbo', 'superpounce', 'goldrush']
-INIT = "try { if (!localStorage.getItem('wm-learn')) localStorage.setItem('wm-learn', '%s'); if (!localStorage.getItem('wm-intro')) localStorage.setItem('wm-intro', '1'); } catch (e) {}" % json.dumps({k: True for k in ALL})
+INIT = "try { if (!localStorage.getItem('wm-learn')) localStorage.setItem('wm-learn', '%s'); if (!localStorage.getItem('wm-intro')) localStorage.setItem('wm-intro', '1'); if (!localStorage.getItem('wm-news41')) localStorage.setItem('wm-news41', 'done'); } catch (e) {}" % json.dumps({k: True for k in ALL})
 def veteran(pg): pg.add_init_script(INIT)
 _veteran_plain = veteran
 SNAP = "window.__ls0 = JSON.stringify(Object.assign({}, localStorage));"

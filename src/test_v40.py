@@ -35,7 +35,7 @@ with sync_playwright() as p:
     errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
     veteran.veteran(pg)
     pg.goto('file://' + D + '/' + GAME)
-    pg.evaluate("localStorage.setItem('wm-intro','1'); localStorage.setItem('wm-level', 200); localStorage.setItem('wm-purr-told','1'); localStorage.setItem('wm-music','off'); localStorage.removeItem('wm-pair40')")
+    pg.evaluate("localStorage.setItem('wm-intro','1'); localStorage.setItem('wm-news41','done'); localStorage.setItem('wm-level', 200); localStorage.setItem('wm-purr-told','1'); localStorage.setItem('wm-music','off'); localStorage.removeItem('wm-pair40')")
     pg.reload(); pg.wait_for_timeout(600); fonts(pg)
     pg.evaluate("() => { try { if (introRun && introRun.kind === 'wake') mapSkip = true; } catch (e) {} }"); pg.wait_for_function('!introRun', timeout=10000); pg.wait_for_timeout(900)
     if pg.evaluate("document.getElementById('introOv').classList.contains('show')"): pg.click('#introX'); pg.wait_for_timeout(300)

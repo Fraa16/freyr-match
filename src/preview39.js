@@ -169,6 +169,7 @@
     (('PAIR40' in window) ? '<div class="p39lbl">Extras</div><div class="p39seg" role="group"><button type="button" data-p="on">Erst paaren (Candy Crush)</button><button type="button" data-p="off">Sofort (bisher)</button></div>' : '') +
     '<div class="p39grid">' + DEMOS.map((d, i) => `<button type="button" class="${d[2] === 'big' ? 'big' : ''}" data-i="${i}">${d[0]}</button>`).join('') + '</div>' +
     '<p class="p39note">Tipp drauf: das Brett wird neu gelegt und die Extras werden getauscht. Danach kannst du normal weiterspielen.</p>' +
+    '<button type="button" class="p39bench alt" data-m="news41">Brief von Freyr nochmal zeigen</button>' +
     '<button type="button" class="p39bench">Leistungstest starten (dauert gut eine Minute)</button>' +
     '<button type="button" class="p39bench alt" data-m="benchnip">Analyse Minze + Laser (dauert gut eine Minute)</button>' +
     '<button type="button" class="p39x" aria-label="Schließen">✕</button></div>';
@@ -187,6 +188,7 @@
     const b = e.target.closest('button');
     if (!b) { if (e.target === sheet) close(); return; }
     if (b.classList.contains('p39x')) return close();
+    if (b.dataset.m === 'news41') { close(); if (typeof news41Again === 'function') news41Again(); return; }
     if (b.classList.contains('p39bench')) { const m = b.dataset.m || 'bench'; close(); if (running) queued = m; else go(m); return; }
     if (b.dataset.v) { FX39 = b.dataset.v === 'new'; try { localStorage.setItem('wm-fx39', FX39 ? 'new' : 'old'); } catch (er) {} seg(); return; }
     if (b.dataset.p) {

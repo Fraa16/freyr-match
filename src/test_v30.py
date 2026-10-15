@@ -30,7 +30,7 @@ with sync_playwright() as p:
         return pg, errs
     def fresh(pg, ml, learn=ALLL, extra=''):
         pg.goto('file://' + D + '/' + GAME)
-        pg.evaluate(f"localStorage.clear(); localStorage.setItem('wm-intro', '1'); localStorage.setItem('wm-level', {ml}); localStorage.setItem('wm-learn', '{learn}'); localStorage.setItem('wm-purr-told', '1'); {extra}")
+        pg.evaluate(f"localStorage.clear(); localStorage.setItem('wm-intro', '1'); localStorage.setItem('wm-news41', 'done'); localStorage.setItem('wm-level', {ml}); localStorage.setItem('wm-learn', '{learn}'); localStorage.setItem('wm-purr-told', '1'); {extra}")
         pg.reload(); pg.wait_for_timeout(500)
     def skip(pg):
         pg.evaluate('mapSkip = true'); pg.wait_for_function('!introRun && !mapAnimating', timeout=8000, polling=50); pg.wait_for_timeout(200)
