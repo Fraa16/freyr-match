@@ -102,3 +102,41 @@ let shake39 = 0;
 const bigShake39 = bigShake, shakePlain39 = shake;
 bigShake = function () { const now = performance.now(); if (now - shake39 < 400) return; shake39 = now; return bigShake39.apply(this, arguments); };
 shake = function () { const now = performance.now(); if (now - shake39 < 400) return; shake39 = now; return shakePlain39.apply(this, arguments); };
+// When a big combo empties the board, the new treats no longer appear all in one frame: they come in column by column,
+// 14 ms apart (the phone has to set up and paint every new tile, fifty at once took it up to 200 ms)
+let dropBatch39 = null;
+const dropIn39 = dropIn;
+dropIn = function () { if (dropBatch39) { dropBatch39.push([...arguments]); return; } return dropIn39.apply(this, arguments); };
+const gravity39 = gravity;
+gravity = function () {
+  dropBatch39 = [];
+  try { return gravity39.apply(this, arguments); } finally {
+    const b = dropBatch39; dropBatch39 = null;
+    if (b.length < 16 || REDUCED) b.forEach(a => dropIn39.apply(null, a));
+    else {
+      for (const a of b) if (a[0]) a[0].style.visibility = 'hidden';
+      [...new Set(b.map(a => a[1]))].sort((x, y) => x - y).forEach((col, i) => setTimeout(() => {
+        for (const a of b) if (a[1] === col) { if (a[0]) a[0].style.visibility = ''; dropIn39.apply(null, a); }
+      }, i * 14));
+    }
+  }
+};
+// many catnips or lasers at once: the first four (lasers: five) get the full show, the others a lighter one
+let nip39 = [];
+const nipFx39 = nipFx;
+nipFx = function (cell, k, d) {
+  const now = performance.now() + d; nip39 = nip39.filter(t => t > now - 400);
+  if (nip39.length >= 4) {
+    if (REDUCED) return;
+    const [x, y] = cellXY(k); later(d + 120, () => burst(x, y, 6, 1.3, ['#5ED83C', '#8FE870', '#B8F0A8', '#2FA84A'], 'leaf'));
+    return;
+  }
+  nip39.push(now); return nipFx39.apply(this, arguments);
+};
+let las39 = [];
+const laserRun39 = laserRun;
+laserRun = function (from, targets, d) {
+  const now = performance.now() + (d || 0); las39 = las39.filter(t => t > now - 600);
+  if (las39.length >= 5) return;
+  las39.push(now); return laserRun39.apply(this, arguments);
+};
