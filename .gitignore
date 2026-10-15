@@ -10,3 +10,6 @@ __pycache__/
 /src/*.log
 /src/shots*/
 /src/rec*/
+/src/game39*.html
+/src/shots39/
+/src/vid39/

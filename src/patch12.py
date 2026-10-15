@@ -562,7 +562,32 @@ rep("      if (bellNow && (c >= bellCol || c === N - 1 || !onBoard) && i === slo
 # (the column a bell just dropped out of counts as well, also for the bells that were on the board from the start)
 rep("    n++; grid[low][c] = null;\n    const el = els.get(x.id), [px, py] = cellXY(low * N + c);",
     "    n++; grid[low][c] = null; lastBellCol = c;\n    const el = els.get(x.id), [px, py] = cellXY(low * N + c);")
+# V39 (preview, only with V39=1 for now): new sounds for the extras (sfx39.js), the Krallenkratzer paw and the double Festmahl (fx39.js).
+# Every sound that used to be played for an extra asks FX39 first, so the old ones stay for comparing. V39P=1 adds the playground.
+if os.environ.get('V39'):
+    rep('</style>', R('fx39.css') + (R('preview39.css') if os.environ.get('V39P') else '') + '</style>')
+    rep("\naddEventListener('resize', sizeFx);\n", "\n" + R('sfx39.js') + R('fx39.js') + (R('preview39.js') if os.environ.get('V39P') else '') + "\naddEventListener('resize', sizeFx);\n")
+    # resolve: the extras that go off are noted with what they are; their sounds come from sxPlay; a new extra gets its own sound
+    rep("const firedTypes = [], fxq = { whoosh: [], boing: [], pew: [], magic: [] };", "const firedTypes = [], fxq = { whoosh: [], boing: [], pew: [], magic: [], x: [] };")
+    rep("    fxq.pew.slice(0, 12).forEach(d => pew(d / 1000));\n    fxq.whoosh.slice(0, 6).forEach(d => whoosh(d / 1000));\n    fxq.boing.slice(0, 6).forEach(d => boing(d / 1000));\n    fxq.magic.slice(0, 2).forEach(d => later(d, sparkle));\n    if (best) extraSound(best);",
+        "    if (FX39) sxPlay(fxq.x);\n    else {\n    fxq.pew.slice(0, 12).forEach(d => pew(d / 1000));\n    fxq.whoosh.slice(0, 6).forEach(d => whoosh(d / 1000));\n    fxq.boing.slice(0, 6).forEach(d => boing(d / 1000));\n    fxq.magic.slice(0, 2).forEach(d => later(d, sparkle));\n    }\n    if (best) { if (FX39) SFX.spawn(best); else extraSound(best); }")
+    # the bowl combos: one rising harp note for each treat that turns into an extra (and a zap when the laser does it)
+    rep("      const [x, y] = cellXY(k); burst(x, y, 8, 1); blip();", "      const [x, y] = cellXY(k); burst(x, y, 8, 1);\n      if (FX39 && audioOk()) { SFX.conv(0, i, kind); if (viaLaser) SFX.laserHit(0, i, (k % N - 3.5) / 4.5); } else blip();")
+    rep("  if (viaLaser) laserRun(fromKey, keys, 0); else ring(fromKey, 3, 0, 'ring rainbow');\n  sparkle();",
+        "  if (viaLaser) laserRun(fromKey, keys, 0); else ring(fromKey, 3, 0, 'ring rainbow');\n  if (FX39) { if (audioOk()) SFX.convStart(0, keys.length, viaLaser ? LEG / 1000 : .045); } else sparkle();")
+    # the old sounds inside the effects: only when FX39 is off
+    rep("    later(base, () => sweep(500, 2200, 0, .22, 'triangle', .05));", "    later(base, () => { if (!FX39) sweep(500, 2200, 0, .22, 'triangle', .05); });")
+    rep("  later(d, thud); later(d + 60, bigShake);\n  if (REDUCED) return;", "  later(d, () => { if (!FX39) thud(); }); later(d + 60, bigShake);\n  if (REDUCED) return;")
+    rep("  later(d, () => extraSound('bowl'));\n  if (REDUCED) { later(d + 60, bigShake); return; }", "  later(d, () => { if (!FX39) extraSound('bowl'); else if (audioOk()) SFX.bowl(0); });\n  if (REDUCED) { later(d + 60, bigShake); return; }")
+    rep("  zaps(zt);\n", "  if (FX39) { if (audioOk()) SFX.zaps(zt); } else zaps(zt);\n")
+    # two bowls: their own show
+    rep("    bowlFx(k, cell.eat === 'all' ? added.filter((x, i) => i % 3 === 0) : added, delay, base);",
+        "    if (FX39 && cell.eat === 'all') feastFx(k, added, delay, base, clear);\n    else bowlFx(k, cell.eat === 'all' ? added.filter((x, i) => i % 3 === 0) : added, delay, base);")
+    if os.environ.get('V39P'):
+        # the preview starts with everything open (it has its own storage, separate from the game)
+        rep("<script>", "<script>\ntry { if (!localStorage.getItem('wm-p39')) { localStorage.setItem('wm-p39', '1'); localStorage.setItem('wm-intro', '1'); localStorage.setItem('wm-purr-told', '1'); if ((parseInt(localStorage.getItem('wm-level'), 10) || 1) < 200) localStorage.setItem('wm-level', '200'); } } catch (e) {}")
+        rep('<title>Whisker Match</title>', '<title>Freyr Match Vorschau</title>')
 # V35: the game is called Freyr Match now
-rep('<title>Whisker Match</title>', '<title>Freyr Match</title>')
+if not os.environ.get('V39P'): rep('<title>Whisker Match</title>', '<title>Freyr Match</title>')
 open(D + os.environ.get('OUT12', 'game.html'), 'w').write(s)
 print('patched', len(s), 'levels', len(LV))
